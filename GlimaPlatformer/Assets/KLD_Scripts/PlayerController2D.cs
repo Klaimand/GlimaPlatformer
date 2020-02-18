@@ -47,11 +47,16 @@ public class PlayerController2D : MonoBehaviour
     public float flatSlidingMinSpeed;
     private bool thisFlatSlideHasBeenDone; //become true when the player finish a flat slide, and become false again when the player is not crouching
 
+    [Header("SlopeSlide")]
+    public float slidableSlopeDrag;
+    private bool isAgainstSlidableSlope;
+
     [Space(10)]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
+    public LayerMask whatIsSlidableSlope;
     
-    public enum PlayerState {Idle, Running, CrouchIdle, CrouchWalk, Jumping, Falling, WallSliding};
+    public enum PlayerState {Idle, Running, CrouchIdle, CrouchWalk, Jumping, Falling, WallSliding}; //retournement, flatslide, slopeslide, slopestand
     [Header("Animations Handling")]
     public PlayerState playerState;
     public float moveStateThreshold; //Horizontal Axis related (can't be 0)
@@ -72,6 +77,7 @@ public class PlayerController2D : MonoBehaviour
         doWallJump();
         doCrouch();
         doFlatSliding();
+        doSlopeSlide();
         getPlayerState();
     }
 
@@ -281,6 +287,19 @@ public class PlayerController2D : MonoBehaviour
         if (!isCrouching)
         {
             thisFlatSlideHasBeenDone = false;
+        }
+    }
+    
+    private void doSlopeSlide () //WIP
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position, -Vector2.up);
+        if (hit.transform.gameObject.layer == whatIsSlidableSlope)
+        {
+            isAgainstSlidableSlope = true;
+        }
+        else
+        {
+            isAgainstSlidableSlope = false;
         }
     }
 
