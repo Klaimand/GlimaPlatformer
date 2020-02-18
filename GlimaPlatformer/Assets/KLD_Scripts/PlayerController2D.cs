@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerController2D : MonoBehaviour
 {
     private Rigidbody2D rb;
-
-    //test starfoulah
+    
     [Header("Movement")]
     public float moveSpeed;
     private float xAxis;
@@ -156,7 +155,6 @@ public class PlayerController2D : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded) //check if we can jump
         {
-            //rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.velocity += new Vector2(0, jumpForce.y); //jump
             StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
         }
