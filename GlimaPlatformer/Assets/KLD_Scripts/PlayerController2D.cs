@@ -156,6 +156,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded) //check if we can jump
         {
+            //rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.velocity += new Vector2(0, jumpForce.y); //jump
             StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
         }
