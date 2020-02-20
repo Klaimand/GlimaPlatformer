@@ -1296,6 +1296,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 388797003305851273, guid: 9559ca908da379d4a946c2bc315da983,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 388797003305851274, guid: 9559ca908da379d4a946c2bc315da983,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1360,6 +1365,31 @@ PrefabInstance:
         type: 3}
       propertyPath: whatIsWall.m_Bits
       value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 388797003305851277, guid: 9559ca908da379d4a946c2bc315da983,
+        type: 3}
+      propertyPath: slopeCastDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 388797003438918238, guid: 9559ca908da379d4a946c2bc315da983,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 388797004198169454, guid: 9559ca908da379d4a946c2bc315da983,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 388797004626858461, guid: 9559ca908da379d4a946c2bc315da983,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 388797004916334319, guid: 9559ca908da379d4a946c2bc315da983,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9559ca908da379d4a946c2bc315da983, type: 3}

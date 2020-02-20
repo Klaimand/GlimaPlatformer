@@ -50,6 +50,7 @@ public class PlayerController2D : MonoBehaviour
     [Header("SlopeSlide")]
     public float slidableSlopeDrag;
     private bool isAgainstSlidableSlope;
+    public float slopeCastDistance;
 
     [Space(10)]
     public LayerMask whatIsGround;
@@ -292,10 +293,11 @@ public class PlayerController2D : MonoBehaviour
     
     private void doSlopeSlide () //WIP
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position, -Vector2.up);
-        if (hit.transform.gameObject.layer == whatIsSlidableSlope)
+        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
+        if (hit == true)
         {
             isAgainstSlidableSlope = true;
+            print("Touched " + hit.collider.gameObject.name);
         }
         else
         {
