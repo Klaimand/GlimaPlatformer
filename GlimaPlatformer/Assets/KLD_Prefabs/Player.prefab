@@ -124,7 +124,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &388797003305851277
 MonoBehaviour:
@@ -155,7 +155,14 @@ MonoBehaviour:
   crouchSpeed: 2
   flatSlideDrag: 0.03
   flatSlidingMinSpeed: 1
-  slidableSlopeDrag: 0
+  forceCrouch: 0
+  slideCrouchingXSpeedMultiplier: 1
+  slideCrouchingMaxSpeed: 12
+  slideStandingDrag: 0.1
+  slideStandingMaxSpeed: 4
+  slopeEndDetectionRayLenght: 0.5
+  slopeCastDistance: 0.3
+  SlopeSlideJumpForce: {x: 0, y: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
