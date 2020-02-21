@@ -162,7 +162,7 @@ MonoBehaviour:
   slideStandingMaxSpeed: 4
   slopeEndDetectionRayLenght: 0.5
   slopeCastDistance: 0.3
-  SlopeSlideJumpForce: {x: 0, y: 0}
+  SlopeSlideJumpForce: {x: 10, y: 15}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256

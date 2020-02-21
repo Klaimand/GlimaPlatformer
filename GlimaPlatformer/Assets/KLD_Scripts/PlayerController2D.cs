@@ -93,6 +93,7 @@ public class PlayerController2D : MonoBehaviour
         doWallJump();
         doCrouch();
         doFlatSliding();
+        doSlopedSlideJump();
         getPlayerState();
     }
 
@@ -147,7 +148,7 @@ public class PlayerController2D : MonoBehaviour
     {
         xAxis = Input.GetAxis("Horizontal");
         xRawAxis = Input.GetAxisRaw("Horizontal");
-        if (isGrounded) //&& !isAgainstSlidableSlope && !isFlatSliding)
+        if (isGrounded && !isFlatSliding)
         {
             if (!cantControlHorizontal && !isCrouching)
             {
@@ -284,6 +285,21 @@ public class PlayerController2D : MonoBehaviour
     {
         yield return new WaitForSeconds(wallJumpNoControlTimer);
         cantControlHorizontal = false;
+    }
+
+    private void doSlopedSlideJump () //wip
+    {
+        if (isAgainstSlidableSlope && Input.GetKeyDown(KeyCode.UpArrow) && !isGrounded)
+        {
+            float velocitySign = Mathf.Sign(rb.velocity.x);
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.velocity += new Vector2(velocitySign * SlopeSlideJumpForce.x, SlopeSlideJumpForce.y);
+            /*
+            float curSpeedPercentage = rb.velocity.x / slideCrouchingMaxSpeed;
+
+            rb.velocity += new Vector2(-Mathf.Sign(rb.velocity.x) * curSpeedPercentage * SlopeSlideJumpForce.x, SlopeSlideJumpForce.y);
+            */
+        }
     }
 
     #endregion
