@@ -206,7 +206,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void doJump ()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded) //check if we can jump
+        if (Input.GetButtonDown("Fire1") && isGrounded) //if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded) //check if we can jump
         {
             rb.velocity += new Vector2(0, jumpForce.y); //jump
             StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
@@ -222,7 +222,7 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime; //makes fall faster
             }
         }
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.UpArrow) && !lastJumpIsWallJump) //check if we're jumping and gaining height
+        else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump) //else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.UpArrow) && !lastJumpIsWallJump) //check if we're jumping and gaining height
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime; //make gravity less
         }
@@ -265,9 +265,9 @@ public class PlayerController2D : MonoBehaviour
         {
             isAgainstLeftWall = false;
         }
-        
+
         //ACTION
-        if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetKeyDown(KeyCode.UpArrow))
+        if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetButtonDown("Fire1")) //if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetKeyDown(KeyCode.UpArrow))
         {
             lastJumpIsWallJump = true;
             rb.velocity = Vector2.zero;
@@ -282,7 +282,7 @@ public class PlayerController2D : MonoBehaviour
     
     private void doSlopedSlideJump ()
     {
-        if (isAgainstSlidableSlope && Input.GetKeyDown(KeyCode.UpArrow) && !isGrounded)
+        if (isAgainstSlidableSlope && Input.GetButtonDown("Fire1") && !isGrounded) //if (isAgainstSlidableSlope && Input.GetKeyDown(KeyCode.UpArrow) && !isGrounded)
         {
             float velocitySign = isSlidingToTheLeft ? -1f : 1f;
 
@@ -313,7 +313,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void doCrouch ()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) || forceCrouch)
+        if (Input.GetButtonDown("Fire2") || forceCrouch) //if (Input.GetKeyDown(KeyCode.DownArrow) || forceCrouch)
         {
             isCrouching = true;
             coll.size = new Vector2(1f, 0.5f);
@@ -331,7 +331,7 @@ public class PlayerController2D : MonoBehaviour
                 isUnderCollider = true;
             }
         }
-        if (!isUnderCollider && !Input.GetKey(KeyCode.DownArrow) && isCrouching && !forceCrouch)
+        if (!isUnderCollider && !Input.GetButton("Fire2") && isCrouching && !forceCrouch) //if (!isUnderCollider && !Input.GetKey(KeyCode.DownArrow) && isCrouching && !forceCrouch)
         {
             isCrouching = false;
             coll.size = new Vector2(1f, 1f);
