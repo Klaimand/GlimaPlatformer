@@ -160,9 +160,9 @@ MonoBehaviour:
   slideCrouchingMaxSpeed: 12
   slideStandingDrag: 0.1
   slideStandingMaxSpeed: 4
-  slopeEndDetectionRayLenght: 0.5
+  slopeJumpNoControlTimer: 0.3
   slopeCastDistance: 0.3
-  SlopeSlideJumpForce: {x: 10, y: 15}
+  SlopeSlideJumpForce: {x: 8, y: 10}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256

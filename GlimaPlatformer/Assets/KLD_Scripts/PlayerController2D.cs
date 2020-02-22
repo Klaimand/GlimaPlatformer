@@ -56,11 +56,12 @@ public class PlayerController2D : MonoBehaviour
     public float slideCrouchingMaxSpeed;
     public float slideStandingDrag;
     public float slideStandingMaxSpeed;
+    public float slopeJumpNoControlTimer;
     private bool isAgainstSlidableSlope;
-    public float slopeEndDetectionRayLenght;
-    //private bool isNearSlopeEnd;
+    private bool isSlidingToTheLeft;
     public float slopeCastDistance;
     public Vector2 SlopeSlideJumpForce;
+    private bool lastJumpIsSlopeJump;
     
 
     [Space(10)]
@@ -172,22 +173,24 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity = new Vector2(-maxAirSpeed, rb.velocity.y);
             }
         }
-        else if (isAgainstSlidableSlope)
+        else if (isAgainstSlidableSlope) //bug
         {
             if (isCrouching)
             {
                 rb.velocity = new Vector2(rb.velocity.x * slideCrouchingXSpeedMultiplier, rb.velocity.y);
-                if (rb.velocity.x > slideCrouchingMaxSpeed)
+                if (rb.velocity.x > slideCrouchingMaxSpeed || rb.velocity.x < -slideCrouchingMaxSpeed)
                 {
-                    rb.velocity = new Vector2(slideCrouchingMaxSpeed, rb.velocity.y);
+                    float velocitySign = Mathf.Sign(rb.velocity.x);
+                    rb.velocity = new Vector2(slideCrouchingMaxSpeed * velocitySign, rb.velocity.y);
                 }
             }
             else if (!isCrouching)
             {
                 rb.velocity = new Vector2(rb.velocity.x * (1.0f - slideStandingDrag), rb.velocity.y);
-                if (rb.velocity.x > slideStandingMaxSpeed)
+                if (rb.velocity.x > slideStandingMaxSpeed || rb.velocity.x < -slideStandingMaxSpeed)
                 {
-                    rb.velocity = new Vector2(slideStandingMaxSpeed, rb.velocity.y);
+                    float velocitySign = Mathf.Sign(rb.velocity.x);
+                    rb.velocity = new Vector2(slideStandingMaxSpeed * velocitySign, rb.velocity.y);
                 }
             }
         }
@@ -237,6 +240,7 @@ public class PlayerController2D : MonoBehaviour
         if (isGrounded)
         {
             lastJumpIsWallJump = false;
+            lastJumpIsSlopeJump = false;
         }
     }
 
@@ -262,14 +266,14 @@ public class PlayerController2D : MonoBehaviour
             isAgainstLeftWall = false;
         }
 
-       //ACTION
+       //ACTION MUST OPTI
         if (isAgainstRightWall && Input.GetKeyDown(KeyCode.UpArrow))
         {
             lastJumpIsWallJump = true;
             rb.velocity = new Vector2(0,0);
             rb.velocity += new Vector2(-wallJumpForce.x, wallJumpForce.y);
             cantControlHorizontal = true;
-            StartCoroutine(wallJumpNoControl());
+            StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
         }
         else if (isAgainstLeftWall && Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -277,29 +281,35 @@ public class PlayerController2D : MonoBehaviour
             rb.velocity = new Vector2(0,0);
             rb.velocity += new Vector2(wallJumpForce.x, wallJumpForce.y);
             cantControlHorizontal = true;
-            StartCoroutine(wallJumpNoControl());
+            StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
         }
     }
-
-    private IEnumerator wallJumpNoControl ()
-    {
-        yield return new WaitForSeconds(wallJumpNoControlTimer);
-        cantControlHorizontal = false;
-    }
-
-    private void doSlopedSlideJump () //wip
+    
+    private void doSlopedSlideJump ()
     {
         if (isAgainstSlidableSlope && Input.GetKeyDown(KeyCode.UpArrow) && !isGrounded)
         {
-            float velocitySign = Mathf.Sign(rb.velocity.x);
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.velocity += new Vector2(velocitySign * SlopeSlideJumpForce.x, SlopeSlideJumpForce.y);
-            /*
-            float curSpeedPercentage = rb.velocity.x / slideCrouchingMaxSpeed;
+            float velocitySign = isSlidingToTheLeft ? -1f : 1f;
 
-            rb.velocity += new Vector2(-Mathf.Sign(rb.velocity.x) * curSpeedPercentage * SlopeSlideJumpForce.x, SlopeSlideJumpForce.y);
-            */
+            rb.velocity = new Vector2(rb.velocity.x, SlopeSlideJumpForce.y);
+
+            StartCoroutine(addSlideJumpXVelocity(velocitySign));
+
+            cantControlHorizontal = true;
+            StartCoroutine(noHorizontalControlDuring(slopeJumpNoControlTimer));
         }
+    }
+
+    private IEnumerator addSlideJumpXVelocity (float velocitySign)
+    {
+        yield return new WaitForFixedUpdate();
+        rb.velocity += new Vector2(velocitySign * SlopeSlideJumpForce.x, 0f);
+    }
+
+    private IEnumerator noHorizontalControlDuring(float noControlTime)
+    {
+        yield return new WaitForSeconds(noControlTime);
+        cantControlHorizontal = false;
     }
 
     #endregion
@@ -355,12 +365,20 @@ public class PlayerController2D : MonoBehaviour
     
     private void doSlopeSlideDetection ()
     {
-        Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
+        //Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
 
         if (hit == true)
         {
             isAgainstSlidableSlope = true;
+            if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
+            {
+                isSlidingToTheLeft = true;
+            }
+            else
+            {
+                isSlidingToTheLeft = false;
+            }
         }
         else
         {
