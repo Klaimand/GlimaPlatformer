@@ -265,21 +265,16 @@ public class PlayerController2D : MonoBehaviour
         {
             isAgainstLeftWall = false;
         }
+        
+        //ACTION
+        if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            lastJumpIsWallJump = true;
+            rb.velocity = Vector2.zero;
 
-       //ACTION MUST OPTI
-        if (isAgainstRightWall && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            lastJumpIsWallJump = true;
-            rb.velocity = new Vector2(0,0);
-            rb.velocity += new Vector2(-wallJumpForce.x, wallJumpForce.y);
-            cantControlHorizontal = true;
-            StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
-        }
-        else if (isAgainstLeftWall && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            lastJumpIsWallJump = true;
-            rb.velocity = new Vector2(0,0);
-            rb.velocity += new Vector2(wallJumpForce.x, wallJumpForce.y);
+            float xVelocitySign = isAgainstLeftWall ? 1f : -1f;
+            rb.velocity += new Vector2(wallJumpForce.x * xVelocitySign, wallJumpForce.y);
+
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
         }
