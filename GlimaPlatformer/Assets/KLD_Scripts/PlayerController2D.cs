@@ -16,7 +16,6 @@ public class PlayerController2D : MonoBehaviour
     private float xRawAxis;
     public int accelerationFrame;
     public int decelerationFrame;
-    //public float xAxisStopThreshold;
 
     [Header("Jump + AirControl")]
     public Vector2 jumpForce; //jump velocity on button press
@@ -48,7 +47,7 @@ public class PlayerController2D : MonoBehaviour
     public float flatSlideDrag;
     private bool isFlatSliding;
     public float flatSlidingMinSpeed;
-    private bool thisFlatSlideHasBeenDone; //become true when the player finish a flat slide, and become false again when the player is not crouching
+    private bool thisFlatSlideHasBeenDone; //become true when the player finish a flat slide, and become false again when the player is not crouching (more complex now)
     public bool forceCrouch;
 
     [Header("SlopeSlide")]
@@ -62,6 +61,7 @@ public class PlayerController2D : MonoBehaviour
     public float slopeCastDistance;
     public Vector2 SlopeSlideJumpForce;
     private bool lastJumpIsSlopeJump;
+    private bool isGoingInTheSlopeDirection;
     
 
     [Space(10)]
@@ -69,7 +69,20 @@ public class PlayerController2D : MonoBehaviour
     public LayerMask whatIsWall;
     public LayerMask whatIsSlidableSlope;
     
-    public enum PlayerState {Idle, Running, CrouchIdle, CrouchWalk, Jumping, Falling, WallSliding}; //retournement, flatslide, slopeslide, slopestand
+    public enum PlayerState {
+        Idle,
+        Running,
+        CrouchIdle,
+        CrouchWalk, //Marcher accroupi
+        Jumping, //Dans les airs quand on prend de la hauteur
+        Falling, //Dans les airs quand on perd de la hauteur
+        WallSliding, //Frotte contre un mur, peut potentiellement walljump, tombe beaucoup moins vite que s'il ne frottait pas
+        TurningBack, //Change de direction brusquement en courant au sol
+        FlatSliding, //Glissade sur un sol plat après avoir couru
+        SlopeSliding, //Glissade sur un sol penché a 45°, va assez vite
+        SlopeStanding //Essaye de tenir debout sur un sol penché a 45°, glisse assez doucement
+    };
+
     [Header("Animations Handling")]
     public PlayerState playerState;
     public float moveStateThreshold; //Horizontal Axis related (can't be 0)
@@ -101,6 +114,7 @@ public class PlayerController2D : MonoBehaviour
     private void FixedUpdate()
     {
         manageVirtualXAxis();
+        checkFall();
         doSlopeSlideDetection();
         doHorizontalMove();
     }
@@ -149,7 +163,7 @@ public class PlayerController2D : MonoBehaviour
     {
         xAxis = Input.GetAxis("Horizontal");
         xRawAxis = Input.GetAxisRaw("Horizontal");
-        if (isGrounded && !isFlatSliding)
+        if (isGrounded && !isFlatSliding) //GROUND
         {
             if (!cantControlHorizontal && !isCrouching)
             {
@@ -160,22 +174,24 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity = new Vector2(virtualXAxis * crouchSpeed, rb.velocity.y);
             }
         }
-        else if (!isGrounded && !cantControlHorizontal && !isAgainstSlidableSlope)
+        else if (!isGrounded && !isAgainstSlidableSlope) //AIR
         {
-            rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * addAirSpeed, 0f));
             rb.velocity = new Vector2(rb.velocity.x * (1.0f - horizontalAirDrag), rb.velocity.y);
-            if (rb.velocity.x > maxAirSpeed)
-            {
-                rb.velocity = new Vector2(maxAirSpeed, rb.velocity.y);
-            }
-            else if (rb.velocity.x < -maxAirSpeed)
-            {
-                rb.velocity = new Vector2(-maxAirSpeed, rb.velocity.y);
+            if (!cantControlHorizontal) {
+                rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * addAirSpeed, 0f));
+                if (rb.velocity.x > maxAirSpeed)
+                {
+                    rb.velocity = new Vector2(maxAirSpeed, rb.velocity.y);
+                }
+                else if (rb.velocity.x < -maxAirSpeed)
+                {
+                    rb.velocity = new Vector2(-maxAirSpeed, rb.velocity.y);
+                }
             }
         }
-        else if (isAgainstSlidableSlope) //bug
+        else if (isAgainstSlidableSlope) //SLOPE SLIDE
         {
-            if (isCrouching)
+            if (isCrouching) //CROUCHED
             {
                 rb.velocity = new Vector2(rb.velocity.x * slideCrouchingXSpeedMultiplier, rb.velocity.y);
                 if (rb.velocity.x > slideCrouchingMaxSpeed || rb.velocity.x < -slideCrouchingMaxSpeed)
@@ -184,7 +200,7 @@ public class PlayerController2D : MonoBehaviour
                     rb.velocity = new Vector2(slideCrouchingMaxSpeed * velocitySign, rb.velocity.y);
                 }
             }
-            else if (!isCrouching)
+            else if (!isCrouching) //STANDING
             {
                 rb.velocity = new Vector2(rb.velocity.x * (1.0f - slideStandingDrag), rb.velocity.y);
                 if (rb.velocity.x > slideStandingMaxSpeed || rb.velocity.x < -slideStandingMaxSpeed)
@@ -194,7 +210,7 @@ public class PlayerController2D : MonoBehaviour
                 }
             }
         }
-        else if (isFlatSliding)
+        else if (isFlatSliding) //FLATSLIDING
         {
             rb.velocity = new Vector2(rb.velocity.x * (1.0f - flatSlideDrag), rb.velocity.y);
         }
@@ -206,25 +222,29 @@ public class PlayerController2D : MonoBehaviour
 
     private void doJump ()
     {
-        if (Input.GetButtonDown("Fire1") && isGrounded) //if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded) //check if we can jump
+        if (Input.GetButtonDown("Fire1") && isGrounded) //classic jump
         {
-            rb.velocity += new Vector2(0, jumpForce.y); //jump
+            rb.velocity += new Vector2(0, jumpForce.y);
             StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
         }
+    }
+
+    private void checkFall ()
+    {
         if (rb.velocity.y < 0) //check if we're falling
         {
             if ((isAgainstLeftWall || isAgainstRightWall) && !isCrouching)
             {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (wallSlideMultiplier - 1) * Time.deltaTime; //makes fall faster
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (wallSlideMultiplier - 1) * Time.deltaTime; //makes fall slower
             }
             else
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime; //makes fall faster
             }
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump) //else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.UpArrow) && !lastJumpIsWallJump) //check if we're jumping and gaining height
+        else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump)  //check if we're jumping and gaining height
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime; //make gravity less
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -248,7 +268,7 @@ public class PlayerController2D : MonoBehaviour
     {
         //DETECTION
         //right
-        if (Physics2D.OverlapCircle(transform.GetChild(1).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0) //&& Input.GetAxisRaw("Horizontal") > 0.1f)
+        if (Physics2D.OverlapCircle(transform.GetChild(1).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
         {
             isAgainstRightWall = true;
         }
@@ -257,7 +277,7 @@ public class PlayerController2D : MonoBehaviour
             isAgainstRightWall = false;
         }
         //left
-        if (Physics2D.OverlapCircle(transform.GetChild(2).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0) //&& Input.GetAxisRaw("Horizontal") < -0.1f)
+        if (Physics2D.OverlapCircle(transform.GetChild(2).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
         {
             isAgainstLeftWall = true;
         }
@@ -267,7 +287,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //ACTION
-        if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetButtonDown("Fire1")) //if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetKeyDown(KeyCode.UpArrow))
+        if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetButtonDown("Fire1"))
         {
             lastJumpIsWallJump = true;
             rb.velocity = Vector2.zero;
@@ -282,7 +302,7 @@ public class PlayerController2D : MonoBehaviour
     
     private void doSlopedSlideJump ()
     {
-        if (isAgainstSlidableSlope && Input.GetButtonDown("Fire1") && !isGrounded) //if (isAgainstSlidableSlope && Input.GetKeyDown(KeyCode.UpArrow) && !isGrounded)
+        if (isAgainstSlidableSlope && Input.GetButtonDown("Fire1") && !isGrounded)
         {
             float velocitySign = isSlidingToTheLeft ? -1f : 1f;
 
@@ -313,7 +333,9 @@ public class PlayerController2D : MonoBehaviour
 
     private void doCrouch ()
     {
-        if (Input.GetButtonDown("Fire2") || forceCrouch) //if (Input.GetKeyDown(KeyCode.DownArrow) || forceCrouch)
+        isGoingInTheSlopeDirection = isAgainstSlidableSlope && ((Input.GetAxisRaw("Horizontal") == -1f && isSlidingToTheLeft) || (Input.GetAxisRaw("Horizontal") == 1f && !isSlidingToTheLeft));
+
+        if (Input.GetButtonDown("Fire2") || forceCrouch || isGoingInTheSlopeDirection)
         {
             isCrouching = true;
             coll.size = new Vector2(1f, 0.5f);
@@ -331,7 +353,7 @@ public class PlayerController2D : MonoBehaviour
                 isUnderCollider = true;
             }
         }
-        if (!isUnderCollider && !Input.GetButton("Fire2") && isCrouching && !forceCrouch) //if (!isUnderCollider && !Input.GetKey(KeyCode.DownArrow) && isCrouching && !forceCrouch)
+        if ((!isUnderCollider && !Input.GetButton("Fire2") && isCrouching) && !forceCrouch && !isGoingInTheSlopeDirection)
         {
             isCrouching = false;
             coll.size = new Vector2(1f, 1f);
@@ -352,7 +374,7 @@ public class PlayerController2D : MonoBehaviour
             isFlatSliding = false;
             thisFlatSlideHasBeenDone = true;
         }
-        if (!isCrouching || isAgainstSlidableSlope)
+        if ((!isCrouching || isAgainstSlidableSlope) || (isCrouching && !isGrounded && !isAgainstSlidableSlope))
         {
             thisFlatSlideHasBeenDone = false;
         }
