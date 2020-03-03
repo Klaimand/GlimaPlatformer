@@ -8,7 +8,7 @@ public class PlayerController2D : MonoBehaviour
     #region Variables
 
     private Rigidbody2D rb;
-    
+
     [Header("Movement")]
     public float moveSpeed;
     private float xAxis;
@@ -224,6 +224,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && isGrounded) //classic jump
         {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.velocity += new Vector2(0, jumpForce.y);
             StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
         }
@@ -383,9 +384,10 @@ public class PlayerController2D : MonoBehaviour
     private void doSlopeSlideDetection ()
     {
         //Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
+        //RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
+        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up, slopeCastDistance);
 
-        if (hit == true)
+        if (hit == true && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope) //if (hit == true)
         {
             isAgainstSlidableSlope = true;
             if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
