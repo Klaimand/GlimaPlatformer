@@ -61,6 +61,7 @@ public class PlayerController2D : MonoBehaviour
     public float slopeCastDistance;
     public Vector2 SlopeSlideJumpForce;
     private bool lastJumpIsSlopeJump;
+    private bool isUnderMaxAirSpeedAfterSlopeJump;
     private bool isGoingInTheSlopeDirection;
     
 
@@ -178,14 +179,31 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x * (1.0f - horizontalAirDrag), rb.velocity.y);
             if (!cantControlHorizontal) {
-                rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * addAirSpeed, 0f));
-                if (rb.velocity.x > maxAirSpeed)
-                {
-                    rb.velocity = new Vector2(maxAirSpeed, rb.velocity.y);
+                if ((!lastJumpIsSlopeJump && (Mathf.Abs(rb.velocity.x) < maxAirSpeed)) || lastJumpIsSlopeJump && Mathf.Sign(rb.velocity.x) != Mathf.Sign(Input.GetAxisRaw("Horizontal"))) {
+                    rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * addAirSpeed, 0f));
                 }
-                else if (rb.velocity.x < -maxAirSpeed)
+                /*
+                if (lastJumpIsSlopeJump)
                 {
-                    rb.velocity = new Vector2(-maxAirSpeed, rb.velocity.y);
+                    if (Mathf.Abs(rb.velocity.x) < maxAirSpeed)
+                    {
+                        isUnderMaxAirSpeedAfterSlopeJump = true;
+                        lastJumpIsSlopeJump = false;
+                    }
+                    else
+                    {
+                        isUnderMaxAirSpeedAfterSlopeJump = false;
+                    }
+                }*/
+                if (!lastJumpIsSlopeJump) {
+                    if (rb.velocity.x > maxAirSpeed)
+                    {
+                        rb.velocity = new Vector2(maxAirSpeed, rb.velocity.y);
+                    }
+                    else if (rb.velocity.x < -maxAirSpeed)
+                    {
+                        rb.velocity = new Vector2(-maxAirSpeed, rb.velocity.y);
+                    }
                 }
             }
         }
@@ -311,6 +329,7 @@ public class PlayerController2D : MonoBehaviour
 
             StartCoroutine(addSlideJumpXVelocity(velocitySign));
 
+            lastJumpIsSlopeJump = true;
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(slopeJumpNoControlTimer));
         }
@@ -421,7 +440,7 @@ public class PlayerController2D : MonoBehaviour
                     if ((Mathf.Sign(rb.velocity.x) != Input.GetAxisRaw("Horizontal")) && Input.GetAxisRaw("Horizontal") != 0f)
                     {
                         //Retournement trigger
-                        print("retourning");
+                        //print("retourning");
                     }
                 }
                 else if (!isGrounded)
