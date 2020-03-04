@@ -25,6 +25,7 @@ public class PlayerController2D : MonoBehaviour
     public float fallMultiplier; //more means a faster fall
     public float lowJumpMultiplier; //more means a lower minimal jump
 
+    private bool jumped;
     private bool isGrounded; //is the player touching the ground (overlap circle related)
     public float groundDetectionRadius = 0.2f; //radius around ground detection child
 
@@ -38,6 +39,23 @@ public class PlayerController2D : MonoBehaviour
     private float wallJumpNoControlCurrentTime;
     private bool cantControlHorizontal;
     private bool lastJumpIsWallJump;
+    private bool wallJumped;
+
+    [Header("Jump Buffering")]
+    public float normalJumpBufferTime;
+    private bool isBuffering;
+    private bool doneBuffering;
+
+    [Header("GhostJump")]
+    public float normalGhostJumpTime;
+    private bool canNormalGhostJump; //normal
+    private bool doneNormalGhostJump;
+    private bool lastFrameGrounded;
+    private bool canWallGhostJump; //wall
+    public float wallGhostJumpTime;
+    private bool doneWallGhostJump;
+    private bool lastFrameWallSliding;
+    private bool lastFrameAgainstLeftWall;
 
     [Header("Crouch + FlatSlide")]
     public float crouchSpeed;
@@ -60,6 +78,7 @@ public class PlayerController2D : MonoBehaviour
     private bool isSlidingToTheLeft;
     public float slopeCastDistance;
     public Vector2 SlopeSlideJumpForce;
+    public float slopeJumpDrag;
     private bool lastJumpIsSlopeJump;
     private bool isUnderMaxAirSpeedAfterSlopeJump;
     private bool isGoingInTheSlopeDirection;
@@ -103,8 +122,8 @@ public class PlayerController2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        doJump();
         checkGround();
+        doJump();
         doWallJump();
         doCrouch();
         doFlatSliding();
@@ -118,6 +137,8 @@ public class PlayerController2D : MonoBehaviour
         checkFall();
         doSlopeSlideDetection();
         doHorizontalMove();
+        checkLastGroundState();
+        checkLastWallState();
     }
 
     #endregion
@@ -177,7 +198,13 @@ public class PlayerController2D : MonoBehaviour
         }
         else if (!isGrounded && !isAgainstSlidableSlope) //AIR
         {
-            rb.velocity = new Vector2(rb.velocity.x * (1.0f - horizontalAirDrag), rb.velocity.y);
+            if (!lastJumpIsSlopeJump) {
+                rb.velocity = new Vector2(rb.velocity.x * (1.0f - horizontalAirDrag), rb.velocity.y);
+            }
+            else if (lastJumpIsSlopeJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x * (1.0f - slopeJumpDrag), rb.velocity.y);
+            }
             if (!cantControlHorizontal) {
                 if ((!lastJumpIsSlopeJump && (Mathf.Abs(rb.velocity.x) < maxAirSpeed)) || lastJumpIsSlopeJump && Mathf.Sign(rb.velocity.x) != Mathf.Sign(Input.GetAxisRaw("Horizontal"))) {
                     rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * addAirSpeed, 0f));
@@ -240,12 +267,33 @@ public class PlayerController2D : MonoBehaviour
 
     private void doJump ()
     {
-        if (Input.GetButtonDown("Fire1") && isGrounded) //classic jump
+        if (Input.GetButtonDown("Fire1") || isBuffering) //classic jump
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.velocity += new Vector2(0, jumpForce.y);
-            StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
+            if (isGrounded || canNormalGhostJump)
+            {
+                jumped = true;
+                StartCoroutine(applyJumpedOnNextFrame());
+                doneBuffering = true;
+                doneNormalGhostJump = true;
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.velocity += new Vector2(0, jumpForce.y);
+                StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
+            }
+            else if (!isGrounded)
+            {
+                if (!isBuffering)
+                {
+                    doneBuffering = false;
+                    StartCoroutine(startJumpBuffer(normalJumpBufferTime));
+                }
+            }
         }
+    }
+
+    private IEnumerator applyJumpedOnNextFrame ()
+    {
+        yield return new WaitForFixedUpdate();
+        jumped = true;
     }
 
     private void checkFall ()
@@ -278,6 +326,7 @@ public class PlayerController2D : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(transform.GetChild(0).transform.position, groundDetectionRadius, whatIsGround);
         if (isGrounded)
         {
+            jumped = false;
             lastJumpIsWallJump = false;
             lastJumpIsSlopeJump = false;
         }
@@ -290,6 +339,7 @@ public class PlayerController2D : MonoBehaviour
         if (Physics2D.OverlapCircle(transform.GetChild(1).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
         {
             isAgainstRightWall = true;
+            wallJumped = false;
         }
         else
         {
@@ -299,6 +349,7 @@ public class PlayerController2D : MonoBehaviour
         if (Physics2D.OverlapCircle(transform.GetChild(2).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
         {
             isAgainstLeftWall = true;
+            wallJumped = false;
         }
         else
         {
@@ -306,23 +357,33 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //ACTION
-        if ((isAgainstLeftWall || isAgainstRightWall) && Input.GetButtonDown("Fire1"))
+        if (((isAgainstLeftWall || isAgainstRightWall) || canWallGhostJump) && (Input.GetButtonDown("Fire1") || isBuffering))
         {
+            doneBuffering = true;
+            doneWallGhostJump = true;
             lastJumpIsWallJump = true;
+            wallJumped = true;
             rb.velocity = Vector2.zero;
 
-            float xVelocitySign = isAgainstLeftWall ? 1f : -1f;
+            float xVelocitySign = isAgainstLeftWall || lastFrameAgainstLeftWall ? 1f : -1f;
             rb.velocity += new Vector2(wallJumpForce.x * xVelocitySign, wallJumpForce.y);
 
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
         }
     }
-    
+
+    private IEnumerator applyWallJumpedOnNextFrame()
+    {
+        yield return new WaitForFixedUpdate();
+        wallJumped = true;
+    }
+
     private void doSlopedSlideJump ()
     {
-        if (isAgainstSlidableSlope && Input.GetButtonDown("Fire1") && !isGrounded)
+        if (isAgainstSlidableSlope && (Input.GetButtonDown("Fire1") || isBuffering) && !isGrounded)
         {
+            doneBuffering = true;
             float velocitySign = isSlidingToTheLeft ? -1f : 1f;
 
             rb.velocity = new Vector2(rb.velocity.x, SlopeSlideJumpForce.y);
@@ -345,6 +406,65 @@ public class PlayerController2D : MonoBehaviour
     {
         yield return new WaitForSeconds(noControlTime);
         cantControlHorizontal = false;
+    }
+
+    private IEnumerator startJumpBuffer (float bufferTime)
+    {
+        float curBufferTime = 0f;
+        isBuffering = true;
+        while (curBufferTime < bufferTime && !doneBuffering) {
+            yield return null;
+            curBufferTime += Time.deltaTime;
+        }
+        isBuffering = false;
+    }
+
+    private void checkLastGroundState ()
+    {
+        if (lastFrameGrounded && !isGrounded && !jumped)
+        {
+            doneNormalGhostJump = false;
+            StartCoroutine(startGhostJump());
+        }
+        lastFrameGrounded = isGrounded;
+    }
+
+    private IEnumerator startGhostJump ()
+    {
+        float curNormalGhostJumpTime = 0f;
+        canNormalGhostJump = true;
+        while (curNormalGhostJumpTime < normalGhostJumpTime && !doneNormalGhostJump)
+        {
+            yield return null;
+            curNormalGhostJumpTime += Time.deltaTime;
+        }
+        canNormalGhostJump = false;
+    }
+
+    private void checkLastWallState ()
+    {
+        if (lastFrameWallSliding && (!isAgainstLeftWall && !isAgainstRightWall) && !wallJumped)
+        {
+            doneWallGhostJump = false;
+            StartCoroutine(startWallGhostJump());
+        }
+        if (!canWallGhostJump)
+        {
+            lastFrameAgainstLeftWall = isAgainstLeftWall;
+        }
+        lastFrameWallSliding = isAgainstRightWall || isAgainstLeftWall;
+    }
+
+    private IEnumerator startWallGhostJump ()
+    {
+        float curWallGhostJumpTime = 0f;
+        canWallGhostJump = true;
+        while (curWallGhostJumpTime < wallGhostJumpTime && !doneWallGhostJump)
+        {
+            yield return null;
+            curWallGhostJumpTime += Time.deltaTime;
+        }
+        canWallGhostJump = false;
     }
 
     #endregion
