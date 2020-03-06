@@ -18703,10 +18703,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 548934806, guid: 9559ca908da379d4a946c2bc315da983, type: 3}
-      propertyPath: unitsAddedPerDPadClick
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 388797003305851273, guid: 9559ca908da379d4a946c2bc315da983,
         type: 3}
       propertyPath: m_Name
