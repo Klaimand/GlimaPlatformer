@@ -9,11 +9,23 @@ public class KLD_TestQTE : MonoBehaviour
     public float pointsPerInput;
     public float pointsLostPerSecond;
 
+    public float joystickLenghtToAdd;
+
     private bool done;
+
+    private float curXAxisRawValue;
+    private float lastXAxisRawValue;
 
     private SpriteRenderer sr;
     public Color basic, doneColor;
 
+    public enum QteMode
+    {
+        button,
+        joystick
+    }
+
+    public QteMode qteMode;
     
     void Awake()
     {
@@ -27,6 +39,7 @@ public class KLD_TestQTE : MonoBehaviour
     
     void Update()
     {
+        doCurXValue();
         if (!done)
         {
             addPoints();
@@ -36,11 +49,29 @@ public class KLD_TestQTE : MonoBehaviour
         doGraphics();
     }
 
+    private void doCurXValue ()
+    {
+        float xAxisRaw = Input.GetAxisRaw("Horizontal");
+        if (Mathf.Abs(xAxisRaw) >= joystickLenghtToAdd)
+        {
+            curXAxisRawValue = Mathf.Sign(xAxisRaw);
+        }
+        else
+        {
+            curXAxisRawValue = 0f;
+        }
+    }
+
     private void addPoints ()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if ((qteMode == QteMode.button && Input.GetButtonDown("Fire1")) || (qteMode == QteMode.joystick && curXAxisRawValue != lastXAxisRawValue && curXAxisRawValue != 0f))
         {
             currentPoints += pointsPerInput;
+            lastXAxisRawValue = 0f;
+        }
+        if (curXAxisRawValue != 0f)
+        {
+            lastXAxisRawValue = curXAxisRawValue;
         }
     }
 
