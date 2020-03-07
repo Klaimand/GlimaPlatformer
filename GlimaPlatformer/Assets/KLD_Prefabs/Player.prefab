@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f2b4c2231e59a459ffd5f82bbdeb38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 8
   accelerationFrame: 6
   decelerationFrame: 8
   jumpForce: {x: 3, y: 15}
@@ -152,9 +152,12 @@ MonoBehaviour:
   wallDetectionRadius: 0.1
   wallJumpForce: {x: 7, y: 15}
   wallJumpNoControlTimer: 0.2
-  crouchSpeed: 2
-  flatSlideDrag: 0.03
-  flatSlidingMinSpeed: 1
+  normalJumpBufferTime: 0.1
+  normalGhostJumpTime: 0.06
+  wallGhostJumpTime: 0.1
+  crouchSpeed: 3
+  flatSlideDrag: 0.02
+  flatSlidingMinSpeed: 1.5
   forceCrouch: 0
   slideCrouchingXSpeedMultiplier: 1
   slideCrouchingMaxSpeed: 12
@@ -162,13 +165,14 @@ MonoBehaviour:
   slideStandingMaxSpeed: 4
   slopeJumpNoControlTimer: 0.3
   slopeCastDistance: 0.3
-  SlopeSlideJumpForce: {x: 8, y: 10}
+  SlopeSlideJumpForce: {x: 6, y: 10}
+  slopeJumpDrag: 0.015
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   whatIsSlidableSlope:
     serializedVersion: 2
     m_Bits: 1024
@@ -186,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14ed209f7e60674ead8a18af1ea36f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitsAddedPerDPadClick: 5
 --- !u!1 &388797003438918238
 GameObject:
   m_ObjectHideFlags: 0
