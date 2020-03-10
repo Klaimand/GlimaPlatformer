@@ -8,6 +8,11 @@ public class KLD_LdHelper : MonoBehaviour
     private Rigidbody2D rb;
     private Camera camera;
 
+    private float lastDpadX;
+    private float lastDpadY;
+
+    public float unitsAddedPerDPadClick;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,6 +30,7 @@ public class KLD_LdHelper : MonoBehaviour
     {
         teleportOnClickPosition();
         teleportToRespawnPoint();
+        teleportOnControllerCrossDirection();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,6 +50,34 @@ public class KLD_LdHelper : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
             rb.velocity = Vector2.zero;
         }
+    }
+
+    void teleportOnControllerCrossDirection ()
+    {
+        float curDPadX = Input.GetAxis("DPad X");
+        float curDPadY = Input.GetAxis("DPad Y");
+        if (curDPadX == 1f && lastDpadX != 1f)
+        {
+            transform.position += Vector3.right * unitsAddedPerDPadClick;
+            rb.velocity = Vector2.zero;
+        }
+        else if (curDPadX == -1f && lastDpadX != -1f)
+        {
+            transform.position += Vector3.left * unitsAddedPerDPadClick;
+            rb.velocity = Vector2.zero;
+        }
+        if (curDPadY == 1f && lastDpadY != 1f)
+        {
+            transform.position += Vector3.up * unitsAddedPerDPadClick;
+            rb.velocity = Vector2.zero;
+        }
+        else if (curDPadY == -1f && lastDpadY != -1f)
+        {
+            transform.position += Vector3.down * unitsAddedPerDPadClick;
+            rb.velocity = Vector2.zero;
+        }
+        lastDpadX = Input.GetAxis("DPad X");
+        lastDpadY = Input.GetAxis("DPad Y");
     }
 
     void teleportToRespawnPoint ()
