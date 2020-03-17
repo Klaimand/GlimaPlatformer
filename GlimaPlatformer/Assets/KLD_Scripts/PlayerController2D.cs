@@ -82,7 +82,12 @@ public class PlayerController2D : MonoBehaviour
     private bool lastJumpIsSlopeJump;
     private bool isUnderMaxAirSpeedAfterSlopeJump;
     private bool isGoingInTheSlopeDirection;
-    
+
+    [Header("Stairs")]
+    private bool isOnStairs;
+    private bool stairsToTheLeft;
+    public float stairSpeed;
+    private bool jumpTrigger;
 
     [Space(10)]
     public LayerMask whatIsGround;
@@ -135,7 +140,9 @@ public class PlayerController2D : MonoBehaviour
     {
         manageVirtualXAxis();
         checkFall();
-        doSlopeSlideDetection();
+        doSlopeAndStairsDetection();
+        doOnStairsGravityDisable();
+        //doSlopeSlideDetection();
         doHorizontalMove();
         checkLastGroundState();
         checkLastWallState();
@@ -185,7 +192,7 @@ public class PlayerController2D : MonoBehaviour
     {
         xAxis = Input.GetAxis("Horizontal");
         xRawAxis = Input.GetAxisRaw("Horizontal");
-        if (isGrounded && !isFlatSliding) //GROUND
+        if (isGrounded && !isFlatSliding && !isOnStairs) //GROUND
         {
             if (!cantControlHorizontal && !isCrouching)
             {
@@ -196,7 +203,7 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity = new Vector2(virtualXAxis * crouchSpeed, rb.velocity.y);
             }
         }
-        else if (!isGrounded && !isAgainstSlidableSlope) //AIR
+        else if (!isGrounded && !isAgainstSlidableSlope && !isOnStairs) //AIR
         {
             if (!lastJumpIsSlopeJump) {
                 rb.velocity = new Vector2(rb.velocity.x * (1.0f - horizontalAirDrag), rb.velocity.y);
@@ -259,6 +266,11 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x * (1.0f - flatSlideDrag), rb.velocity.y);
         }
+        else if (isOnStairs)
+        {
+            float stairsDirection = stairsToTheLeft ? 1f : -1f;
+            rb.velocity = new Vector2(1f, stairsDirection).normalized * stairSpeed * virtualXAxis;
+        }
     }
 
     #endregion
@@ -271,6 +283,8 @@ public class PlayerController2D : MonoBehaviour
         {
             if (isGrounded || canNormalGhostJump)
             {
+                jumpTrigger = true;
+                StartCoroutine(waitToDisableJumpTrigger());
                 jumped = true;
                 StartCoroutine(applyJumpedOnNextFrame());
                 doneBuffering = true;
@@ -294,6 +308,13 @@ public class PlayerController2D : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         jumped = true;
+    }
+
+    private IEnumerator waitToDisableJumpTrigger ()
+    {
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        jumpTrigger = false;
     }
 
     private void checkFall ()
@@ -324,6 +345,10 @@ public class PlayerController2D : MonoBehaviour
     void checkGround()
     {
         isGrounded = Physics2D.OverlapCircle(transform.GetChild(0).transform.position, groundDetectionRadius, whatIsGround);
+        if (isOnStairs)
+        {
+            isGrounded = true;
+        }
         if (isGrounded)
         {
             jumped = false;
@@ -519,28 +544,81 @@ public class PlayerController2D : MonoBehaviour
             thisFlatSlideHasBeenDone = false;
         }
     }
-    
+    /*
     private void doSlopeSlideDetection ()
     {
         //Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
         //RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
         RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up, slopeCastDistance);
 
-        if (hit == true && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope) //if (hit == true)
+        if (hit == true && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope)
         {
-            isAgainstSlidableSlope = true;
-            if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
+            if (!hit.collider.gameObject.CompareTag("Stairs"))
             {
-                isSlidingToTheLeft = true;
-            }
-            else
-            {
-                isSlidingToTheLeft = false;
+                isAgainstSlidableSlope = true;
+                if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
+                {
+                    isSlidingToTheLeft = true;
+                }
+                else
+                {
+                    isSlidingToTheLeft = false;
+                }
             }
         }
         else
         {
             isAgainstSlidableSlope = false;
+        }
+    }*/
+
+    private void doSlopeAndStairsDetection ()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up, slopeCastDistance);
+
+        if (hit && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope && !jumpTrigger)
+        {
+            if (!hit.collider.gameObject.tag.Contains("Stairs"))
+            {
+                isAgainstSlidableSlope = true;
+                if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
+                {
+                    isSlidingToTheLeft = true;
+                }
+                else
+                {
+                    isSlidingToTheLeft = false;
+                }
+            }
+            else
+            {
+                isOnStairs = true;
+                if (hit.collider.gameObject.CompareTag("StairsToTheLeft"))
+                {
+                    stairsToTheLeft = true;
+                }
+                else
+                {
+                    stairsToTheLeft = false;
+                }
+            }
+        }
+        else
+        {
+            isOnStairs = false;
+            isAgainstSlidableSlope = false;
+        }
+    }
+
+    private void doOnStairsGravityDisable ()
+    {
+        if (isOnStairs && !jumped)
+        {
+            rb.gravityScale = 0f;
+        }
+        else
+        {
+            rb.gravityScale = 1f;
         }
     }
 
