@@ -7,6 +7,8 @@ TagManager:
   - DeathZone
   - SlopeToTheLeft
   - Can
+  - StairsToTheLeft
+  - StairsToTheRight
   layers:
   - Default
   - TransparentFX
