@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4208650845474005004}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   slopeCastDistance: 0.3
   SlopeSlideJumpForce: {x: 8, y: 10}
   slopeJumpDrag: 0.025
+  stairSpeed: 8
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2304
