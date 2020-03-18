@@ -92,6 +92,10 @@ public class PlayerController2D : MonoBehaviour
     public float stairSpeed;
     private bool jumpTrigger;
 
+    [Header("Terrain Interraction")]
+    public float timeToReachFireRun;
+
+
     [Space(10)]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
@@ -508,9 +512,8 @@ public class PlayerController2D : MonoBehaviour
     public void addExplosionForce (Transform mine, float explosionForce)
     {
         cantMoveTrigger = true;
-        rb.velocity += new Vector2(transform.position.x - mine.position.x, (transform.position.y - mine.position.y) + 0.8f).normalized * explosionForce;
+        rb.velocity = new Vector2(transform.position.x - mine.position.x, (transform.position.y - mine.position.y) + 0.8f).normalized * explosionForce;
         StartCoroutine(disableCantMoveTrigger());
-        print("added force");
     }
 
     private IEnumerator disableCantMoveTrigger ()

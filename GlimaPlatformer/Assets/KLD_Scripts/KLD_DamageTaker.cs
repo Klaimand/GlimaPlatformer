@@ -29,9 +29,13 @@ public class KLD_DamageTaker : MonoBehaviour
         controller.addExplosionForce(mine, explosionForce);
 
         //summon le QTE avec les bonnes valeurs
-        if ((int)egoManager.curEgoState < 3)
+        if ((int)egoManager.curEgoState < 4)
         {
             InstantiateQTE(damageType, (int)egoManager.curEgoState);
+        }
+        else
+        {
+            controller.cantMove = false;
         }
 
         //actualiser l'égo
@@ -44,7 +48,7 @@ public class KLD_DamageTaker : MonoBehaviour
     {
         GameObject curQTE = Instantiate(QTEPrefab, transform.position + new Vector3(-3.7f, 2.75f, 0f), Quaternion.identity);
         KLD_TestQTE qteScript = curQTE.transform.GetChild(0).GetComponent<KLD_TestQTE>();
-        if (difficulty == 0)
+        if (difficulty <= 1)
         {
             //hard
             if (damageType == DamageType.Explosion)
@@ -58,7 +62,7 @@ public class KLD_DamageTaker : MonoBehaviour
 
             }
         }
-        else if (difficulty == 1)
+        else if (difficulty == 2)
         {
             //medium
             if (damageType == DamageType.Explosion)
@@ -72,7 +76,7 @@ public class KLD_DamageTaker : MonoBehaviour
 
             }
         }
-        else if (difficulty == 2)
+        else if (difficulty == 3)
         {
             //easy
             if (damageType == DamageType.Explosion)
