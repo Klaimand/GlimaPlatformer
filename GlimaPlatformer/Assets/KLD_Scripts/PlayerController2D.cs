@@ -652,8 +652,22 @@ public class PlayerController2D : MonoBehaviour
 
     #endregion
 
-    #region Animations Handling
+    #region Getters and Setters
     
+    public bool getGroundStatus()
+    {
+        return isGrounded;
+    }
+
+    public float getVirtualXAxis ()
+    {
+        return virtualXAxis;
+    }
+
+    #endregion
+
+    #region Animations Handling
+
     private void getPlayerState2 ()
     {
         if (!isCrouching)
