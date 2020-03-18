@@ -16,6 +16,9 @@ public class PlayerController2D : MonoBehaviour
     private float xRawAxis;
     public int accelerationFrame;
     public int decelerationFrame;
+    public bool cantMove;
+
+    private bool cantMoveTrigger;
 
     [Header("Jump + AirControl")]
     public Vector2 jumpForce; //jump velocity on button press
@@ -128,17 +131,27 @@ public class PlayerController2D : MonoBehaviour
     void Update()
     {
         checkGround();
-        doJump();
-        doWallJump();
-        doCrouch();
-        doFlatSliding();
-        doSlopedSlideJump();
+        if (!cantMove)
+        {
+            doJump();
+            doWallJump();
+            doCrouch();
+            doFlatSliding();
+            doSlopedSlideJump();
+        }
         getPlayerState2();
     }
 
     private void FixedUpdate()
     {
-        manageVirtualXAxis();
+        if (!cantMove)
+        {
+            manageVirtualXAxis();
+        }
+        else
+        {
+            virtualXAxis = 0f;
+        }
         checkFall();
         doSlopeAndStairsDetection();
         doOnStairsGravityDisable();
@@ -192,7 +205,7 @@ public class PlayerController2D : MonoBehaviour
     {
         xAxis = Input.GetAxis("Horizontal");
         xRawAxis = Input.GetAxisRaw("Horizontal");
-        if (isGrounded && !isFlatSliding && !isOnStairs) //GROUND
+        if (isGrounded && !isFlatSliding && !isOnStairs && !cantMoveTrigger) //GROUND
         {
             if (!cantControlHorizontal && !isCrouching)
             {
@@ -490,6 +503,21 @@ public class PlayerController2D : MonoBehaviour
             curWallGhostJumpTime += Time.deltaTime;
         }
         canWallGhostJump = false;
+    }
+
+    public void addExplosionForce (Transform mine, float explosionForce)
+    {
+        cantMoveTrigger = true;
+        rb.velocity += new Vector2(transform.position.x - mine.position.x, (transform.position.y - mine.position.y) + 0.8f).normalized * explosionForce;
+        StartCoroutine(disableCantMoveTrigger());
+        print("added force");
+    }
+
+    private IEnumerator disableCantMoveTrigger ()
+    {
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        cantMoveTrigger = false;
     }
 
     #endregion
