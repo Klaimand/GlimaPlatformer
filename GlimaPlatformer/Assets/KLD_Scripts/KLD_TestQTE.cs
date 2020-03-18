@@ -26,7 +26,10 @@ public class KLD_TestQTE : MonoBehaviour
     }
 
     public QteMode qteMode;
-    
+
+
+    private GameObject player;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -34,6 +37,7 @@ public class KLD_TestQTE : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("Player");
         sr.color = basic;
     }
     
@@ -89,11 +93,18 @@ public class KLD_TestQTE : MonoBehaviour
 
     private void checkEnd ()
     {
-        if (currentPoints >= maxPoints)
+        if (currentPoints >= maxPoints && !done)
         {
             done = true;
             currentPoints = maxPoints;
+            doEnd();
         }
+    }
+
+    private void doEnd ()
+    {
+        player.GetComponent<PlayerController2D>().cantMove = false;
+        Destroy(transform.parent.gameObject);
     }
 
     private void doGraphics ()
