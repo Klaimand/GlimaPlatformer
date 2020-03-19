@@ -6,9 +6,14 @@ public class KLD_DamageTaker : MonoBehaviour
 {
     [SerializeField]
     GameObject QTEPrefab;
+    [SerializeField]
+    float invulnerableTimeAfterDamageTaking;
+    //[HideInInspector]
+    public bool isInvulnerable;
 
     PlayerController2D controller;
     KLD_EgoManager egoManager;
+
 
     private void Awake()
     {
@@ -25,13 +30,18 @@ public class KLD_DamageTaker : MonoBehaviour
     public void doDamageTaking (DamageType damageType, Transform mine, float explosionForce)
     {
         //arreter le joueur
+        isInvulnerable = true;
         controller.cantMove = true;
         controller.addExplosionForce(mine, explosionForce);
 
         //summon le QTE avec les bonnes valeurs
-        if ((int)egoManager.curEgoState < 3)
+        if ((int)egoManager.curEgoState < 4)
         {
             InstantiateQTE(damageType, (int)egoManager.curEgoState);
+        }
+        else
+        {
+            controller.cantMove = false;
         }
 
         //actualiser l'égo
@@ -72,7 +82,7 @@ public class KLD_DamageTaker : MonoBehaviour
 
             }
         }
-        else if (difficulty == 2)
+        else if (difficulty <= 3)
         {
             //easy
             if (damageType == DamageType.Explosion)
@@ -86,6 +96,17 @@ public class KLD_DamageTaker : MonoBehaviour
 
             }
         }
+    }
+
+    public void startInvulnerability ()
+    {
+        StartCoroutine(startInvul());
+    }
+
+    private IEnumerator startInvul ()
+    {
+        yield return new WaitForSeconds(invulnerableTimeAfterDamageTaking);
+        isInvulnerable = false;
     }
 
 }

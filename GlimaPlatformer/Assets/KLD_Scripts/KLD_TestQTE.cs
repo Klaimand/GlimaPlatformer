@@ -104,6 +104,7 @@ public class KLD_TestQTE : MonoBehaviour
     private void doEnd ()
     {
         player.GetComponent<PlayerController2D>().cantMove = false;
+        player.GetComponent<KLD_DamageTaker>().startInvulnerability();
         Destroy(transform.parent.gameObject);
     }
 

@@ -12,12 +12,15 @@ public class KLD_Mines : MonoBehaviour
     private SpriteRenderer thisSr;
     private SpriteRenderer buttonSr;
 
+    private KLD_DamageTaker damageTaker;
+
     [SerializeField]
     private float timeBeforeExplosion, explosionRadius, explosionForce;
     
     // Start is called before the first frame update
     void Start()
     {
+        damageTaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
         thisSr = GetComponent<SpriteRenderer>();
         buttonSr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         buttonSr.color = buttonOff;
@@ -31,7 +34,7 @@ public class KLD_Mines : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isTriggered && !exploded && collision.gameObject.CompareTag("Player"))
+        if (!isTriggered && !exploded && !damageTaker.isInvulnerable && collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(triggerMine());
         }
@@ -56,7 +59,7 @@ public class KLD_Mines : MonoBehaviour
             if (coll.gameObject.CompareTag("Player"))
             {
                 print("player is in explosion radius");
-                coll.transform.GetComponent<KLD_DamageTaker>().doDamageTaking(DamageType.Explosion, transform, explosionForce);
+                damageTaker.doDamageTaking(DamageType.Explosion, transform, explosionForce);
             }
         }
     }
