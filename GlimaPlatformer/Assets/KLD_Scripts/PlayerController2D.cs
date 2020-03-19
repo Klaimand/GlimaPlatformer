@@ -60,6 +60,10 @@ public class PlayerController2D : MonoBehaviour
     private bool lastFrameWallSliding;
     private bool lastFrameAgainstLeftWall;
 
+    [Header("Corner Correction")] //not implemented
+    public float cornerDistance;
+    //private BoxCollider2D triggerCollider;
+
     [Header("Crouch + FlatSlide")]
     public float crouchSpeed;
     private bool isCrouching;
@@ -123,14 +127,14 @@ public class PlayerController2D : MonoBehaviour
 
     #region MonoBehaviour voids
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        //triggerCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         spriterenderer = GetComponent<SpriteRenderer>();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -164,6 +168,18 @@ public class PlayerController2D : MonoBehaviour
         checkLastGroundState();
         checkLastWallState();
     }
+    
+    /*
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Wall") || collision.gameObject.layer == LayerMask.NameToLayer("Tilemap"))
+        {
+            if (collision.transform.position.x > transform.position.x)
+            {
+
+            }
+        }
+    }*/
 
     #endregion
 
@@ -229,7 +245,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x * (1.0f - slopeJumpDrag), rb.velocity.y);
             }
-            if (!cantControlHorizontal) {
+            if (!cantControlHorizontal && !cantMove) {
                 if ((!lastJumpIsSlopeJump && (Mathf.Abs(rb.velocity.x) < maxAirSpeed)) || lastJumpIsSlopeJump && Mathf.Sign(rb.velocity.x) != Mathf.Sign(Input.GetAxisRaw("Horizontal"))) {
                     rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * addAirSpeed, 0f));
                 }

@@ -6,9 +6,14 @@ public class KLD_DamageTaker : MonoBehaviour
 {
     [SerializeField]
     GameObject QTEPrefab;
+    [SerializeField]
+    float invulnerableTimeAfterDamageTaking;
+    //[HideInInspector]
+    public bool isInvulnerable;
 
     PlayerController2D controller;
     KLD_EgoManager egoManager;
+
 
     private void Awake()
     {
@@ -25,6 +30,7 @@ public class KLD_DamageTaker : MonoBehaviour
     public void doDamageTaking (DamageType damageType, Transform mine, float explosionForce)
     {
         //arreter le joueur
+        isInvulnerable = true;
         controller.cantMove = true;
         controller.addExplosionForce(mine, explosionForce);
 
@@ -48,7 +54,7 @@ public class KLD_DamageTaker : MonoBehaviour
     {
         GameObject curQTE = Instantiate(QTEPrefab, transform.position + new Vector3(-3.7f, 2.75f, 0f), Quaternion.identity);
         KLD_TestQTE qteScript = curQTE.transform.GetChild(0).GetComponent<KLD_TestQTE>();
-        if (difficulty <= 1)
+        if (difficulty == 0)
         {
             //hard
             if (damageType == DamageType.Explosion)
@@ -62,7 +68,7 @@ public class KLD_DamageTaker : MonoBehaviour
 
             }
         }
-        else if (difficulty == 2)
+        else if (difficulty == 1)
         {
             //medium
             if (damageType == DamageType.Explosion)
@@ -76,7 +82,7 @@ public class KLD_DamageTaker : MonoBehaviour
 
             }
         }
-        else if (difficulty == 3)
+        else if (difficulty <= 3)
         {
             //easy
             if (damageType == DamageType.Explosion)
@@ -90,6 +96,17 @@ public class KLD_DamageTaker : MonoBehaviour
 
             }
         }
+    }
+
+    public void startInvulnerability ()
+    {
+        StartCoroutine(startInvul());
+    }
+
+    private IEnumerator startInvul ()
+    {
+        yield return new WaitForSeconds(invulnerableTimeAfterDamageTaking);
+        isInvulnerable = false;
     }
 
 }
