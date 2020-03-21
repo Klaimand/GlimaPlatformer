@@ -17,9 +17,11 @@ public class KLD_TurretBehavior : MonoBehaviour
     private Transform target;
     public GameObject bulletObj;
 
+    private KLD_DamageTaker damagetaker;
 
     void Start()
     {
+        damagetaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
         canShoot = true;
         target = turretIdletarget;
     }
@@ -57,7 +59,7 @@ public class KLD_TurretBehavior : MonoBehaviour
 
     private void doPlayerInSight ()
     {
-        if (Vector3.Distance(transform.position, target.position) <= maxRange)
+        if (Vector3.Distance(transform.position, target.position) <= maxRange && !damagetaker.isInvulnerable)
         {
             Vector3 vectorToPlayer = playerTarget.position - transform.position;
             RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, (Vector2)vectorToPlayer, Mathf.Infinity);
