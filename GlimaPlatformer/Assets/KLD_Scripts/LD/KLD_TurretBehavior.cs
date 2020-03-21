@@ -21,6 +21,7 @@ public class KLD_TurretBehavior : MonoBehaviour
 
     void Start()
     {
+        playerTarget = GameObject.Find("Player").transform.GetChild(4);
         damagetaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
         canShoot = true;
         target = turretIdletarget;
