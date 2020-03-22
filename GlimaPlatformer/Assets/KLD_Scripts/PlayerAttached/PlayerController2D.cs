@@ -123,6 +123,7 @@ public class PlayerController2D : MonoBehaviour
     [Header("Animations Handling")]
     public PlayerState playerState;
     public float moveStateThreshold;
+    private bool flip = false;
 
     #endregion
 
@@ -150,6 +151,7 @@ public class PlayerController2D : MonoBehaviour
             doSlopedSlideJump();
         }
         getPlayerState2();
+        doFlipX();
     }
 
     private void FixedUpdate()
@@ -358,7 +360,9 @@ public class PlayerController2D : MonoBehaviour
         {
             if ((isAgainstLeftWall || isAgainstRightWall) && !isCrouching)
             {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (wallSlideMultiplier - 1) * Time.deltaTime; //makes fall slower
+                if (rb.velocity.y < 0f) {
+                    rb.velocity += Vector2.up * Physics2D.gravity.y * (wallSlideMultiplier - 1) * Time.deltaTime; //makes fall slower
+                }
             }
             else
             {
@@ -396,7 +400,7 @@ public class PlayerController2D : MonoBehaviour
     {
         //DETECTION
         //right
-        if (Physics2D.OverlapCircle(transform.GetChild(1).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
+        if (Physics2D.OverlapCircle(transform.GetChild(1).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded) //&& rb.velocity.y < 0)
         {
             isAgainstRightWall = true;
             wallJumped = false;
@@ -406,7 +410,7 @@ public class PlayerController2D : MonoBehaviour
             isAgainstRightWall = false;
         }
         //left
-        if (Physics2D.OverlapCircle(transform.GetChild(2).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
+        if (Physics2D.OverlapCircle(transform.GetChild(2).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded) //&& rb.velocity.y < 0)
         {
             isAgainstLeftWall = true;
             wallJumped = false;
@@ -747,6 +751,29 @@ public class PlayerController2D : MonoBehaviour
             }
         }
         animator.SetInteger("PlayerState", (int)playerState);
+    }
+
+    private void doFlipX ()
+    {
+        if (playerState == PlayerState.Running || playerState == PlayerState.Jumping || playerState == PlayerState.Falling || playerState == PlayerState.CrouchWalk)
+        {
+            if (Mathf.Abs(virtualXAxis) > moveStateThreshold && !cantControlHorizontal) {
+                flip = Mathf.Sign(virtualXAxis) == -1f;
+            }
+        }
+        else if (isAgainstLeftWall)
+        {
+            flip = false;
+        }
+        else if (isAgainstRightWall)
+        {
+            flip = true;
+        }
+        if (isAgainstSlidableSlope)
+        {
+            flip = isSlidingToTheLeft;
+        }
+        spriterenderer.flipX = flip;
     }
 
     #endregion
