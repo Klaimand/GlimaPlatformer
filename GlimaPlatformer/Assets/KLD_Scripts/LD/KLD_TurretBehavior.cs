@@ -8,7 +8,7 @@ public class KLD_TurretBehavior : MonoBehaviour
     private float maxRotateSpeed, maxRange, timeBetweenShoots, angleToShoot;
 
     [SerializeField]
-    private bool targetInSight, canShoot;
+    private bool targetInSight, canShoot, drawSight;
     
     //private Vector3 vectorToTarget;
 
@@ -64,7 +64,10 @@ public class KLD_TurretBehavior : MonoBehaviour
         {
             Vector3 vectorToPlayer = playerTarget.position - transform.position;
             RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, (Vector2)vectorToPlayer, Mathf.Infinity);
-            Debug.DrawRay(transform.position, vectorToPlayer * maxRange, new Color(1f, 1f, 0f, 0.2f));
+            if (drawSight)
+            {
+                Debug.DrawRay(transform.position, vectorToPlayer * maxRange, new Color(1f, 1f, 0f, 0.2f));
+            }
             if (hit && hit.collider.gameObject.CompareTag("Player"))
             {
                 targetInSight = true;
