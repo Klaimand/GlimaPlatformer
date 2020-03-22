@@ -8,6 +8,7 @@ public class PlayerController2D : MonoBehaviour
     #region Variables
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -106,22 +107,23 @@ public class PlayerController2D : MonoBehaviour
     public LayerMask whatIsSlidableSlope;
     
     public enum PlayerState {
-        Idle,
-        Running,
-        CrouchIdle,
-        CrouchWalk, //Marcher accroupi
-        Jumping, //Dans les airs quand on prend de la hauteur
-        Falling, //Dans les airs quand on perd de la hauteur
-        WallSliding, //Frotte contre un mur, peut potentiellement walljump, tombe beaucoup moins vite que s'il ne frottait pas
-        TurningBack, //Change de direction brusquement en courant au sol
-        FlatSliding, //Glissade sur un sol plat après avoir couru
-        SlopeSliding, //Glissade sur un sol penché a 45°, va assez vite
-        SlopeStanding //Essaye de tenir debout sur un sol penché a 45°, glisse assez doucement
+        Idle, //0
+        Running, //1
+        CrouchIdle, //2
+        CrouchWalk, //3
+        Jumping, //4
+        Falling, //5
+        WallSliding, //6
+        TurningBack, //7
+        FlatSliding, //8
+        SlopeSliding, //9
+        SlopeStanding //10
     };
 
     [Header("Animations Handling")]
     public PlayerState playerState;
     public float moveStateThreshold;
+    private bool flip = false;
 
     #endregion
 
@@ -133,6 +135,7 @@ public class PlayerController2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         spriterenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
     
     // Update is called once per frame
@@ -148,6 +151,7 @@ public class PlayerController2D : MonoBehaviour
             doSlopedSlideJump();
         }
         getPlayerState2();
+        doFlipX();
     }
 
     private void FixedUpdate()
@@ -356,7 +360,9 @@ public class PlayerController2D : MonoBehaviour
         {
             if ((isAgainstLeftWall || isAgainstRightWall) && !isCrouching)
             {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (wallSlideMultiplier - 1) * Time.deltaTime; //makes fall slower
+                if (rb.velocity.y < 0f) {
+                    rb.velocity += Vector2.up * Physics2D.gravity.y * (wallSlideMultiplier - 1) * Time.deltaTime; //makes fall slower
+                }
             }
             else
             {
@@ -394,7 +400,7 @@ public class PlayerController2D : MonoBehaviour
     {
         //DETECTION
         //right
-        if (Physics2D.OverlapCircle(transform.GetChild(1).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
+        if (Physics2D.OverlapCircle(transform.GetChild(1).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded) //&& rb.velocity.y < 0)
         {
             isAgainstRightWall = true;
             wallJumped = false;
@@ -404,7 +410,7 @@ public class PlayerController2D : MonoBehaviour
             isAgainstRightWall = false;
         }
         //left
-        if (Physics2D.OverlapCircle(transform.GetChild(2).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded && rb.velocity.y < 0)
+        if (Physics2D.OverlapCircle(transform.GetChild(2).transform.position, wallDetectionRadius, whatIsWall) && !isCrouching && !isGrounded) //&& rb.velocity.y < 0)
         {
             isAgainstLeftWall = true;
             wallJumped = false;
@@ -550,8 +556,8 @@ public class PlayerController2D : MonoBehaviour
         if (Input.GetButtonDown("Fire2") || forceCrouch || isGoingInTheSlopeDirection)
         {
             isCrouching = true;
-            coll.size = new Vector2(1f, 0.5f);
-            coll.offset = new Vector2(0f, 0.25f);
+            coll.size = new Vector2(0.8f, 0.95f);
+            coll.offset = new Vector2(0f, 0.475f);
             spriterenderer.size = new Vector2(1f, 0.5f);
             //transform.localScale = new Vector3(0.8f,0.8f,1f);
         }
@@ -568,8 +574,8 @@ public class PlayerController2D : MonoBehaviour
         if ((!isUnderCollider && !Input.GetButton("Fire2") && isCrouching) && !forceCrouch && !isGoingInTheSlopeDirection)
         {
             isCrouching = false;
-            coll.size = new Vector2(1f, 1f);
-            coll.offset = new Vector2(0f, 0.5f);
+            coll.size = new Vector2(0.8f, 1.9f);
+            coll.offset = new Vector2(0f, 0.95f);
             spriterenderer.size = new Vector2(1f, 1f);
             //transform.localScale = new Vector3(0.8f, 1.6f, 1f);
         }
@@ -744,6 +750,30 @@ public class PlayerController2D : MonoBehaviour
                 }
             }
         }
+        animator.SetInteger("PlayerState", (int)playerState);
+    }
+
+    private void doFlipX ()
+    {
+        if (playerState == PlayerState.Running || playerState == PlayerState.Jumping || playerState == PlayerState.Falling || playerState == PlayerState.CrouchWalk)
+        {
+            if (Mathf.Abs(virtualXAxis) > moveStateThreshold && !cantControlHorizontal) {
+                flip = Mathf.Sign(virtualXAxis) == -1f;
+            }
+        }
+        else if (isAgainstLeftWall)
+        {
+            flip = false;
+        }
+        else if (isAgainstRightWall)
+        {
+            flip = true;
+        }
+        if (isAgainstSlidableSlope)
+        {
+            flip = isSlidingToTheLeft;
+        }
+        spriterenderer.flipX = flip;
     }
 
     #endregion
