@@ -689,6 +689,11 @@ public class PlayerController2D : MonoBehaviour
         return virtualXAxis;
     }
 
+    public bool getStairsStatus ()
+    {
+        return isOnStairs;
+    }
+
     #endregion
 
     #region Animations Handling
