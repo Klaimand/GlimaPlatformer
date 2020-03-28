@@ -597,33 +597,6 @@ public class PlayerController2D : MonoBehaviour
             thisFlatSlideHasBeenDone = false;
         }
     }
-    /*
-    private void doSlopeSlideDetection ()
-    {
-        //Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
-        //RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
-        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up, slopeCastDistance);
-
-        if (hit == true && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope)
-        {
-            if (!hit.collider.gameObject.CompareTag("Stairs"))
-            {
-                isAgainstSlidableSlope = true;
-                if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
-                {
-                    isSlidingToTheLeft = true;
-                }
-                else
-                {
-                    isSlidingToTheLeft = false;
-                }
-            }
-        }
-        else
-        {
-            isAgainstSlidableSlope = false;
-        }
-    }*/
 
     private void doSlopeAndStairsDetection ()
     {

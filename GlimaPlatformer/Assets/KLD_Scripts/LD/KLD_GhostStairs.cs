@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class KLD_GhostStairs : MonoBehaviour
 {
-    BoxCollider2D collider;
-    CapsuleCollider2D playercollider;
-    Rigidbody2D playerrb;
+    BoxCollider2D thisCollider;
 
     float yAxis;
     [SerializeField]
@@ -15,28 +13,24 @@ public class KLD_GhostStairs : MonoBehaviour
     bool toTheLeft;
     [SerializeField]
     private float offset;
-    bool enabled;
+    new bool enabled;
+    bool wasAboveOffset;
+
 
     PlayerController2D controller;
-    Transform origin;
-    Transform origin2;
     Transform player;
     
 
     private void Awake()
     {
-        collider = GetComponent<BoxCollider2D>();
+        thisCollider = GetComponent<BoxCollider2D>();
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        origin = transform.GetChild(0);
-        origin2 = transform.GetChild(1);
         controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
-        playercollider = GameObject.Find("Player").GetComponent<CapsuleCollider2D>();
-        playerrb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         player = controller.transform;
     }
 
@@ -45,21 +39,32 @@ public class KLD_GhostStairs : MonoBehaviour
     {
         yAxis = Input.GetAxisRaw("Vertical");
         checkGhost();
+        resetAboveOffset();
     }
 
 
     void checkGhost()
     {
+        transform.GetChild(2).position = transform.GetChild(0).position + Vector3.up * offset;
+        transform.GetChild(3).position = transform.GetChild(1).position + Vector3.up * offset;
+
         Vector3 thisVector = transform.GetChild(1).position - transform.GetChild(0).position;
         Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(0).position, Color.blue);
-
-        Vector3 thisVectorOffset = (transform.GetChild(1).position + Vector3.up * offset) - (transform.GetChild(0).position + Vector3.up * offset);
-        Debug.DrawLine(transform.GetChild(0).position + Vector3.up * offset, transform.GetChild(0).position + Vector3.up * offset + thisVector, Color.green);
+        
+        Vector3 thisVectorOffset = transform.GetChild(3).position - transform.GetChild(2).position;
+        Debug.DrawLine(transform.GetChild(2).position, transform.GetChild(3).position, Color.green);
 
         Vector3 stairToPlayerVector = player.position - transform.GetChild(0).position;
-        
+        Vector3 stairToPlayerVectorOffset = player.position - transform.GetChild(2).position;
+
         float xp = thisVector.x * stairToPlayerVector.y - thisVector.y * stairToPlayerVector.x;
-        float xo = thisVectorOffset.x * stairToPlayerVector.y - thisVectorOffset.y * stairToPlayerVector.x;
+        float xo = thisVectorOffset.x * stairToPlayerVectorOffset.y - thisVectorOffset.y * stairToPlayerVectorOffset.x;
+
+        if (!toTheLeft)
+        {
+            xp = -xp;
+            xo = -xo;
+        }
 
         if (xp > 0)
         {
@@ -74,17 +79,21 @@ public class KLD_GhostStairs : MonoBehaviour
                     enabled = false;
                 }
             }
-            else if (!controller.getGroundStatus())
+            else if (!controller.getGroundStatus() && !controller.getStairsStatus() && !wasAboveOffset)
             {
                 if (xo > 0)
                 {
+                    wasAboveOffset = true;
                     enabled = true;
                 }
                 else
                 {
                     enabled = false;
                 }
-                
+            }
+            else if (controller.getStairsStatus())
+            {
+                enabled = true;
             }
         }
 
@@ -100,10 +109,16 @@ public class KLD_GhostStairs : MonoBehaviour
             enabled = false;
         }
 
-        collider.enabled = enabled;
+        thisCollider.enabled = enabled;
 
-        //y = ax + b
+    }
 
+    void resetAboveOffset ()
+    {
+        if (controller.getGroundStatus())
+        {
+            wasAboveOffset = false;
+        }
     }
 
 
