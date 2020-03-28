@@ -203,6 +203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  virtualXAxis: 0
+  xRawAxis: 0
+  virtualXRawAxis: 0
+  xAxisSensitivity: 0.2
   accelerationFrame: 6
   decelerationFrame: 8
   cantMove: 0
