@@ -9,6 +9,7 @@ public class PlayerController2D : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+    private KLD_PlayerEvents events;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -101,11 +102,10 @@ public class PlayerController2D : MonoBehaviour
     private bool stairsToTheLeft;
     public float stairSpeed;
     private bool jumpTrigger;
-
-    [Header("Terrain Interraction")]
-    public float timeToReachFireRun;
-
-
+    
+    [Header("Getters and Setters")]
+    private bool canTriggerJumpGetter;
+    
     [Space(10)]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
@@ -129,6 +129,7 @@ public class PlayerController2D : MonoBehaviour
     public PlayerState playerState;
     public float moveStateThreshold;
     private bool flip = false;
+    
 
     #endregion
 
@@ -141,6 +142,7 @@ public class PlayerController2D : MonoBehaviour
         coll = GetComponent<CapsuleCollider2D>();
         spriterenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        events = GetComponent<KLD_PlayerEvents>();
     }
     
     // Update is called once per frame
@@ -351,6 +353,7 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.velocity += new Vector2(0, jumpForce.y);
                 StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
+                events.InvokeJump();
             }
             else if (!isGrounded)
             {
@@ -456,6 +459,7 @@ public class PlayerController2D : MonoBehaviour
 
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
+            events.InvokeWallJump();
         }
     }
 
@@ -479,6 +483,7 @@ public class PlayerController2D : MonoBehaviour
             lastJumpIsSlopeJump = true;
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(slopeJumpNoControlTimer));
+            events.InvokeSlopeJump();
         }
     }
 
@@ -687,6 +692,24 @@ public class PlayerController2D : MonoBehaviour
     public bool getStairsStatus ()
     {
         return isOnStairs;
+    }
+
+    public bool getJumpedStatus ()
+    {
+        if (jumped && canTriggerJumpGetter)
+        {
+            canTriggerJumpGetter = false;
+            return true;
+        }
+        else if (!jumped)
+        {
+            canTriggerJumpGetter = true;
+            return false;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     #endregion
