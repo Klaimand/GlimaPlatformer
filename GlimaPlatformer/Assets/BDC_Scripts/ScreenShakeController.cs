@@ -14,6 +14,14 @@ public class ScreenShakeController : MonoBehaviour
     public float MaximumShake = 1f;
     public float MinimumRotation = 1f;
     public float MaximumRotation = 1f;
+
+    public float WallJumpLenght;
+    public float WallJumpPower;
+
+    public float SlopeJumpLenght;
+    public float SlopeJumpPower;
+
+
     void Start()
     {
         
@@ -45,7 +53,7 @@ public class ScreenShakeController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, shakeRotation*Random.Range(MinimumRotation, MaximumRotation));
     }
     
-    public void StartShake(float lenght, float power)
+    private void StartShake(float lenght, float power)
     {
         shakeTimeRemaining = lenght;
         shakePower = power;
@@ -54,5 +62,17 @@ public class ScreenShakeController : MonoBehaviour
 
         shakeRotation = power * rotationMultiplier;
 
+    }
+
+    public void WallJumpShake()
+    {
+        StartShake(WallJumpLenght, WallJumpPower);
+
+    }
+
+    public void SlopeJumpShake()
+    {
+        StartShake(SlopeJumpLenght, SlopeJumpLenght);
+       
     }
 }
