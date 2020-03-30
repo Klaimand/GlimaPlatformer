@@ -9,12 +9,18 @@ public class PlayerController2D : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+    private KLD_PlayerEvents events;
 
     [Header("Movement")]
     public float moveSpeed;
     private float xAxis;
+    [SerializeField]
     private float virtualXAxis;
+    [SerializeField]
     private float xRawAxis;
+    [SerializeField]
+    private float virtualXRawAxis;
+    public float xAxisSensitivity;
     public int accelerationFrame;
     public int decelerationFrame;
     public bool cantMove;
@@ -96,11 +102,10 @@ public class PlayerController2D : MonoBehaviour
     private bool stairsToTheLeft;
     public float stairSpeed;
     private bool jumpTrigger;
-
-    [Header("Terrain Interraction")]
-    public float timeToReachFireRun;
-
-
+    
+    [Header("Getters and Setters")]
+    private bool canTriggerJumpGetter;
+    
     [Space(10)]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
@@ -124,6 +129,7 @@ public class PlayerController2D : MonoBehaviour
     public PlayerState playerState;
     public float moveStateThreshold;
     private bool flip = false;
+    
 
     #endregion
 
@@ -136,6 +142,7 @@ public class PlayerController2D : MonoBehaviour
         coll = GetComponent<CapsuleCollider2D>();
         spriterenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        events = GetComponent<KLD_PlayerEvents>();
     }
     
     // Update is called once per frame
@@ -158,6 +165,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (!cantMove)
         {
+            manageVirtualRawAxis();
             manageVirtualXAxis();
         }
         else
@@ -189,17 +197,33 @@ public class PlayerController2D : MonoBehaviour
 
     #region Horizontal Movement
 
+    private void manageVirtualRawAxis ()
+    {
+        if (Input.GetAxisRaw("Horizontal") >= xAxisSensitivity)
+        {
+            virtualXRawAxis = 1f;
+        }
+        else if (Input.GetAxisRaw("Horizontal") <= -xAxisSensitivity)
+        {
+            virtualXRawAxis = -1f;
+        }
+        else
+        {
+            virtualXRawAxis = 0f;
+        }
+    }
+    
     private void manageVirtualXAxis ()
     {
-        if (Input.GetAxisRaw("Horizontal") == 1f && virtualXAxis < 1f)
+        if (virtualXRawAxis == 1f && virtualXAxis < 1f)
         {
             virtualXAxis += 1f / (float)accelerationFrame;
         }
-        else if (Input.GetAxisRaw("Horizontal") == -1f && virtualXAxis > -1f)
+        else if (virtualXRawAxis == -1f && virtualXAxis > -1f)
         {
             virtualXAxis -= 1f / (float)accelerationFrame;
         }
-        else if (Input.GetAxisRaw("Horizontal") == 0f)
+        else if (virtualXRawAxis == 0f)
         {
             if (virtualXAxis > 0f)
             {
@@ -219,7 +243,7 @@ public class PlayerController2D : MonoBehaviour
         {
             virtualXAxis = -1f;
         }
-        else if (Input.GetAxisRaw("Horizontal") == 0f && virtualXAxis > -(1f / (float)decelerationFrame) && virtualXAxis < 1f / (float)decelerationFrame)
+        else if (virtualXRawAxis == 0f && virtualXAxis > -(1f / (float)decelerationFrame) && virtualXAxis < 1f / (float)decelerationFrame)
         {
             virtualXAxis = 0f;
         }
@@ -329,6 +353,7 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.velocity += new Vector2(0, jumpForce.y);
                 StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
+                events.InvokeJump();
             }
             else if (!isGrounded)
             {
@@ -434,6 +459,7 @@ public class PlayerController2D : MonoBehaviour
 
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
+            events.InvokeWallJump();
         }
     }
 
@@ -457,6 +483,7 @@ public class PlayerController2D : MonoBehaviour
             lastJumpIsSlopeJump = true;
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(slopeJumpNoControlTimer));
+            events.InvokeSlopeJump();
         }
     }
 
@@ -597,33 +624,6 @@ public class PlayerController2D : MonoBehaviour
             thisFlatSlideHasBeenDone = false;
         }
     }
-    /*
-    private void doSlopeSlideDetection ()
-    {
-        //Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
-        //RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
-        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up, slopeCastDistance);
-
-        if (hit == true && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope)
-        {
-            if (!hit.collider.gameObject.CompareTag("Stairs"))
-            {
-                isAgainstSlidableSlope = true;
-                if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
-                {
-                    isSlidingToTheLeft = true;
-                }
-                else
-                {
-                    isSlidingToTheLeft = false;
-                }
-            }
-        }
-        else
-        {
-            isAgainstSlidableSlope = false;
-        }
-    }*/
 
     private void doSlopeAndStairsDetection ()
     {
@@ -687,6 +687,29 @@ public class PlayerController2D : MonoBehaviour
     public float getVirtualXAxis ()
     {
         return virtualXAxis;
+    }
+
+    public bool getStairsStatus ()
+    {
+        return isOnStairs;
+    }
+
+    public bool getJumpedStatus ()
+    {
+        if (jumped && canTriggerJumpGetter)
+        {
+            canTriggerJumpGetter = false;
+            return true;
+        }
+        else if (!jumped)
+        {
+            canTriggerJumpGetter = true;
+            return false;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     #endregion
