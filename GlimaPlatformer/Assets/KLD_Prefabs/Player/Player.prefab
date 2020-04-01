@@ -92,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139996610849355492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 179.35, y: -26.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1139996610712675596}
@@ -203,6 +203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  virtualXAxis: 0
+  xRawAxis: 0
+  virtualXRawAxis: 0
+  xAxisSensitivity: 0.2
   accelerationFrame: 6
   decelerationFrame: 8
   cantMove: 0
@@ -212,7 +216,7 @@ MonoBehaviour:
   horizontalAirDrag: 0.04
   fallMultiplier: 2
   lowJumpMultiplier: 3
-  groundDetectionRadius: 0.1
+  groundDetectionRadius: 0.28
   wallSlideMultiplier: 0.1
   wallDetectionRadius: 0.1
   wallJumpForce: {x: 12, y: 15}

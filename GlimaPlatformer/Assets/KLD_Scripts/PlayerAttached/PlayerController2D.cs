@@ -13,8 +13,13 @@ public class PlayerController2D : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     private float xAxis;
+    [SerializeField]
     private float virtualXAxis;
+    [SerializeField]
     private float xRawAxis;
+    [SerializeField]
+    private float virtualXRawAxis;
+    public float xAxisSensitivity;
     public int accelerationFrame;
     public int decelerationFrame;
     public bool cantMove;
@@ -158,6 +163,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (!cantMove)
         {
+            manageVirtualRawAxis();
             manageVirtualXAxis();
         }
         else
@@ -189,17 +195,33 @@ public class PlayerController2D : MonoBehaviour
 
     #region Horizontal Movement
 
+    private void manageVirtualRawAxis ()
+    {
+        if (Input.GetAxisRaw("Horizontal") >= xAxisSensitivity)
+        {
+            virtualXRawAxis = 1f;
+        }
+        else if (Input.GetAxisRaw("Horizontal") <= -xAxisSensitivity)
+        {
+            virtualXRawAxis = -1f;
+        }
+        else
+        {
+            virtualXRawAxis = 0f;
+        }
+    }
+    
     private void manageVirtualXAxis ()
     {
-        if (Input.GetAxisRaw("Horizontal") == 1f && virtualXAxis < 1f)
+        if (virtualXRawAxis == 1f && virtualXAxis < 1f)
         {
             virtualXAxis += 1f / (float)accelerationFrame;
         }
-        else if (Input.GetAxisRaw("Horizontal") == -1f && virtualXAxis > -1f)
+        else if (virtualXRawAxis == -1f && virtualXAxis > -1f)
         {
             virtualXAxis -= 1f / (float)accelerationFrame;
         }
-        else if (Input.GetAxisRaw("Horizontal") == 0f)
+        else if (virtualXRawAxis == 0f)
         {
             if (virtualXAxis > 0f)
             {
@@ -219,7 +241,7 @@ public class PlayerController2D : MonoBehaviour
         {
             virtualXAxis = -1f;
         }
-        else if (Input.GetAxisRaw("Horizontal") == 0f && virtualXAxis > -(1f / (float)decelerationFrame) && virtualXAxis < 1f / (float)decelerationFrame)
+        else if (virtualXRawAxis == 0f && virtualXAxis > -(1f / (float)decelerationFrame) && virtualXAxis < 1f / (float)decelerationFrame)
         {
             virtualXAxis = 0f;
         }
@@ -597,33 +619,6 @@ public class PlayerController2D : MonoBehaviour
             thisFlatSlideHasBeenDone = false;
         }
     }
-    /*
-    private void doSlopeSlideDetection ()
-    {
-        //Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
-        //RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
-        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up, slopeCastDistance);
-
-        if (hit == true && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope)
-        {
-            if (!hit.collider.gameObject.CompareTag("Stairs"))
-            {
-                isAgainstSlidableSlope = true;
-                if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
-                {
-                    isSlidingToTheLeft = true;
-                }
-                else
-                {
-                    isSlidingToTheLeft = false;
-                }
-            }
-        }
-        else
-        {
-            isAgainstSlidableSlope = false;
-        }
-    }*/
 
     private void doSlopeAndStairsDetection ()
     {
@@ -687,6 +682,11 @@ public class PlayerController2D : MonoBehaviour
     public float getVirtualXAxis ()
     {
         return virtualXAxis;
+    }
+
+    public bool getStairsStatus ()
+    {
+        return isOnStairs;
     }
 
     #endregion
