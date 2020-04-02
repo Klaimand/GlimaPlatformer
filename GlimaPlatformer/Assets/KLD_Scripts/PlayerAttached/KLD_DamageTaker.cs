@@ -32,7 +32,13 @@ public class KLD_DamageTaker : MonoBehaviour
         //arreter le joueur
         isInvulnerable = true;
         controller.cantMove = true;
-        controller.addExplosionForce(mine, explosionForce);
+        if (damageType == DamageType.Explosion) {
+            controller.addExplosionForce(mine, explosionForce);
+        }
+        else if (damageType == DamageType.Grab)
+        {
+            transform.position = mine.position;
+        }
 
         //summon le QTE avec les bonnes valeurs
         if ((int)egoManager.curEgoState < 4)
@@ -54,6 +60,17 @@ public class KLD_DamageTaker : MonoBehaviour
     {
         GameObject curQTE = Instantiate(QTEPrefab, transform.position + new Vector3(-3.7f, 2.75f, 0f), Quaternion.identity);
         KLD_TestQTE qteScript = curQTE.transform.GetChild(0).GetComponent<KLD_TestQTE>();
+        
+        if (damageType == DamageType.Explosion)
+        {
+            qteScript.qteMode = KLD_TestQTE.QteMode.button;
+        }
+        else if (damageType == DamageType.Grab)
+        {
+            qteScript.qteMode = KLD_TestQTE.QteMode.joystick;
+        }
+
+
         if (difficulty == 0)
         {
             //hard
@@ -65,7 +82,9 @@ public class KLD_DamageTaker : MonoBehaviour
             }
             else if (damageType == DamageType.Grab)
             {
-
+                qteScript.maxPoints = HardJoystickValues.maxPoints;
+                qteScript.pointsPerInput = HardJoystickValues.pointsPerInput;
+                qteScript.pointsLostPerSecond = HardJoystickValues.pointsLostPerSecond;
             }
         }
         else if (difficulty == 1)
@@ -79,7 +98,9 @@ public class KLD_DamageTaker : MonoBehaviour
             }
             else if (damageType == DamageType.Grab)
             {
-
+                qteScript.maxPoints = MediumJoystickValues.maxPoints;
+                qteScript.pointsPerInput = MediumJoystickValues.pointsPerInput;
+                qteScript.pointsLostPerSecond = MediumJoystickValues.pointsLostPerSecond;
             }
         }
         else if (difficulty <= 3)
@@ -93,7 +114,9 @@ public class KLD_DamageTaker : MonoBehaviour
             }
             else if (damageType == DamageType.Grab)
             {
-
+                qteScript.maxPoints = EasyJoystickValues.maxPoints;
+                qteScript.pointsPerInput = EasyJoystickValues.pointsPerInput;
+                qteScript.pointsLostPerSecond = EasyJoystickValues.pointsLostPerSecond;
             }
         }
     }
