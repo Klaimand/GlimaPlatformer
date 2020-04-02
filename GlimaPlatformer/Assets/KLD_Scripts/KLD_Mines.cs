@@ -7,7 +7,7 @@ public class KLD_Mines : MonoBehaviour
     private Color buttonOff = Color.black;
     private Color buttonOn = Color.red;
 
-    private bool isTriggered, exploded;
+    private bool isTriggered, exploded = false;
 
     private SpriteRenderer thisSr;
     private SpriteRenderer buttonSr;
@@ -15,7 +15,7 @@ public class KLD_Mines : MonoBehaviour
     private KLD_DamageTaker damageTaker;
 
     [SerializeField]
-    private float timeBeforeExplosion, explosionRadius, explosionForce;
+    private float timeBeforeExplosion = 0f, explosionRadius = 0f, explosionForce = 0f;
     
     // Start is called before the first frame update
     void Start()

@@ -5,10 +5,10 @@ using UnityEngine;
 public class KLD_TurretBehavior : MonoBehaviour
 {
     [SerializeField]
-    private float maxRotateSpeed, maxRange, timeBetweenShoots, angleToShoot;
+    private float maxRotateSpeed = 0f, maxRange = 0f, timeBetweenShoots = 0f, angleToShoot = 0f;
 
     [SerializeField]
-    private bool targetInSight, canShoot, drawSight;
+    private bool targetInSight, canShoot, drawSight = false;
     
     //private Vector3 vectorToTarget;
 

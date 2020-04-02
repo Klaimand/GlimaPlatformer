@@ -5,7 +5,7 @@ using UnityEngine;
 public class KLD_Grabber : MonoBehaviour
 {
     [SerializeField]
-    Color defaultColor, grabColor;
+    Color defaultColor = Color.blue, grabColor = Color.red;
 
     bool grabbing;
 

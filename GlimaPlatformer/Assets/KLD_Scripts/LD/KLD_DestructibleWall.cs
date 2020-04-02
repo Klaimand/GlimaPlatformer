@@ -5,7 +5,7 @@ using UnityEngine;
 public class KLD_DestructibleWall : MonoBehaviour
 {
 
-    private bool destroyed;
+    private bool destroyed = false;
 
 
     PlayerController2D controller;

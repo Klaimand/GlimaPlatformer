@@ -8,11 +8,11 @@ public class KLD_GhostStairs : MonoBehaviour
 
     float yAxis;
     [SerializeField]
-    float axisThreshold;
+    float axisThreshold = 0f;
     [SerializeField]
-    bool toTheLeft;
+    bool toTheLeft = false;
     [SerializeField]
-    private float offset;
+    private float offset = 0f;
     new bool enabled;
     bool wasAboveOffset;
 

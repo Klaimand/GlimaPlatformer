@@ -5,7 +5,7 @@ using UnityEngine;
 public class KLD_OneWayPlatform : MonoBehaviour
 {
     private Transform player;
-    private BoxCollider2D collider;
+    private new BoxCollider2D collider;
 
     private bool activateCollider;
 

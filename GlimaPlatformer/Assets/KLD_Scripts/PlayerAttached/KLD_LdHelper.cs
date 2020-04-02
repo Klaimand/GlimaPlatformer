@@ -6,7 +6,7 @@ public class KLD_LdHelper : MonoBehaviour
 {
     private Transform respawnPointsObject;
     private Rigidbody2D rb;
-    private Camera camera;
+    private new Camera camera;
 
     private float lastDpadX;
     private float lastDpadY;
