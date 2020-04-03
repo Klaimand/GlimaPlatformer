@@ -70,7 +70,7 @@ public class KLD_GhostStairs : MonoBehaviour
         {
             //print("above");
             if (controller.getGroundStatus() && !controller.getStairsStatus()) {
-                if (yAxis > axisThreshold)
+                if (yAxis > axisThreshold || player.position.y > transform.GetChild(1).position.y)
                 {
                     enabled = true;
                 }

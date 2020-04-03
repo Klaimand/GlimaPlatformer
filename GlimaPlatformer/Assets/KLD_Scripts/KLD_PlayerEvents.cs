@@ -9,7 +9,10 @@ public class KLD_PlayerEvents : MonoBehaviour
     public UnityEvent OnJump;
     public UnityEvent OnWallJump;
     public UnityEvent OnSlopeJump;
-    
+    public UnityEvent OnFlatSlide;
+    public UnityEvent OnSlopeSlide;
+
+
     public void InvokeJump ()
     {
         OnJump.Invoke();
@@ -23,6 +26,16 @@ public class KLD_PlayerEvents : MonoBehaviour
     public void InvokeSlopeJump()
     {
         OnSlopeJump.Invoke();
+    }
+
+    public void InvokeFlatSlide()
+    {
+        OnFlatSlide.Invoke();
+    }
+
+    public void InvokeSlopeSlide()
+    {
+        OnSlopeSlide.Invoke();
     }
 
 }

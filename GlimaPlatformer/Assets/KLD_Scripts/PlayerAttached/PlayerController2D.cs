@@ -98,9 +98,10 @@ public class PlayerController2D : MonoBehaviour
     private bool isGoingInTheSlopeDirection;
 
     [Header("Stairs")]
+    public float stairSpeed;
+    public float crouchStairsSpeed;
     private bool isOnStairs;
     private bool stairsToTheLeft;
-    public float stairSpeed;
     private bool jumpTrigger;
     
     [Header("Getters and Setters")]
@@ -327,10 +328,11 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x * (1.0f - flatSlideDrag), rb.velocity.y);
         }
-        else if (isOnStairs)
+        else if (isOnStairs) //Stairs
         {
             float stairsDirection = stairsToTheLeft ? 1f : -1f;
-            rb.velocity = new Vector2(1f, stairsDirection).normalized * stairSpeed * virtualXAxis;
+            float speed = isCrouching ? crouchStairsSpeed : stairSpeed;
+            rb.velocity = new Vector2(1f, stairsDirection).normalized * speed * virtualXAxis;
         }
     }
 
@@ -610,8 +612,11 @@ public class PlayerController2D : MonoBehaviour
 
     private void doFlatSliding ()
     {
-        if (isCrouching && ((rb.velocity.x > flatSlidingMinSpeed || rb.velocity.x < -flatSlidingMinSpeed) && isGrounded && !thisFlatSlideHasBeenDone) || isAgainstSlidableSlope)
+        if (isCrouching && !isOnStairs && ((rb.velocity.x > flatSlidingMinSpeed || rb.velocity.x < -flatSlidingMinSpeed) && isGrounded && !thisFlatSlideHasBeenDone) || isAgainstSlidableSlope)
         {
+            if (!isFlatSliding && !isAgainstSlidableSlope) {
+                events.InvokeFlatSlide();
+            }
             isFlatSliding = true;
         }
         else
@@ -633,6 +638,10 @@ public class PlayerController2D : MonoBehaviour
         {
             if (!hit.collider.gameObject.tag.Contains("Stairs"))
             {
+                if (!isAgainstSlidableSlope)
+                {
+                    events.InvokeSlopeSlide();
+                }
                 isAgainstSlidableSlope = true;
                 if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
                 {
