@@ -237,7 +237,7 @@ MonoBehaviour:
   slideStandingMaxSpeed: 4
   slopeJumpNoControlTimer: 0.3
   slopeCastDistance: 0.3
-  SlopeSlideJumpForce: {x: 8, y: 10}
+  SlopeSlideJumpForce: {x: 13, y: 10}
   slopeJumpDrag: 0.025
   stairSpeed: 7
   crouchStairsSpeed: 2.5

@@ -43998,11 +43998,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1139996610849355488, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
-        type: 3}
-      propertyPath: SlopeSlideJumpForce.x
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 1139996610849355492, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
         type: 3}
       propertyPath: m_Name
