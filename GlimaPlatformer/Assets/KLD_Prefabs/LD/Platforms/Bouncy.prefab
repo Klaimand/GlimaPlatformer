@@ -121,5 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8cc95edc444bf4aabdffb1ca0f41fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounciness: 1.2
-  minVel: 10
+  bounciness: 0.8
+  minVel: 15
+  maxVel: 22
+  bouncinessAddedWhenButtonIsPressed: 0.4
