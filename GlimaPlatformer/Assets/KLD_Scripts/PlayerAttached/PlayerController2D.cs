@@ -359,7 +359,7 @@ public class PlayerController2D : MonoBehaviour
                 StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
                 events.InvokeJump();
             }
-            else if (!isGrounded)
+            else if (!isGrounded && !isAgainstSlidableSlope)
             {
                 if (!isBuffering)
                 {

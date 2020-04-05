@@ -31,6 +31,6 @@ public class KLD_LDStats : MonoBehaviour
 
     public void addSlopeSlide()
     {
-        slopeSlides+= 0.5f;
+        slopeSlides++;
     }
 }

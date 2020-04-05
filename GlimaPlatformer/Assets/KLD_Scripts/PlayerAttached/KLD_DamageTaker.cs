@@ -48,6 +48,7 @@ public class KLD_DamageTaker : MonoBehaviour
         else
         {
             controller.cantMove = false;
+            startInvulnerability();
         }
 
         //actualiser l'égo
