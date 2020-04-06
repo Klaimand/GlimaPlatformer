@@ -39,6 +39,8 @@ public class PlayerController2D : MonoBehaviour
     private bool isGrounded; //is the player touching the ground (overlap circle related)
     public float groundDetectionRadius = 0.2f; //radius around ground detection child
 
+    private bool lastJumpIsBounce;
+
     [Header("WallJump")]
     public float wallSlideMultiplier;
     public float wallDetectionRadius = 0.05f;
@@ -98,9 +100,10 @@ public class PlayerController2D : MonoBehaviour
     private bool isGoingInTheSlopeDirection;
 
     [Header("Stairs")]
+    public float stairSpeed;
+    public float crouchStairsSpeed;
     private bool isOnStairs;
     private bool stairsToTheLeft;
-    public float stairSpeed;
     private bool jumpTrigger;
     
     [Header("Getters and Setters")]
@@ -327,10 +330,11 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x * (1.0f - flatSlideDrag), rb.velocity.y);
         }
-        else if (isOnStairs)
+        else if (isOnStairs) //Stairs
         {
             float stairsDirection = stairsToTheLeft ? 1f : -1f;
-            rb.velocity = new Vector2(1f, stairsDirection).normalized * stairSpeed * virtualXAxis;
+            float speed = isCrouching ? crouchStairsSpeed : stairSpeed;
+            rb.velocity = new Vector2(1f, stairsDirection).normalized * speed * virtualXAxis;
         }
     }
 
@@ -355,7 +359,7 @@ public class PlayerController2D : MonoBehaviour
                 StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
                 events.InvokeJump();
             }
-            else if (!isGrounded)
+            else if (!isGrounded && !isAgainstSlidableSlope)
             {
                 if (!isBuffering)
                 {
@@ -381,7 +385,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void checkFall ()
     {
-        if (rb.velocity.y < 0) //check if we're falling
+        if (rb.velocity.y < 0 && !lastJumpIsBounce) //check if we're falling
         {
             if ((isAgainstLeftWall || isAgainstRightWall) && !isCrouching)
             {
@@ -394,9 +398,13 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime; //makes fall faster
             }
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump)  //check if we're jumping and gaining height
+        else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump && !lastJumpIsBounce)  //check if we're jumping and gaining height
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        else if (lastJumpIsBounce)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -418,6 +426,7 @@ public class PlayerController2D : MonoBehaviour
             jumped = false;
             lastJumpIsWallJump = false;
             lastJumpIsSlopeJump = false;
+            lastJumpIsBounce = false;
         }
     }
 
@@ -610,8 +619,11 @@ public class PlayerController2D : MonoBehaviour
 
     private void doFlatSliding ()
     {
-        if (isCrouching && ((rb.velocity.x > flatSlidingMinSpeed || rb.velocity.x < -flatSlidingMinSpeed) && isGrounded && !thisFlatSlideHasBeenDone) || isAgainstSlidableSlope)
+        if (isCrouching && !isOnStairs && ((rb.velocity.x > flatSlidingMinSpeed || rb.velocity.x < -flatSlidingMinSpeed) && isGrounded && !thisFlatSlideHasBeenDone) || isAgainstSlidableSlope)
         {
+            if (!isFlatSliding && !isAgainstSlidableSlope) {
+                events.InvokeFlatSlide();
+            }
             isFlatSliding = true;
         }
         else
@@ -633,6 +645,10 @@ public class PlayerController2D : MonoBehaviour
         {
             if (!hit.collider.gameObject.tag.Contains("Stairs"))
             {
+                if (!isAgainstSlidableSlope)
+                {
+                    events.InvokeSlopeSlide();
+                }
                 isAgainstSlidableSlope = true;
                 if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
                 {
@@ -710,6 +726,11 @@ public class PlayerController2D : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void SetLastJumpIsBounce (bool value)
+    {
+        lastJumpIsBounce = value;
     }
 
     #endregion

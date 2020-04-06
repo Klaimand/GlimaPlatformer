@@ -32,3 +32,28 @@ using UnityEngine;
         public static float pointsPerInput = 5f;
         public static float pointsLostPerSecond = 9f;
     }
+
+
+
+
+
+    public class EasyJoystickValues
+    {
+        public static float maxPoints = 40f;
+        public static float pointsPerInput = 5f;
+        public static float pointsLostPerSecond = 4f;
+    }
+
+    public class MediumJoystickValues
+    {
+        public static float maxPoints = 65f;
+        public static float pointsPerInput = 6f;
+        public static float pointsLostPerSecond = 6f;
+    }
+
+    public class HardJoystickValues
+    {
+        public static float maxPoints = 80f;
+        public static float pointsPerInput = 4f;
+        public static float pointsLostPerSecond = 8f;
+    }
