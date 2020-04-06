@@ -8,11 +8,11 @@ public class KLD_GhostStairs : MonoBehaviour
 
     float yAxis;
     [SerializeField]
-    float axisThreshold;
+    float axisThreshold = 0f;
     [SerializeField]
-    bool toTheLeft;
+    bool toTheLeft = false;
     [SerializeField]
-    private float offset;
+    private float offset = 0f;
     new bool enabled;
     bool wasAboveOffset;
 
@@ -70,7 +70,7 @@ public class KLD_GhostStairs : MonoBehaviour
         {
             //print("above");
             if (controller.getGroundStatus() && !controller.getStairsStatus()) {
-                if (yAxis > axisThreshold)
+                if (yAxis > axisThreshold || player.position.y > transform.GetChild(1).position.y)
                 {
                     enabled = true;
                 }

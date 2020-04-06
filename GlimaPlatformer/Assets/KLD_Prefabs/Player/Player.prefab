@@ -77,6 +77,8 @@ GameObject:
   - component: {fileID: 772187224456538735}
   - component: {fileID: 3521671514523263589}
   - component: {fileID: 1139996611729343310}
+  - component: {fileID: 1644083150}
+  - component: {fileID: 971501571}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -235,10 +237,10 @@ MonoBehaviour:
   slideStandingMaxSpeed: 4
   slopeJumpNoControlTimer: 0.3
   slopeCastDistance: 0.3
-  SlopeSlideJumpForce: {x: 8, y: 10}
+  SlopeSlideJumpForce: {x: 13, y: 10}
   slopeJumpDrag: 0.025
-  stairSpeed: 8
-  timeToReachFireRun: 0
+  stairSpeed: 7
+  crouchStairsSpeed: 2.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2304
@@ -315,6 +317,105 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1644083150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f239de5fdec74a343bfe15ff954487c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnWallJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addWallJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSlopeJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addSlopeJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFlatSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addFlatSlide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSlopeSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addSlopeSlide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &971501571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61c181cb5590224f87e2f1edc2fc66b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumps: 0
+  wallJumps: 0
+  slopeJumps: 0
+  flatSlides: 0
+  slopeSlides: 0
 --- !u!1 &1139996611386880386
 GameObject:
   m_ObjectHideFlags: 0
