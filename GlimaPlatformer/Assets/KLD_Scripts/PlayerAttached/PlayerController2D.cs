@@ -728,6 +728,11 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public bool getFlatSlideStatus ()
+    {
+        return isFlatSliding;
+    }
+
     public void SetLastJumpIsBounce (bool value)
     {
         lastJumpIsBounce = value;
