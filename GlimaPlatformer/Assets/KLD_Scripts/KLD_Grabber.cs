@@ -11,7 +11,7 @@ public class KLD_Grabber : MonoBehaviour
 
     SpriteRenderer sr;
     KLD_DamageTaker damageTaker;
-
+    PlayerController2D controller;
 
     private void Awake()
     {
@@ -21,13 +21,13 @@ public class KLD_Grabber : MonoBehaviour
     void Start()
     {
         damageTaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
-
+        controller = damageTaker.transform.GetComponent<PlayerController2D>();
         sr.color = defaultColor;
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !damageTaker.isInvulnerable)
+        if (collision.gameObject.CompareTag("Player") && !damageTaker.isInvulnerable && !controller.getFlatSlideStatus())
         {
             grabbing = true;
             sr.color = grabColor;
