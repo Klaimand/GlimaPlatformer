@@ -127,15 +127,18 @@ public class PlayerController2D : MonoBehaviour
         SlopeSliding, //9
         SlopeStanding, //10
         CrouchAir, //11
-        Blowed, //12
-        Downed //13
+        BlowedAscending, //12
+        BlowedFalling, //13
+        Downed //14
     };
 
     [Header("Animations Handling")]
     public PlayerState playerState;
     public float moveStateThreshold;
     private bool flip = false;
-    
+    public float rollLenght;
+    public float rollSpeed;
+    private bool doneRoll;
 
     #endregion
 
@@ -165,6 +168,7 @@ public class PlayerController2D : MonoBehaviour
         }
         getPlayerState2();
         doFlipX();
+        checkBlowedGround();
     }
 
     private void FixedUpdate()
@@ -817,7 +821,14 @@ public class PlayerController2D : MonoBehaviour
             }
             else if (!isGrounded)
             {
-                playerState = PlayerState.Blowed;
+                if (rb.velocity.y > 0f)
+                {
+                    playerState = PlayerState.BlowedAscending;
+                }
+                else if (rb.velocity.y < 0f)
+                {
+                    playerState = PlayerState.BlowedFalling;
+                }
             }
         }
 
@@ -847,6 +858,44 @@ public class PlayerController2D : MonoBehaviour
         }
         spriterenderer.flipX = flip;
     }
+
+
+    private void checkBlowedGround ()
+    {
+        if (cantMove && isGrounded && !doneRoll)
+        {
+            doneRoll = true;
+            StartCoroutine(startRolling());
+        }
+        else if (!cantMove)
+        {
+            doneRoll = false;
+        }
+    }
+
+
+    private IEnumerator startRolling ()
+    {
+        float rollDirection = spriterenderer.flipX ? 1f : -1f;
+        float startPos = transform.position.x;
+        float endPos = startPos + (rollLenght * rollDirection);
+
+        float time = 0;
+
+        while (transform.position.x != endPos)
+        {
+            transform.position = new Vector3(Mathf.Lerp(startPos, endPos, time), transform.position.y, transform.position.z);
+            time += Time.deltaTime * rollSpeed;
+            yield return null;
+            if (time > 1f)
+            {
+                time = 1f;
+            }
+        }
+
+
+    }
+
 
     #endregion
 
