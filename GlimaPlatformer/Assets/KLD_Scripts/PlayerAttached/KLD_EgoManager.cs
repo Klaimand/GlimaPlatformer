@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class KLD_EgoManager : MonoBehaviour
 {
     [SerializeField, Range(1, 40)]
-    private int egoPointsPerBar;
+    private int egoPointsPerBar = 0;
     
     [SerializeField]
-    private int curEgoPoints, egoPointsPerCan, pointsAfter3BarsToFillSuperSayan;
+    private int curEgoPoints, egoPointsPerCan = 0, pointsAfter3BarsToFillSuperSayan = 0;
 
     
     private Image egoBarUI, egoBarAUI;
@@ -38,14 +38,7 @@ public class KLD_EgoManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Space))
-       {
-            addEgo(egoPointsPerCan);
-       }
-       if (Input.GetKeyDown(KeyCode.A))
-       {
-            removeEgo();
-       }
+
     }
 
     public void addEgo(int egoToAdd)
