@@ -8,7 +8,7 @@ public class KLD_TurretBehavior : MonoBehaviour
     private float maxRotateSpeed = 0f, maxRange = 0f, timeBetweenShoots = 0f, angleToShoot = 0f;
 
     [SerializeField]
-    private bool targetInSight, canShoot, drawSight = false;
+    private bool targetInSight, canShoot, drawSight = false, drawDebugRays = false;
     
     //private Vector3 vectorToTarget;
 
@@ -34,7 +34,10 @@ public class KLD_TurretBehavior : MonoBehaviour
         chooseTarget();
         aimTarget();
         checkIfTurretCanShoot();
-        drawRays();
+        if (drawDebugRays)
+        {
+            drawRays();
+        }
     }
     
 
@@ -109,10 +112,10 @@ public class KLD_TurretBehavior : MonoBehaviour
     {
         //turret sight
         RaycastHit2D hitt = Physics2D.Raycast((Vector2)transform.position, (Vector2)transform.up, Mathf.Infinity);
-        Debug.DrawRay(transform.position, transform.up * hitt.distance, Color.red);
+        Debug.DrawRay(transform.position + transform.up * 0.625f, transform.up * (hitt.distance - 0.625f), Color.red);
 
-        Debug.DrawRay(transform.position, (Quaternion.Euler(0f, 0f, angleToShoot) * transform.up).normalized * maxRange, new Color(0f, 1f, 0f, 0.2f));
-        Debug.DrawRay(transform.position, (Quaternion.Euler(0f, 0f, -angleToShoot) * transform.up).normalized * maxRange, new Color(0f, 1f, 0f, 0.2f));
+        //Debug.DrawRay(transform.position, (Quaternion.Euler(0f, 0f, angleToShoot) * transform.up).normalized * maxRange, new Color(0f, 1f, 0f, 0.2f));
+        //Debug.DrawRay(transform.position, (Quaternion.Euler(0f, 0f, -angleToShoot) * transform.up).normalized * maxRange, new Color(0f, 1f, 0f, 0.2f));
     }
 
 }

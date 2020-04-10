@@ -8,6 +8,7 @@ public class KLD_Door : MonoBehaviour
     float openDistance;
     bool opened;
 
+    KLD_PlayerEvents events;
 
     Transform player;
 
@@ -27,6 +28,7 @@ public class KLD_Door : MonoBehaviour
     {
         if (!opened && Vector3.Distance(transform.position, player.position) < openDistance)
         {
+            events.InvokeDoorOpening();
             opened = true;
             if (player.position.x < transform.position.x)
             {
