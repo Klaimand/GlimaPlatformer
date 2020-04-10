@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: fe5475b39111493498d5df1ecfbd267c
+guid: 6f88482eb7991d04980293943c90d663
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5666664011316416433
-    second: pleintes_0
+      213: -8993693262844506520
+    second: palmier_0
+  - first:
+      213: 135727921141069222
+    second: palmier_1
+  - first:
+      213: 8754654236603870688
+    second: palmier_2
+  - first:
+      213: -3379081191831540241
+    second: palmier_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -49,7 +58,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
-  spriteBorder: {x: 0, y: 14, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -89,13 +98,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pleintes_0
+      name: palmier_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 4
-        width: 344
-        height: 10
+        y: 3
+        width: 58
+        height: 221
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -103,8 +112,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f40beffda17fb51b0800000000000000
-      internalID: -5666664011316416433
+      spriteID: 86e4459c0abff2380800000000000000
+      internalID: -8993693262844506520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: palmier_1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 3
+        width: 73
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a537bd33d332e100800000000000000
+      internalID: 135727921141069222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: palmier_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 60
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed6420e4a7ce7970800000000000000
+      internalID: 8754654236603870688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: palmier_3
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 2
+        width: 67
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fed6da52f871b11d0800000000000000
+      internalID: -3379081191831540241
       vertices: []
       indices: 
       edges: []
