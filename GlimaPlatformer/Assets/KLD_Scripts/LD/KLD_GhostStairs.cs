@@ -16,6 +16,9 @@ public class KLD_GhostStairs : MonoBehaviour
     new bool enabled;
     bool wasAboveOffset;
 
+    [SerializeField]
+    bool drawRays;
+
 
     PlayerController2D controller;
     Transform player;
@@ -49,10 +52,13 @@ public class KLD_GhostStairs : MonoBehaviour
         transform.GetChild(3).position = transform.GetChild(1).position + Vector3.up * offset;
 
         Vector3 thisVector = transform.GetChild(1).position - transform.GetChild(0).position;
-        Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(0).position, Color.blue);
         
         Vector3 thisVectorOffset = transform.GetChild(3).position - transform.GetChild(2).position;
-        Debug.DrawLine(transform.GetChild(2).position, transform.GetChild(3).position, Color.green);
+
+        if (drawRays) {
+            Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(0).position, Color.blue);
+            Debug.DrawLine(transform.GetChild(2).position, transform.GetChild(3).position, Color.green);
+        }
 
         Vector3 stairToPlayerVector = player.position - transform.GetChild(0).position;
         Vector3 stairToPlayerVectorOffset = player.position - transform.GetChild(2).position;
