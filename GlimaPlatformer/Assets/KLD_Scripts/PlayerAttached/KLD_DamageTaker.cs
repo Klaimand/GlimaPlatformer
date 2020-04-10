@@ -20,6 +20,7 @@ public class KLD_DamageTaker : MonoBehaviour
     {
         controller = GetComponent<PlayerController2D>();
         egoManager = GetComponent<KLD_EgoManager>();
+        events = GetComponent<KLD_PlayerEvents>();
     }
 
     // Start is called before the first frame update

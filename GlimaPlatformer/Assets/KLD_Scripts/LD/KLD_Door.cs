@@ -16,6 +16,7 @@ public class KLD_Door : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
+        events = player.GetComponent<KLD_PlayerEvents>();
     }
 
     // Update is called once per frame
