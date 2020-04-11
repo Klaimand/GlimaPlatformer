@@ -8,6 +8,7 @@ public class KLD_Door : MonoBehaviour
     float openDistance;
     bool opened;
 
+    KLD_PlayerEvents events;
 
     Transform player;
 
@@ -15,6 +16,7 @@ public class KLD_Door : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
+        events = player.GetComponent<KLD_PlayerEvents>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class KLD_Door : MonoBehaviour
     {
         if (!opened && Vector3.Distance(transform.position, player.position) < openDistance)
         {
+            events.InvokeDoorOpening();
             opened = true;
             if (player.position.x < transform.position.x)
             {
