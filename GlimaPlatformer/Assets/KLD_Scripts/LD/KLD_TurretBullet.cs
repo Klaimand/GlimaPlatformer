@@ -5,7 +5,7 @@ using UnityEngine;
 public class KLD_TurretBullet : MonoBehaviour
 {
     [SerializeField]
-    float speed;
+    float speed = 30f;
     
     void Update()
     {

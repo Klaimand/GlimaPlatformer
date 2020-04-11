@@ -9,12 +9,18 @@ public class PlayerController2D : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+    private KLD_PlayerEvents events;
 
     [Header("Movement")]
     public float moveSpeed;
     private float xAxis;
+    [SerializeField]
     private float virtualXAxis;
+    [SerializeField]
     private float xRawAxis;
+    [SerializeField]
+    private float virtualXRawAxis;
+    public float xAxisSensitivity;
     public int accelerationFrame;
     public int decelerationFrame;
     public bool cantMove;
@@ -32,6 +38,8 @@ public class PlayerController2D : MonoBehaviour
     private bool jumped;
     private bool isGrounded; //is the player touching the ground (overlap circle related)
     public float groundDetectionRadius = 0.2f; //radius around ground detection child
+
+    private bool lastJumpIsBounce;
 
     [Header("WallJump")]
     public float wallSlideMultiplier;
@@ -92,15 +100,15 @@ public class PlayerController2D : MonoBehaviour
     private bool isGoingInTheSlopeDirection;
 
     [Header("Stairs")]
+    public float stairSpeed;
+    public float crouchStairsSpeed;
     private bool isOnStairs;
     private bool stairsToTheLeft;
-    public float stairSpeed;
     private bool jumpTrigger;
-
-    [Header("Terrain Interraction")]
-    public float timeToReachFireRun;
-
-
+    
+    [Header("Getters and Setters")]
+    private bool canTriggerJumpGetter;
+    
     [Space(10)]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
@@ -117,13 +125,20 @@ public class PlayerController2D : MonoBehaviour
         TurningBack, //7
         FlatSliding, //8
         SlopeSliding, //9
-        SlopeStanding //10
+        SlopeStanding, //10
+        CrouchAir, //11
+        BlowedAscending, //12
+        BlowedFalling, //13
+        Downed //14
     };
 
     [Header("Animations Handling")]
     public PlayerState playerState;
     public float moveStateThreshold;
     private bool flip = false;
+    public float rollLenght;
+    public float rollSpeed;
+    private bool doneRoll;
 
     #endregion
 
@@ -136,6 +151,7 @@ public class PlayerController2D : MonoBehaviour
         coll = GetComponent<CapsuleCollider2D>();
         spriterenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        events = GetComponent<KLD_PlayerEvents>();
     }
     
     // Update is called once per frame
@@ -152,12 +168,14 @@ public class PlayerController2D : MonoBehaviour
         }
         getPlayerState2();
         doFlipX();
+        checkBlowedGround();
     }
 
     private void FixedUpdate()
     {
         if (!cantMove)
         {
+            manageVirtualRawAxis();
             manageVirtualXAxis();
         }
         else
@@ -189,17 +207,33 @@ public class PlayerController2D : MonoBehaviour
 
     #region Horizontal Movement
 
+    private void manageVirtualRawAxis ()
+    {
+        if (Input.GetAxisRaw("Horizontal") >= xAxisSensitivity)
+        {
+            virtualXRawAxis = 1f;
+        }
+        else if (Input.GetAxisRaw("Horizontal") <= -xAxisSensitivity)
+        {
+            virtualXRawAxis = -1f;
+        }
+        else
+        {
+            virtualXRawAxis = 0f;
+        }
+    }
+    
     private void manageVirtualXAxis ()
     {
-        if (Input.GetAxisRaw("Horizontal") == 1f && virtualXAxis < 1f)
+        if (virtualXRawAxis == 1f && virtualXAxis < 1f)
         {
             virtualXAxis += 1f / (float)accelerationFrame;
         }
-        else if (Input.GetAxisRaw("Horizontal") == -1f && virtualXAxis > -1f)
+        else if (virtualXRawAxis == -1f && virtualXAxis > -1f)
         {
             virtualXAxis -= 1f / (float)accelerationFrame;
         }
-        else if (Input.GetAxisRaw("Horizontal") == 0f)
+        else if (virtualXRawAxis == 0f)
         {
             if (virtualXAxis > 0f)
             {
@@ -219,7 +253,7 @@ public class PlayerController2D : MonoBehaviour
         {
             virtualXAxis = -1f;
         }
-        else if (Input.GetAxisRaw("Horizontal") == 0f && virtualXAxis > -(1f / (float)decelerationFrame) && virtualXAxis < 1f / (float)decelerationFrame)
+        else if (virtualXRawAxis == 0f && virtualXAxis > -(1f / (float)decelerationFrame) && virtualXAxis < 1f / (float)decelerationFrame)
         {
             virtualXAxis = 0f;
         }
@@ -303,10 +337,11 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x * (1.0f - flatSlideDrag), rb.velocity.y);
         }
-        else if (isOnStairs)
+        else if (isOnStairs) //Stairs
         {
             float stairsDirection = stairsToTheLeft ? 1f : -1f;
-            rb.velocity = new Vector2(1f, stairsDirection).normalized * stairSpeed * virtualXAxis;
+            float speed = isCrouching ? crouchStairsSpeed : stairSpeed;
+            rb.velocity = new Vector2(1f, stairsDirection).normalized * speed * virtualXAxis;
         }
     }
 
@@ -329,8 +364,9 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.velocity += new Vector2(0, jumpForce.y);
                 StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
+                events.InvokeJump();
             }
-            else if (!isGrounded)
+            else if (!isGrounded && !isAgainstSlidableSlope)
             {
                 if (!isBuffering)
                 {
@@ -356,7 +392,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void checkFall ()
     {
-        if (rb.velocity.y < 0) //check if we're falling
+        if (rb.velocity.y < 0 && !lastJumpIsBounce) //check if we're falling
         {
             if ((isAgainstLeftWall || isAgainstRightWall) && !isCrouching)
             {
@@ -369,9 +405,13 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime; //makes fall faster
             }
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump)  //check if we're jumping and gaining height
+        else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump && !lastJumpIsBounce)  //check if we're jumping and gaining height
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        else if (lastJumpIsBounce)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -393,6 +433,7 @@ public class PlayerController2D : MonoBehaviour
             jumped = false;
             lastJumpIsWallJump = false;
             lastJumpIsSlopeJump = false;
+            lastJumpIsBounce = false;
         }
     }
 
@@ -434,6 +475,7 @@ public class PlayerController2D : MonoBehaviour
 
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(wallJumpNoControlTimer));
+            events.InvokeWallJump();
         }
     }
 
@@ -457,6 +499,7 @@ public class PlayerController2D : MonoBehaviour
             lastJumpIsSlopeJump = true;
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(slopeJumpNoControlTimer));
+            events.InvokeSlopeJump();
         }
     }
 
@@ -583,8 +626,11 @@ public class PlayerController2D : MonoBehaviour
 
     private void doFlatSliding ()
     {
-        if (isCrouching && ((rb.velocity.x > flatSlidingMinSpeed || rb.velocity.x < -flatSlidingMinSpeed) && isGrounded && !thisFlatSlideHasBeenDone) || isAgainstSlidableSlope)
+        if (isCrouching && !isOnStairs && ((rb.velocity.x > flatSlidingMinSpeed || rb.velocity.x < -flatSlidingMinSpeed) && isGrounded && !thisFlatSlideHasBeenDone) || isAgainstSlidableSlope)
         {
+            if (!isFlatSliding && !isAgainstSlidableSlope) {
+                events.InvokeFlatSlide();
+            }
             isFlatSliding = true;
         }
         else
@@ -597,33 +643,6 @@ public class PlayerController2D : MonoBehaviour
             thisFlatSlideHasBeenDone = false;
         }
     }
-    /*
-    private void doSlopeSlideDetection ()
-    {
-        //Debug.DrawRay(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up * slopeCastDistance, Color.red);
-        //RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f,-0.008f, 0f), -Vector2.up, slopeCastDistance, whatIsSlidableSlope);
-        RaycastHit2D hit = Physics2D.Raycast(transform.GetChild(0).position + new Vector3(0f, -0.008f, 0f), -Vector2.up, slopeCastDistance);
-
-        if (hit == true && 1 << hit.collider.gameObject.layer == whatIsSlidableSlope)
-        {
-            if (!hit.collider.gameObject.CompareTag("Stairs"))
-            {
-                isAgainstSlidableSlope = true;
-                if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
-                {
-                    isSlidingToTheLeft = true;
-                }
-                else
-                {
-                    isSlidingToTheLeft = false;
-                }
-            }
-        }
-        else
-        {
-            isAgainstSlidableSlope = false;
-        }
-    }*/
 
     private void doSlopeAndStairsDetection ()
     {
@@ -633,6 +652,10 @@ public class PlayerController2D : MonoBehaviour
         {
             if (!hit.collider.gameObject.tag.Contains("Stairs"))
             {
+                if (!isAgainstSlidableSlope)
+                {
+                    events.InvokeSlopeSlide();
+                }
                 isAgainstSlidableSlope = true;
                 if (hit.collider.gameObject.CompareTag("SlopeToTheLeft"))
                 {
@@ -689,73 +712,133 @@ public class PlayerController2D : MonoBehaviour
         return virtualXAxis;
     }
 
+    public bool getStairsStatus ()
+    {
+        return isOnStairs;
+    }
+
+    public bool getJumpedStatus ()
+    {
+        if (jumped && canTriggerJumpGetter)
+        {
+            canTriggerJumpGetter = false;
+            return true;
+        }
+        else if (!jumped)
+        {
+            canTriggerJumpGetter = true;
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool getFlatSlideStatus ()
+    {
+        return isFlatSliding;
+    }
+
+    public void SetLastJumpIsBounce (bool value)
+    {
+        lastJumpIsBounce = value;
+    }
+
     #endregion
 
     #region Animations Handling
 
     private void getPlayerState2 ()
     {
-        if (!isCrouching)
+        if (!cantMove)
         {
-            if (!isFlatSliding && !isAgainstSlidableSlope)
+            if (!isCrouching)
             {
-                if (isGrounded)
+                if (!isFlatSliding && !isAgainstSlidableSlope)
                 {
-                    playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.Running : PlayerState.Idle;
-                    if ((Mathf.Sign(rb.velocity.x) != Input.GetAxisRaw("Horizontal")) && Input.GetAxisRaw("Horizontal") != 0f)
+                    if (isGrounded)
                     {
-                        //Retournement trigger
-                        //print("retourning");
+                        playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.Running : PlayerState.Idle;
+                        if ((Mathf.Sign(rb.velocity.x) != Input.GetAxisRaw("Horizontal")) && Input.GetAxisRaw("Horizontal") != 0f)
+                        {
+                            //Retournement trigger
+                            //print("retourning");
+                        }
+                    }
+                    else if (!isGrounded)
+                    {
+                        if (!isAgainstRightWall && !isAgainstLeftWall)
+                        {
+                            if (rb.velocity.y > 0f)
+                            {
+                                playerState = PlayerState.Jumping;
+                            }
+                            else if (rb.velocity.y < 0f)
+                            {
+                                playerState = PlayerState.Falling;
+                            }
+                        }
+                        else if (isAgainstLeftWall || isAgainstRightWall)
+                        {
+                            playerState = PlayerState.WallSliding;
+                        }
+                    }
+                }
+                else if (isFlatSliding && isAgainstSlidableSlope)
+                {
+                    playerState = PlayerState.SlopeStanding;
+                }
+            }
+            else if (isCrouching)
+            {
+                if (!isFlatSliding && !isAgainstSlidableSlope && isGrounded)
+                {
+                    playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.CrouchWalk : PlayerState.CrouchIdle;
+                }
+                else if (isFlatSliding)
+                {
+                    if (!isAgainstSlidableSlope)
+                    {
+                        playerState = PlayerState.FlatSliding;
+                    }
+                    else if (isAgainstSlidableSlope)
+                    {
+                        playerState = PlayerState.SlopeSliding;
                     }
                 }
                 else if (!isGrounded)
                 {
-                    if (!isAgainstRightWall && !isAgainstLeftWall)
-                    {
-                        if (rb.velocity.y > 0f)
-                        {
-                            playerState = PlayerState.Jumping;
-                        }
-                        else if (rb.velocity.y < 0f)
-                        {
-                            playerState = PlayerState.Falling;
-                        }
-                    }
-                    else if (isAgainstLeftWall ||isAgainstRightWall)
-                    {
-                        playerState = PlayerState.WallSliding;
-                    }
+                    playerState = PlayerState.CrouchAir;
                 }
             }
-            else if (isFlatSliding && isAgainstSlidableSlope)
-            {
-                playerState = PlayerState.SlopeStanding;
-            }
         }
-        else if (isCrouching)
+        else if (cantMove)
         {
-            if (!isFlatSliding && !isAgainstSlidableSlope)
+            if (isGrounded)
             {
-                playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.CrouchWalk : PlayerState.CrouchIdle;
+                playerState = PlayerState.Downed;
             }
-            else if (isFlatSliding)
+            else if (!isGrounded)
             {
-                if (!isAgainstSlidableSlope)
+                if (rb.velocity.y > 0f)
                 {
-                    playerState = PlayerState.FlatSliding;
+                    playerState = PlayerState.BlowedAscending;
                 }
-                else if (isAgainstSlidableSlope)
+                else if (rb.velocity.y < 0f)
                 {
-                    playerState = PlayerState.SlopeSliding;
+                    playerState = PlayerState.BlowedFalling;
                 }
             }
         }
+
         animator.SetInteger("PlayerState", (int)playerState);
     }
 
     private void doFlipX ()
     {
-        if (playerState == PlayerState.Running || playerState == PlayerState.Jumping || playerState == PlayerState.Falling || playerState == PlayerState.CrouchWalk)
+        if (playerState == PlayerState.Running || playerState == PlayerState.Jumping || playerState == PlayerState.Falling ||
+            playerState == PlayerState.CrouchWalk || playerState == PlayerState.CrouchAir)
         {
             if (Mathf.Abs(virtualXAxis) > moveStateThreshold && !cantControlHorizontal) {
                 flip = Mathf.Sign(virtualXAxis) == -1f;
@@ -775,6 +858,44 @@ public class PlayerController2D : MonoBehaviour
         }
         spriterenderer.flipX = flip;
     }
+
+
+    private void checkBlowedGround ()
+    {
+        if (cantMove && isGrounded && !doneRoll)
+        {
+            doneRoll = true;
+            StartCoroutine(startRolling());
+        }
+        else if (!cantMove)
+        {
+            doneRoll = false;
+        }
+    }
+
+
+    private IEnumerator startRolling ()
+    {
+        float rollDirection = spriterenderer.flipX ? 1f : -1f;
+        float startPos = transform.position.x;
+        float endPos = startPos + (rollLenght * rollDirection);
+
+        float time = 0;
+
+        while (transform.position.x != endPos)
+        {
+            transform.position = new Vector3(Mathf.Lerp(startPos, endPos, time), transform.position.y, transform.position.z);
+            time += Time.deltaTime * rollSpeed;
+            yield return null;
+            if (time > 1f)
+            {
+                time = 1f;
+            }
+        }
+
+
+    }
+
 
     #endregion
 

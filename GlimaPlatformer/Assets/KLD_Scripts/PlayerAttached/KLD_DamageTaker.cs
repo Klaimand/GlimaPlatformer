@@ -5,20 +5,22 @@ using UnityEngine;
 public class KLD_DamageTaker : MonoBehaviour
 {
     [SerializeField]
-    GameObject QTEPrefab;
+    GameObject QTEPrefab = null;
     [SerializeField]
-    float invulnerableTimeAfterDamageTaking;
+    float invulnerableTimeAfterDamageTaking = 0f;
     //[HideInInspector]
     public bool isInvulnerable;
 
     PlayerController2D controller;
     KLD_EgoManager egoManager;
+    KLD_PlayerEvents events;
 
 
     private void Awake()
     {
         controller = GetComponent<PlayerController2D>();
         egoManager = GetComponent<KLD_EgoManager>();
+        events = GetComponent<KLD_PlayerEvents>();
     }
 
     // Start is called before the first frame update
@@ -29,10 +31,17 @@ public class KLD_DamageTaker : MonoBehaviour
     
     public void doDamageTaking (DamageType damageType, Transform mine, float explosionForce)
     {
+        events.InvokeDamageTaking();
         //arreter le joueur
         isInvulnerable = true;
         controller.cantMove = true;
-        controller.addExplosionForce(mine, explosionForce);
+        if (damageType == DamageType.Explosion) {
+            controller.addExplosionForce(mine, explosionForce);
+        }
+        else if (damageType == DamageType.Grab)
+        {
+            transform.position = mine.position;
+        }
 
         //summon le QTE avec les bonnes valeurs
         if ((int)egoManager.curEgoState < 4)
@@ -42,6 +51,7 @@ public class KLD_DamageTaker : MonoBehaviour
         else
         {
             controller.cantMove = false;
+            startInvulnerability();
         }
 
         //actualiser l'égo
@@ -54,50 +64,53 @@ public class KLD_DamageTaker : MonoBehaviour
     {
         GameObject curQTE = Instantiate(QTEPrefab, transform.position + new Vector3(-3.7f, 2.75f, 0f), Quaternion.identity);
         KLD_TestQTE qteScript = curQTE.transform.GetChild(0).GetComponent<KLD_TestQTE>();
-        if (difficulty == 0)
+
+        if (damageType == DamageType.Explosion)
         {
-            //hard
-            if (damageType == DamageType.Explosion)
+            qteScript.qteMode = KLD_TestQTE.QteMode.button;
+            if (difficulty == 0)
             {
                 qteScript.maxPoints = HardButtonValues.maxPoints;
                 qteScript.pointsPerInput = HardButtonValues.pointsPerInput;
                 qteScript.pointsLostPerSecond = HardButtonValues.pointsLostPerSecond;
             }
-            else if (damageType == DamageType.Grab)
-            {
-
-            }
-        }
-        else if (difficulty == 1)
-        {
-            //medium
-            if (damageType == DamageType.Explosion)
+            else if (difficulty == 1)
             {
                 qteScript.maxPoints = MediumButtonValues.maxPoints;
                 qteScript.pointsPerInput = MediumButtonValues.pointsPerInput;
                 qteScript.pointsLostPerSecond = MediumButtonValues.pointsLostPerSecond;
             }
-            else if (damageType == DamageType.Grab)
-            {
-
-            }
-        }
-        else if (difficulty <= 3)
-        {
-            //easy
-            if (damageType == DamageType.Explosion)
+            else if (difficulty <= 3)
             {
                 qteScript.maxPoints = EasyButtonValues.maxPoints;
                 qteScript.pointsPerInput = EasyButtonValues.pointsPerInput;
                 qteScript.pointsLostPerSecond = EasyButtonValues.pointsLostPerSecond;
             }
-            else if (damageType == DamageType.Grab)
+        }
+        else if (damageType == DamageType.Grab)
+        {
+            qteScript.qteMode = KLD_TestQTE.QteMode.joystick;
+            if (difficulty == 0)
             {
-
+                qteScript.maxPoints = HardJoystickValues.maxPoints;
+                qteScript.pointsPerInput = HardJoystickValues.pointsPerInput;
+                qteScript.pointsLostPerSecond = HardJoystickValues.pointsLostPerSecond;
+            }
+            else if (difficulty == 1)
+            {
+                qteScript.maxPoints = MediumJoystickValues.maxPoints;
+                qteScript.pointsPerInput = MediumJoystickValues.pointsPerInput;
+                qteScript.pointsLostPerSecond = MediumJoystickValues.pointsLostPerSecond;
+            }
+            else if (difficulty <= 3)
+            {
+                qteScript.maxPoints = EasyJoystickValues.maxPoints;
+                qteScript.pointsPerInput = EasyJoystickValues.pointsPerInput;
+                qteScript.pointsLostPerSecond = EasyJoystickValues.pointsLostPerSecond;
             }
         }
     }
-
+    
     public void startInvulnerability ()
     {
         StartCoroutine(startInvul());
