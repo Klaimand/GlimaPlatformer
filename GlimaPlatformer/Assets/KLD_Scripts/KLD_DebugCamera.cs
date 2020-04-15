@@ -11,6 +11,8 @@ public class KLD_DebugCamera : MonoBehaviour
     public CameraMode cameraMode = CameraMode.staticc;
     private Camera cameraComponent;
 
+    public Vector2 CameraOffset;
+
     public float mouseScrollSensitivity;
 
     // Start is called before the first frame update
@@ -45,7 +47,7 @@ public class KLD_DebugCamera : MonoBehaviour
     void cameraLerpToTarget ()
     {
         Vector2 from = transform.position;
-        Vector2 target = cameraTarget.position;
+        Vector2 target = cameraTarget.position + (Vector3)CameraOffset;
 
         transform.position = from + (target - from) * (1f - Mathf.Pow(0.01f, Time.deltaTime));
         transform.position += Vector3.forward * -5f;
