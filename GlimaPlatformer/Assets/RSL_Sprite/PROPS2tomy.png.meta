@@ -1,0 +1,1015 @@
+fileFormatVersion: 2
+guid: 0596bf33b1aa7884195621afa2cd0dd7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8833846399927716177
+    second: PROPS2tomy_0
+  - first:
+      213: -7038902829649648792
+    second: PROPS2tomy_1
+  - first:
+      213: 3547916875115158586
+    second: PROPS2tomy_2
+  - first:
+      213: 1241002116868521011
+    second: PROPS2tomy_3
+  - first:
+      213: 4019763149985143701
+    second: PROPS2tomy_4
+  - first:
+      213: -4217988509778282527
+    second: PROPS2tomy_5
+  - first:
+      213: 8474563539629105891
+    second: PROPS2tomy_6
+  - first:
+      213: -3724789615853309173
+    second: PROPS2tomy_7
+  - first:
+      213: -857579427324673406
+    second: PROPS2tomy_8
+  - first:
+      213: -4859188667390968543
+    second: PROPS2tomy_9
+  - first:
+      213: 7185714665802778444
+    second: PROPS2tomy_10
+  - first:
+      213: 471396819007108259
+    second: PROPS2tomy_11
+  - first:
+      213: -4226530159767620482
+    second: PROPS2tomy_12
+  - first:
+      213: 8480625428016393870
+    second: PROPS2tomy_13
+  - first:
+      213: -5514585373420253186
+    second: PROPS2tomy_14
+  - first:
+      213: 4196559131798284175
+    second: PROPS2tomy_15
+  - first:
+      213: -9148285073016469844
+    second: PROPS2tomy_16
+  - first:
+      213: 6410856507873054936
+    second: PROPS2tomy_17
+  - first:
+      213: -706460067219324021
+    second: PROPS2tomy_18
+  - first:
+      213: -7990055200438380397
+    second: PROPS2tomy_19
+  - first:
+      213: -3953698653190183770
+    second: PROPS2tomy_20
+  - first:
+      213: 7580159037641940873
+    second: PROPS2tomy_21
+  - first:
+      213: 1801031243868779981
+    second: PROPS2tomy_22
+  - first:
+      213: 4377139466918520648
+    second: PROPS2tomy_23
+  - first:
+      213: 6088596770855601724
+    second: PROPS2tomy_24
+  - first:
+      213: -4678014410495908474
+    second: PROPS2tomy_25
+  - first:
+      213: -4406153881505085080
+    second: PROPS2tomy_26
+  - first:
+      213: -981046016229302607
+    second: PROPS2tomy_27
+  - first:
+      213: 5437411840409792036
+    second: PROPS2tomy_28
+  - first:
+      213: -2650188917386591960
+    second: PROPS2tomy_29
+  - first:
+      213: -6787933540269704579
+    second: PROPS2tomy_30
+  - first:
+      213: 5915560654316228418
+    second: PROPS2tomy_31
+  - first:
+      213: 6389233554653096967
+    second: PROPS2tomy_32
+  - first:
+      213: 4158633208565889202
+    second: PROPS2tomy_33
+  - first:
+      213: -1376452542263148538
+    second: PROPS2tomy_34
+  - first:
+      213: -1104417286847954657
+    second: PROPS2tomy_35
+  - first:
+      213: 3047611036880397474
+    second: PROPS2tomy_36
+  - first:
+      213: 5761860596697242686
+    second: PROPS2tomy_37
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PROPS2tomy_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 163
+        width: 120
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa6f1f3c08fd76580800000000000000
+      internalID: -8833846399927716177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_1
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 169
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 863ad3e8b2bc05e90800000000000000
+      internalID: -7038902829649648792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_2
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 149
+        width: 327
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3c5ad9a99bbc3130800000000000000
+      internalID: 3547916875115158586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 184
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33cb475a9dce83110800000000000000
+      internalID: 1241002116868521011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 25
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59bd11c894119c730800000000000000
+      internalID: 4019763149985143701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_5
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 95
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 6, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e77cf75cc1b675c0800000000000000
+      internalID: -4217988509778282527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_6
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 102
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e2e11e93a2bb9570800000000000000
+      internalID: 8474563539629105891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_7
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 97
+        width: 40
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b03fff34493ee4cc0800000000000000
+      internalID: -3724789615853309173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_8
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 67
+        width: 5
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28241a3fd044914f0800000000000000
+      internalID: -857579427324673406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_9
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 67
+        width: 9
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12dbe8fe6a1b09cb0800000000000000
+      internalID: -4859188667390968543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_10
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 67
+        width: 35
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c474d70ca69c8b360800000000000000
+      internalID: 7185714665802778444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_11
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 0
+        width: 42
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a4fa29c8ecba8600800000000000000
+      internalID: 471396819007108259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_12
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 97
+        width: 26
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74739a76395855c0800000000000000
+      internalID: -4226530159767620482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_13
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 18
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8eef0ef4eb31b570800000000000000
+      internalID: 8480625428016393870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_14
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 82
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff88b502d14873b0800000000000000
+      internalID: -5514585373420253186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_15
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 58
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 1, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8722c9cb4c2d3a30800000000000000
+      internalID: 4196559131798284175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_16
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 47
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca648de1233ca0180800000000000000
+      internalID: -9148285073016469844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_17
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 85
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d056c91700f7f850800000000000000
+      internalID: 6410856507873054936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_18
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 83
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b83c465df462236f0800000000000000
+      internalID: -706460067219324021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_19
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 18
+        width: 36
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3989b1ad02f9d1190800000000000000
+      internalID: -7990055200438380397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_20
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 33
+        width: 53
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a4a8a3c504a129c0800000000000000
+      internalID: -3953698653190183770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_21
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 0
+        width: 66
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 8}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98f5d9bbb72223960800000000000000
+      internalID: 7580159037641940873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_22
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 58
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc5bd20cf5c8ef810800000000000000
+      internalID: 1801031243868779981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_23
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 34
+        width: 61
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84765027729bebc30800000000000000
+      internalID: 4377139466918520648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_24
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 39
+        width: 40
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c36407b118a0f7450800000000000000
+      internalID: 6088596770855601724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_25
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 0
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 685ab38cdaa541fb0800000000000000
+      internalID: -4678014410495908474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_26
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 68
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8694e2bb3623ad2c0800000000000000
+      internalID: -4406153881505085080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_27
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 0
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1be175698df9262f0800000000000000
+      internalID: -981046016229302607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_28
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 20
+        width: 68
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42ee02d9241957b40800000000000000
+      internalID: 5437411840409792036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_29
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 0
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 821ce7f8833a83bd0800000000000000
+      internalID: -2650188917386591960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_30
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 0
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ab34db86a6cc1a0800000000000000
+      internalID: -6787933540269704579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_31
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24fcbc7b21b481250800000000000000
+      internalID: 5915560654316228418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_32
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 0
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70caa1cf01e1ba850800000000000000
+      internalID: 6389233554653096967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_33
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 0
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b876bbaede66b930800000000000000
+      internalID: 4158633208565889202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_34
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 0
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 600c830a4bbd5ece0800000000000000
+      internalID: -1376452542263148538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_35
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 0
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1180ad34525ca0f0800000000000000
+      internalID: -1104417286847954657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_36
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 0
+        width: 33
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a4e0d2571a4b4a20800000000000000
+      internalID: 3047611036880397474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROPS2tomy_37
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 0
+        width: 61
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3c957f5fad36ff40800000000000000
+      internalID: 5761860596697242686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
