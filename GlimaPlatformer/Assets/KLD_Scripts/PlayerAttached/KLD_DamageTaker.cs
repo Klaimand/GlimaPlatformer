@@ -13,12 +13,14 @@ public class KLD_DamageTaker : MonoBehaviour
 
     PlayerController2D controller;
     KLD_EgoManager egoManager;
+    KLD_PlayerEvents events;
 
 
     private void Awake()
     {
         controller = GetComponent<PlayerController2D>();
         egoManager = GetComponent<KLD_EgoManager>();
+        events = GetComponent<KLD_PlayerEvents>();
     }
 
     // Start is called before the first frame update
@@ -29,6 +31,7 @@ public class KLD_DamageTaker : MonoBehaviour
     
     public void doDamageTaking (DamageType damageType, Transform mine, float explosionForce)
     {
+        events.InvokeDamageTaking();
         //arreter le joueur
         isInvulnerable = true;
         controller.cantMove = true;
