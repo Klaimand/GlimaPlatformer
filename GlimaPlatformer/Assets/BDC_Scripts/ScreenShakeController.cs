@@ -21,6 +21,19 @@ public class ScreenShakeController : MonoBehaviour
     public float SlopeJumpLenght;
     public float SlopeJumpPower;
 
+    public float SlopeSlideLenght;
+    public float SlopeSlidePower;
+
+    public float FlatSlideLenght;
+    public float FlatSlidePower;
+
+    public float DamageTakingLenght;
+    public float DamageTakingPower;
+
+    public float DoorOpenLenght;
+    public float DoorOpenPower;
+
+
 
     void Start()
     {
@@ -74,5 +87,29 @@ public class ScreenShakeController : MonoBehaviour
     {
         StartShake(SlopeJumpLenght, SlopeJumpLenght);
        
+    }
+
+    public void SlopeSlideShake()
+    {
+        StartShake(SlopeSlidePower, SlopeSlideLenght);
+
+    }
+
+    public void FlatSlideShake()
+    {
+        StartShake(FlatSlideLenght, FlatSlidePower);
+
+    }
+
+    public void DoorOpenShake()
+    {
+        StartShake(DoorOpenLenght, DoorOpenPower);
+
+    }
+
+    public void DamageTakingShake()
+    {
+        StartShake(DamageTakingLenght, DamageTakingPower);
+
     }
 }
