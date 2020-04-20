@@ -2481,12 +2481,12 @@ PrefabInstance:
     - target: {fileID: 1139996610849355495, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.52
+      value: -70.77
       objectReference: {fileID: 0}
     - target: {fileID: 1139996610849355495, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.85
+      value: 12.35
       objectReference: {fileID: 0}
     - target: {fileID: 1139996610849355495, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
         type: 3}
@@ -3627,6 +3627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxCoef: 0.075
+  SpriteRenderers: []
+  isVisiblee: 0
 --- !u!1 &520744076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5774,7 +5776,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6340d21027e9c4a849a1c4e99b60fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxCoef: 0.08
+  parallaxCoef: 0.06
+  SpriteRenderers: []
+  isVisiblee: 0
 --- !u!4 &843103202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1083019345238318479, guid: 973711a5e21f9af4ca41d4d7f15aa039,
@@ -11294,7 +11298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6340d21027e9c4a849a1c4e99b60fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxCoef: 0.05
+  parallaxCoef: 0.04
+  SpriteRenderers: []
+  isVisiblee: 0
 --- !u!1 &1371499076
 GameObject:
   m_ObjectHideFlags: 0
