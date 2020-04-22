@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Scenes/LUB_Backup.unity
+    guid: 47723abb8cc1d3f45b8fe47ac3d6cc67
   m_configObjects: {}
