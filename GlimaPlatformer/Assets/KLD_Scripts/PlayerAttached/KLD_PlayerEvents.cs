@@ -14,6 +14,7 @@ public class KLD_PlayerEvents : MonoBehaviour
     public UnityEvent OnSlopeSlide;
     public UnityEvent OnDamageTaking;
     public UnityEvent OnDoorOpen;
+    public UnityEvent OnQTEPress;
 
     public void InvokeJump ()
     {
@@ -54,6 +55,11 @@ public class KLD_PlayerEvents : MonoBehaviour
     public void InvokeDoorOpening ()
     {
         OnDoorOpen.Invoke();
+    }
+
+    public void InvokeQTEPress ()
+    {
+        OnQTEPress.Invoke();
     }
 
 }

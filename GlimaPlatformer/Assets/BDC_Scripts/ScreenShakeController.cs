@@ -44,6 +44,9 @@ public class ScreenShakeController : MonoBehaviour
     [Space(5)]
     public float DoorOpenLenght;
     public float DoorOpenPower;
+    [Space(5)]
+    public float QTEPressLenght;
+    public float QTEPressPower;
 
     #endregion
 
@@ -148,6 +151,11 @@ public class ScreenShakeController : MonoBehaviour
     {
         StartShake(DamageTakingLenght, DamageTakingPower);
 
+    }
+
+    public void QTEPressShake ()
+    {
+        StartShake(QTEPressLenght, QTEPressPower);
     }
 
     #endregion
