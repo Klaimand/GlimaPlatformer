@@ -9,6 +9,9 @@ public class KLD_OneWayPlatform : MonoBehaviour
 
     private bool activateCollider;
 
+    [SerializeField]
+    private float offset = 0.2f;
+
     private void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
@@ -27,11 +30,11 @@ public class KLD_OneWayPlatform : MonoBehaviour
 
     void doColliderActivation ()
     {
-        if (player.position.y >= (transform.position.y + transform.localScale.y / 2f) + 0.1f)
+        if (player.position.y >= (transform.position.y + transform.localScale.y / 2f) + offset)
         {
             activateCollider = true;
         }
-        else if (player.position.y < (transform.position.y + transform.localScale.y / 2f) - 0.1f)
+        else if (player.position.y < (transform.position.y + transform.localScale.y / 2f) - offset)
         {
             activateCollider = false;
         }
