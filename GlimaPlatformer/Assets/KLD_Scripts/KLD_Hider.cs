@@ -32,7 +32,7 @@ public class KLD_Hider : MonoBehaviour
 
     private void FixedUpdate()
     {
-        alpha += Time.fixedDeltaTime;
+        alpha += Time.fixedDeltaTime * revealSpeed;
         alpha = Mathf.Clamp01(alpha);
         renderer.material.color = new Color(materialColor.r, materialColor.g, materialColor.b, alpha);
     }

@@ -9,7 +9,11 @@ public class KLD_StairWayPlatform : MonoBehaviour
 
     BoxCollider2D collider;
     PlayerController2D controller;
+    Transform player;
     bool colliderEnabled;
+
+    [SerializeField]
+    private float offset = 0.2f;
 
     private void Awake()
     {
@@ -19,7 +23,8 @@ public class KLD_StairWayPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
+        player = GameObject.Find("Player").transform;
+        controller = player.GetComponent<PlayerController2D>();
     }
 
     // Update is called once per frame
@@ -30,7 +35,8 @@ public class KLD_StairWayPlatform : MonoBehaviour
 
     void doCollider ()
     {
-        if ((controller.getVirtualXAxis() > 0.03f && isStairToTheLeft) || (controller.getVirtualXAxis() < -0.03f && !isStairToTheLeft))
+        if (((controller.getVirtualXAxis() > 0.03f && isStairToTheLeft) || (controller.getVirtualXAxis() < -0.03f && !isStairToTheLeft))
+            && player.position.y >= (transform.position.y - transform.localScale.y / 2f))
         {
             colliderEnabled = true;
         }
