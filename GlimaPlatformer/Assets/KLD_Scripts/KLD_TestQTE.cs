@@ -19,6 +19,8 @@ public class KLD_TestQTE : MonoBehaviour
     private SpriteRenderer sr;
     public Color basic, doneColor;
 
+    KLD_PlayerEvents events;
+
     public enum QteMode
     {
         button,
@@ -39,6 +41,7 @@ public class KLD_TestQTE : MonoBehaviour
     {
         player = GameObject.Find("Player");
         sr.color = basic;
+        events = player.GetComponent<KLD_PlayerEvents>();
     }
     
     void Update()
@@ -72,6 +75,7 @@ public class KLD_TestQTE : MonoBehaviour
         {
             currentPoints += pointsPerInput;
             lastXAxisRawValue = 0f;
+            events.OnQTEPress.Invoke();
         }
         if (curXAxisRawValue != 0f)
         {
