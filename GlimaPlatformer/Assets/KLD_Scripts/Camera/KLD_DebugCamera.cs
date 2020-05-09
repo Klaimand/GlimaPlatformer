@@ -29,18 +29,18 @@ public class KLD_DebugCamera : MonoBehaviour
 
     private void Update()
     {
-        doCameraSize();
+        //doCameraSize();
     }
 
     void LateUpdate()
     {
         if (cameraMode == CameraMode.following)
         {
-            cameraLerpToTarget();
+            //cameraLerpToTarget();
         }
         else if (cameraMode == CameraMode.scrolling)
         {
-            cameraLerpToTargetXPositionOnly();
+            //cameraLerpToTargetXPositionOnly();
         }
     }
 
