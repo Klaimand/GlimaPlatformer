@@ -103,18 +103,18 @@ public class KLD_ScreenShake : MonoBehaviour
     {
         if (controller.getFlatSlideStatus()) //&& shakePower < FlatSlidePower)
         {
-            print(controller.getFlatSlideSpeedPercentage());
+            //print(controller.getFlatSlideSpeedPercentage());
             //StartShake(Time.deltaTime, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
             StartShake(0.1f, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
 
         }
-        else if (controller.getSlopeSlideStatus())
+        else if (controller.getSlopeSlideStatus() && shakePower < SlopeSlidePower)
         {
             StartShake(0.1f, SlopeSlidePower);
         }
-        else if (controller.getSlopeStandStatus())
+        else if (controller.getSlopeStandStatus() && shakePower < StandSlopeJumpPower)
         {
-            StartShake(Time.deltaTime, SlopeStandPower);
+            StartShake(0.1f, SlopeStandPower);
         }
     }
 

@@ -3024,7 +3024,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1139996611392143660}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816342172}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a14ed209f7e60674ead8a18af1ea36f1, type: 3}
@@ -3670,46 +3670,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 739303646}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &435048415 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8328309575769181730, guid: f664ce46b60f7624fa0754318cdf611f,
-    type: 3}
-  m_PrefabInstance: {fileID: 8328309575677736542}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &435048416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435048415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &504329762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2249245001748827911, guid: 569616b77b6b6044dafde87a3e84ca5a,
@@ -48071,44 +48031,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1816342172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1139996610849355492, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1139996611392143660}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1816342173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816342172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec3edb3603904d3408f3c3fa37318ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  virtualCam: {fileID: 929807798}
-  WallJumpLenght: 0.06
-  WallJumpPower: 6
-  SlopeJumpLenght: 0.2
-  SlopeJumpPower: 26
-  StandSlopeJumpLenght: 0.2
-  StandSlopeJumpPower: 12
-  BouncyPlatformShakeLenght: 0
-  BouncyPlatformShakePower: 0
-  SlopeSlidePower: 0.8
-  FlatSlidePower: 1
-  SlopeStandPower: 0.01
-  DamageTakingLenght: 0.5
-  DamageTakingPower: 20
-  GroundHitDeadLenght: 0
-  GroundHitDeadPower: 0
-  DoorOpenLenght: 0.15
-  DoorOpenPower: 6
-  QTEPressLenght: 0.1
-  QTEPressPower: 4
 --- !u!1 &1819065349
 GameObject:
   m_ObjectHideFlags: 0
@@ -50407,94 +50329,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+    - target: {fileID: 1816342173, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: virtualCam
       value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: WallJumpShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnSlopeJump.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnStandSlopeJump.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnDamageTaking.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnGroundHitdead.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnDoorOpen.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnBouncyPlatformJump.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnQTEPress.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnSlopeJump.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SlopeJumpShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnStandSlopeJump.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StandSlopeJumpShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnDamageTaking.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DamageTakingShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnDoorOpen.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DoorOpenShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnBouncyPlatformJump.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BouncyPlatformShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnQTEPress.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QTEPressShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnGroundHitdead.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GroundHitDeadShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1816342173}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: DebugJumpShake
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 929807798}
     - target: {fileID: 1139996610849355492, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
         type: 3}
       propertyPath: m_Name
@@ -50555,13 +50393,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1139996611392143662, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
-        type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 8328309575677736549}
-    m_RemovedComponents:
-    - {fileID: 1139996611392143662, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
 --- !u!1001 &2083263360062693681
 PrefabInstance:
@@ -51912,11 +51744,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7245353929068244939, guid: f664ce46b60f7624fa0754318cdf611f,
-        type: 3}
-      propertyPath: m_ShowToolkit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8328309575769181730, guid: f664ce46b60f7624fa0754318cdf611f,
         type: 3}
       propertyPath: m_Name
@@ -51979,9 +51806,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f664ce46b60f7624fa0754318cdf611f, type: 3}
---- !u!4 &8328309575677736549 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8328309575769181918, guid: f664ce46b60f7624fa0754318cdf611f,
-    type: 3}
-  m_PrefabInstance: {fileID: 8328309575677736542}
-  m_PrefabAsset: {fileID: 0}
