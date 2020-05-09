@@ -28,6 +28,9 @@ public class ScreenShakeController : MonoBehaviour
     [Space(5)]
     public float StandSlopeJumpLenght;
     public float StandSlopeJumpPower;
+    [Space(5)]
+    public float BouncyPlatformShakeLenght;
+    public float BouncyPlatformShakePower;
 
     //public float SlopeSlideLenght;
     [Header("Slides")]
@@ -41,6 +44,9 @@ public class ScreenShakeController : MonoBehaviour
     [Header("Others")]
     public float DamageTakingLenght;
     public float DamageTakingPower;
+    [Space(5)]
+    public float GroundHitDeadLenght;
+    public float GroundHitDeadPower;
     [Space(5)]
     public float DoorOpenLenght;
     public float DoorOpenPower;
@@ -128,19 +134,12 @@ public class ScreenShakeController : MonoBehaviour
     {
         StartShake(StandSlopeJumpLenght, StandSlopeJumpPower);
     }
-    /*
-    public void SlopeSlideShake()
-    {
-        StartShake(SlopeSlidePower, SlopeSlideLenght);
 
+    public void BouncyPlatformShake ()
+    {
+        StartShake(BouncyPlatformShakeLenght, BouncyPlatformShakePower);
     }
 
-    public void FlatSlideShake()
-    {
-        StartShake(FlatSlideLenght, FlatSlidePower);
-
-    }
-    */
     public void DoorOpenShake()
     {
         StartShake(DoorOpenLenght, DoorOpenPower);
@@ -151,6 +150,11 @@ public class ScreenShakeController : MonoBehaviour
     {
         StartShake(DamageTakingLenght, DamageTakingPower);
 
+    }
+
+    public void GroundHitDeadShake ()
+    {
+        StartShake(GroundHitDeadLenght, GroundHitDeadPower);
     }
 
     public void QTEPressShake ()

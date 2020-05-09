@@ -909,6 +909,7 @@ public class PlayerController2D : MonoBehaviour
         {
             doneRoll = true;
             StartCoroutine(startRolling());
+            events.InvokeGroundHitDead();
         }
         else if (!cantMove)
         {
