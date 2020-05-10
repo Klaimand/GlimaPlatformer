@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 1139996611729343310}
   - component: {fileID: 1644083150}
   - component: {fileID: 971501571}
+  - component: {fileID: 1139996611392143662}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -359,11 +360,47 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: WallJumpShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSlopeJump:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 971501571}
         m_MethodName: addSlopeJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: SlopeJumpShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnStandSlopeJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: StandSlopeJumpShake
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -401,6 +438,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnDamageTaking:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: DamageTakingShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDoorOpen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: DoorOpenShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &971501571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +483,36 @@ MonoBehaviour:
   slopeJumps: 0
   flatSlides: 0
   slopeSlides: 0
+--- !u!114 &1139996611392143662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94a53579592c4c4fa848cfb93633293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationMultiplier: 0.5
+  MinimumShake: 0.1
+  MaximumShake: 0.3
+  MinimumRotation: 1
+  MaximumRotation: 3
+  WallJumpLenght: 0.06
+  WallJumpPower: 0.15
+  SlopeJumpLenght: 0.2
+  SlopeJumpPower: 0.4
+  StandSlopeJumpLenght: 0
+  StandSlopeJumpPower: 0
+  SlopeSlidePower: 0.02
+  FlatSlidePower: 0.025
+  SlopeStandPower: 0
+  DamageTakingLenght: 0.5
+  DamageTakingPower: 0.5
+  DoorOpenLenght: 0.15
+  DoorOpenPower: 0.15
 --- !u!1 &1139996611386880386
 GameObject:
   m_ObjectHideFlags: 0

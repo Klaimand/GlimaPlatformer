@@ -43,7 +43,7 @@ public class KLD_BouncyPlatform : MonoBehaviour
 
     void checkTrigger ()
     {
-        if (player.position.y > transform.position.y && Mathf.Abs(playerRb.velocity.y) > minVel)
+        if (player.position.y > transform.position.y && Mathf.Abs(playerRb.velocity.y) > minVel && !controller.cantMove)
         {
             thisCollider.isTrigger = true;
         }
