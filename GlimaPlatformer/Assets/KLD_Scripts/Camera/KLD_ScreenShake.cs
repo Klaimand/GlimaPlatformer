@@ -1,22 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
-public class ScreenShakeController : MonoBehaviour
+public class KLD_ScreenShake : MonoBehaviour
 {
+    public CinemachineVirtualCamera virtualCam;
+    private CinemachineBasicMultiChannelPerlin virtualCamNoise;
     PlayerController2D controller;
 
     private float shakeTimeRemaining;
     private float shakePower;
     private float shakeFadeTime;
-    private float shakeRotation;
 
-    public float rotationMultiplier = 15f;
-    public float MinimumShake = 0.1f;
-    public float MaximumShake = 1f;
-    public float MinimumRotation = 1f;
-    public float MaximumRotation = 1f;
-    
     #region ShakeValues
 
     [Header("Jumps")]
@@ -56,38 +52,44 @@ public class ScreenShakeController : MonoBehaviour
 
     #endregion
 
-    public Transform mainCamera;
-
-
+    // Start is called before the first frame update
     void Start()
     {
-        //mainCamera = Camera.main.transform;
+        virtualCamNoise = virtualCam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
     }
 
-    void Update()
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            StartShake(1f, 1f);
+        }
         checkSlide();
     }
-    private void LateUpdate()
+
+    void LateUpdate()
     {
-        if(shakeTimeRemaining > 0)
-        {
-            shakeTimeRemaining = Time.deltaTime;
-
-            float xAmount = Random.Range(-1f, 1f) * shakePower;
-            float yAmount = Random.Range(-1f, 1f) * shakePower;
-
-            mainCamera.position += new Vector3(xAmount, yAmount, 0f);
-            shakePower = Mathf.MoveTowards(shakePower, 0f, shakeFadeTime * Time.deltaTime);
-
-            shakeRotation = Mathf.MoveTowards(shakeRotation, 0f, shakeFadeTime * rotationMultiplier * Time.deltaTime);
-           
-        }
-
-        mainCamera.rotation = Quaternion.Euler(0f, 0f, shakeRotation*Random.Range(MinimumRotation, MaximumRotation));
+        doShake();
     }
-    
+
+    void doShake ()
+    {
+        if (shakeTimeRemaining > 0)
+        {
+            shakeTimeRemaining -= Time.deltaTime;
+            
+            shakePower = Mathf.MoveTowards(shakePower, 0f, shakeFadeTime * Time.deltaTime);
+            //print("Time remaining : " + shakeTimeRemaining + " Power : " + shakePower);
+            virtualCamNoise.m_AmplitudeGain = shakePower;
+        }
+        else
+        {
+            shakeTimeRemaining = 0f;
+            virtualCamNoise.m_AmplitudeGain = 0f;
+        }
+    }
+
     private void StartShake(float lenght, float power)
     {
         //print("launched shake lenght : " + lenght + " Power : " + power);
@@ -95,29 +97,33 @@ public class ScreenShakeController : MonoBehaviour
         shakePower = power;
 
         shakeFadeTime = power / lenght;
-
-        shakeRotation = power * rotationMultiplier;
-
     }
 
-    void checkSlide ()
+    void checkSlide()
     {
-        if (controller.getFlatSlideStatus())
+        if (controller.getFlatSlideStatus()) //&& shakePower < FlatSlidePower)
         {
             //print(controller.getFlatSlideSpeedPercentage());
-            StartShake(Time.deltaTime, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
+            //StartShake(Time.deltaTime, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
+            StartShake(0.1f, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
+
         }
-        else if (controller.getSlopeSlideStatus())
+        else if (controller.getSlopeSlideStatus() && shakePower < SlopeSlidePower)
         {
-            StartShake(Time.deltaTime, SlopeSlidePower);
+            StartShake(0.1f, SlopeSlidePower);
         }
-        else if (controller.getSlopeStandStatus())
+        else if (controller.getSlopeStandStatus() && shakePower < StandSlopeJumpPower)
         {
-            StartShake(Time.deltaTime, SlopeStandPower);
+            StartShake(0.1f, SlopeStandPower);
         }
     }
 
     #region EventInstances
+
+    public void DebugJumpShake ()
+    {
+        StartShake(1f, 10f);
+    }
 
     public void WallJumpShake()
     {
@@ -127,6 +133,7 @@ public class ScreenShakeController : MonoBehaviour
 
     public void SlopeJumpShake()
     {
+        //print("lieb icht");
         StartShake(SlopeJumpLenght, SlopeJumpPower);
     }
 
@@ -135,7 +142,7 @@ public class ScreenShakeController : MonoBehaviour
         StartShake(StandSlopeJumpLenght, StandSlopeJumpPower);
     }
 
-    public void BouncyPlatformShake ()
+    public void BouncyPlatformShake()
     {
         StartShake(BouncyPlatformShakeLenght, BouncyPlatformShakePower);
     }
@@ -152,15 +159,16 @@ public class ScreenShakeController : MonoBehaviour
 
     }
 
-    public void GroundHitDeadShake ()
+    public void GroundHitDeadShake()
     {
         StartShake(GroundHitDeadLenght, GroundHitDeadPower);
     }
 
-    public void QTEPressShake ()
+    public void QTEPressShake()
     {
         StartShake(QTEPressLenght, QTEPressPower);
     }
 
     #endregion
+
 }

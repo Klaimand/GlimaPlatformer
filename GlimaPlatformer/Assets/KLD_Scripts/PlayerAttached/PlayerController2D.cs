@@ -499,7 +499,14 @@ public class PlayerController2D : MonoBehaviour
             lastJumpIsSlopeJump = true;
             cantControlHorizontal = true;
             StartCoroutine(noHorizontalControlDuring(slopeJumpNoControlTimer));
-            events.InvokeSlopeJump();
+            if (playerState == PlayerState.SlopeSliding)
+            {
+                events.InvokeSlopeJump();
+            }
+            else if (playerState == PlayerState.SlopeStanding)
+            {
+                events.InvokeStandSlopeJump();
+            }
         }
     }
 
@@ -735,9 +742,45 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public bool getSlopeSlideStatus ()
+    {
+        if (playerState == PlayerState.SlopeSliding)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool getSlopeStandStatus ()
+    {
+        if (playerState == PlayerState.SlopeStanding)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool getFlatSlideStatus ()
     {
-        return isFlatSliding;
+        if (playerState == PlayerState.FlatSliding)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public float getFlatSlideSpeedPercentage ()
+    {
+        return 1 - (flatSlidingMinSpeed / Mathf.Abs(rb.velocity.x));
     }
 
     public void SetLastJumpIsBounce (bool value)
@@ -866,6 +909,7 @@ public class PlayerController2D : MonoBehaviour
         {
             doneRoll = true;
             StartCoroutine(startRolling());
+            events.InvokeGroundHitDead();
         }
         else if (!cantMove)
         {

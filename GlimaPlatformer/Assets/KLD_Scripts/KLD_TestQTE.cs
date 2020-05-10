@@ -19,6 +19,10 @@ public class KLD_TestQTE : MonoBehaviour
     private SpriteRenderer sr;
     public Color basic, doneColor;
 
+    public Vector2 playerOffset;
+
+    KLD_PlayerEvents events;
+
     public enum QteMode
     {
         button,
@@ -29,6 +33,7 @@ public class KLD_TestQTE : MonoBehaviour
 
 
     private GameObject player;
+    private Transform parentTransform;
 
     void Awake()
     {
@@ -39,6 +44,8 @@ public class KLD_TestQTE : MonoBehaviour
     {
         player = GameObject.Find("Player");
         sr.color = basic;
+        events = player.GetComponent<KLD_PlayerEvents>();
+        parentTransform = transform.parent;
     }
     
     void Update()
@@ -50,6 +57,7 @@ public class KLD_TestQTE : MonoBehaviour
             decreasePoints();
             checkEnd();
         }
+        linkPosToPlayer();
         doGraphics();
     }
 
@@ -72,6 +80,7 @@ public class KLD_TestQTE : MonoBehaviour
         {
             currentPoints += pointsPerInput;
             lastXAxisRawValue = 0f;
+            events.OnQTEPress.Invoke();
         }
         if (curXAxisRawValue != 0f)
         {
@@ -115,5 +124,10 @@ public class KLD_TestQTE : MonoBehaviour
             sr.color = doneColor;
         }
         sr.size = new Vector2((currentPoints * 5f) / maxPoints, 0.5f);
+    }
+
+    void linkPosToPlayer ()
+    {
+        parentTransform.position = player.transform.position + (Vector3)playerOffset;
     }
 }
