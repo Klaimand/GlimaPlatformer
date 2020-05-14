@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  sprintSpeed: 12
   virtualXAxis: 0
   xRawAxis: 0
   virtualXRawAxis: 0
@@ -216,6 +217,7 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 15}
   addAirSpeed: 32
   maxAirSpeed: 9
+  maxSprintAirSpeed: 13
   horizontalAirDrag: 0.04
   fallMultiplier: 2
   lowJumpMultiplier: 3
@@ -281,9 +283,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   egoPointsPerBar: 4
-  curEgoPoints: 0
   egoPointsPerCan: 1
-  pointsAfter3BarsToFillSuperSayan: 2
+  curEgoPoints: 0
+  sprintSecondEnergyConsuption: 1
+  minimumEgoToSprint: 2
+  isSprinting: 0
   curEgoState: 0
 --- !u!114 &3521671514523263589
 MonoBehaviour:

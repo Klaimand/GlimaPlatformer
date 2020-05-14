@@ -13,6 +13,7 @@ public class PlayerController2D : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed;
+    public float sprintSpeed;
     private float xAxis;
     [SerializeField]
     private float virtualXAxis;
@@ -24,6 +25,7 @@ public class PlayerController2D : MonoBehaviour
     public int accelerationFrame;
     public int decelerationFrame;
     public bool cantMove;
+    private bool isSprinting;
 
     private bool cantMoveTrigger;
 
@@ -31,6 +33,7 @@ public class PlayerController2D : MonoBehaviour
     public Vector2 jumpForce; //jump velocity on button press
     public float addAirSpeed;
     public float maxAirSpeed;
+    public float maxSprintAirSpeed;
     public float horizontalAirDrag;
     public float fallMultiplier; //more means a faster fall
     public float lowJumpMultiplier; //more means a lower minimal jump
@@ -40,6 +43,7 @@ public class PlayerController2D : MonoBehaviour
     public float groundDetectionRadius = 0.2f; //radius around ground detection child
 
     private bool lastJumpIsBounce;
+    private bool lastJumpIsSprintJump;
 
     [Header("WallJump")]
     public float wallSlideMultiplier;
@@ -165,6 +169,7 @@ public class PlayerController2D : MonoBehaviour
             doCrouch();
             doFlatSliding();
             doSlopedSlideJump();
+            //doSprintInputDebug();
         }
         getPlayerState2();
         doFlipX();
@@ -265,9 +270,13 @@ public class PlayerController2D : MonoBehaviour
         xRawAxis = Input.GetAxisRaw("Horizontal");
         if (isGrounded && !isFlatSliding && !isOnStairs && !cantMoveTrigger) //GROUND
         {
-            if (!cantControlHorizontal && !isCrouching)
+            if (!cantControlHorizontal && !isCrouching && !isSprinting)
             {
                 rb.velocity = new Vector2(virtualXAxis * moveSpeed, rb.velocity.y);
+            }
+            else if (!cantControlHorizontal && !isCrouching && isSprinting)
+            {
+                rb.velocity = new Vector2(virtualXAxis * sprintSpeed, rb.velocity.y);
             }
             else if (!cantControlHorizontal && isCrouching)
             {
@@ -284,7 +293,7 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x * (1.0f - slopeJumpDrag), rb.velocity.y);
             }
             if (!cantControlHorizontal && !cantMove) {
-                if ((!lastJumpIsSlopeJump && (Mathf.Abs(rb.velocity.x) < maxAirSpeed)) || lastJumpIsSlopeJump && Mathf.Sign(rb.velocity.x) != Mathf.Sign(Input.GetAxisRaw("Horizontal"))) {
+                if ((!lastJumpIsSlopeJump && (Mathf.Abs(rb.velocity.x) < maxAirSpeed)) || (lastJumpIsSlopeJump && Mathf.Sign(rb.velocity.x) != Mathf.Sign(Input.GetAxisRaw("Horizontal"))) || (lastJumpIsSprintJump && (Mathf.Abs(rb.velocity.x) < maxSprintAirSpeed))) {
                     rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * addAirSpeed, 0f));
                 }
                 /*
@@ -300,7 +309,7 @@ public class PlayerController2D : MonoBehaviour
                         isUnderMaxAirSpeedAfterSlopeJump = false;
                     }
                 }*/
-                if (!lastJumpIsSlopeJump) {
+                if (!lastJumpIsSlopeJump && !lastJumpIsSprintJump) {
                     if (rb.velocity.x > maxAirSpeed)
                     {
                         rb.velocity = new Vector2(maxAirSpeed, rb.velocity.y);
@@ -308,6 +317,17 @@ public class PlayerController2D : MonoBehaviour
                     else if (rb.velocity.x < -maxAirSpeed)
                     {
                         rb.velocity = new Vector2(-maxAirSpeed, rb.velocity.y);
+                    }
+                }
+                else if (!lastJumpIsSlopeJump && lastJumpIsSprintJump)
+                {
+                    if (rb.velocity.x > maxSprintAirSpeed)
+                    {
+                        rb.velocity = new Vector2(maxSprintAirSpeed, rb.velocity.y);
+                    }
+                    else if (rb.velocity.x < -maxSprintAirSpeed)
+                    {
+                        rb.velocity = new Vector2(-maxSprintAirSpeed, rb.velocity.y);
                     }
                 }
             }
@@ -345,6 +365,18 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    void doSprintInputDebug ()
+    {
+        if (Input.GetKey(KeyCode.N))
+        {
+            isSprinting = true;
+        }
+        else
+        {
+            isSprinting = false;
+        }
+    }
+
     #endregion
 
     #region Jumps
@@ -365,6 +397,9 @@ public class PlayerController2D : MonoBehaviour
                 rb.velocity += new Vector2(0, jumpForce.y);
                 StartCoroutine(addXVelocityOnNextUpdateAfterJumping());
                 events.InvokeJump();
+                if (isSprinting) {
+                    SetLastJumpIsSprintJump(true); //WIP
+                }
             }
             else if (!isGrounded && !isAgainstSlidableSlope)
             {
@@ -430,6 +465,7 @@ public class PlayerController2D : MonoBehaviour
             lastJumpIsWallJump = false;
             lastJumpIsSlopeJump = false;
             lastJumpIsBounce = false;
+            lastJumpIsSprintJump = false;
         }
     }
 
@@ -794,6 +830,28 @@ public class PlayerController2D : MonoBehaviour
             lastJumpIsBounce = value;
             i++;
         }
+    }
+
+    public void SetLastJumpIsSprintJump(bool value)
+    {
+        lastJumpIsSprintJump = value;
+        StartCoroutine(SetLastJumpIsSprintNextFrames(5, value));
+    }
+
+    IEnumerator SetLastJumpIsSprintNextFrames(int nbFrames, bool value)
+    {
+        float i = 0;
+        while (i < nbFrames)
+        {
+            yield return new WaitForFixedUpdate();
+            lastJumpIsSprintJump = value;
+            i++;
+        }
+    }
+
+    public void SetSprint(bool state)
+    {
+        isSprinting = state;
     }
 
     #endregion
