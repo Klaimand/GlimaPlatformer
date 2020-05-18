@@ -41,6 +41,7 @@ public class KLD_DamageTaker : MonoBehaviour
         else if (damageType == DamageType.Grab)
         {
             transform.position = mine.position;
+            controller.grabbed = true;
         }
 
         //summon le QTE avec les bonnes valeurs

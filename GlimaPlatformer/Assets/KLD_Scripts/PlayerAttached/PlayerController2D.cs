@@ -25,6 +25,7 @@ public class PlayerController2D : MonoBehaviour
     public int accelerationFrame;
     public int decelerationFrame;
     public bool cantMove;
+    public bool grabbed;
     private bool isSprinting;
 
     private bool cantMoveTrigger;
@@ -133,7 +134,8 @@ public class PlayerController2D : MonoBehaviour
         CrouchAir, //11
         BlowedAscending, //12
         BlowedFalling, //13
-        Downed //14
+        Downed, //14
+        Grabbed //15
     };
 
     [Header("Animations Handling")]
@@ -169,7 +171,6 @@ public class PlayerController2D : MonoBehaviour
             doCrouch();
             doFlatSliding();
             doSlopedSlideJump();
-            //doSprintInputDebug();
         }
         getPlayerState2();
         doFlipX();
@@ -364,19 +365,7 @@ public class PlayerController2D : MonoBehaviour
             rb.velocity = new Vector2(1f, stairsDirection).normalized * speed * virtualXAxis;
         }
     }
-
-    void doSprintInputDebug ()
-    {
-        if (Input.GetKey(KeyCode.N))
-        {
-            isSprinting = true;
-        }
-        else
-        {
-            isSprinting = false;
-        }
-    }
-
+    
     #endregion
 
     #region Jumps
@@ -924,20 +913,27 @@ public class PlayerController2D : MonoBehaviour
         }
         else if (cantMove)
         {
-            if (isGrounded)
+            if (!grabbed)
             {
-                playerState = PlayerState.Downed;
+                if (isGrounded)
+                {
+                    playerState = PlayerState.Downed;
+                }
+                else if (!isGrounded)
+                {
+                    if (rb.velocity.y > 0f)
+                    {
+                        playerState = PlayerState.BlowedAscending;
+                    }
+                    else if (rb.velocity.y < 0f)
+                    {
+                        playerState = PlayerState.BlowedFalling;
+                    }
+                }
             }
-            else if (!isGrounded)
+            else if (grabbed)
             {
-                if (rb.velocity.y > 0f)
-                {
-                    playerState = PlayerState.BlowedAscending;
-                }
-                else if (rb.velocity.y < 0f)
-                {
-                    playerState = PlayerState.BlowedFalling;
-                }
+                playerState = PlayerState.Grabbed;
             }
         }
 
@@ -971,7 +967,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void checkBlowedGround ()
     {
-        if (cantMove && isGrounded && !doneRoll)
+        if (cantMove && isGrounded && !doneRoll && !grabbed)
         {
             doneRoll = true;
             StartCoroutine(startRolling());

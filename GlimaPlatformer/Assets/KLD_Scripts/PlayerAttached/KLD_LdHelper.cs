@@ -10,6 +10,8 @@ public class KLD_LdHelper : MonoBehaviour
     private new Camera camera;
     private GameObject debugMenu;
 
+    private bool canDebugTp = true;
+
     private float lastDpadX;
     private float lastDpadY;
 
@@ -35,9 +37,11 @@ public class KLD_LdHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        teleportOnClickPosition();
-        teleportToRespawnPoint();
-        teleportOnControllerCrossDirection();
+        if (canDebugTp) {
+            teleportOnClickPosition();
+            teleportToRespawnPoint();
+            teleportOnControllerCrossDirection();
+        }
         doCharacterReturn();
     }
 
@@ -184,6 +188,16 @@ public class KLD_LdHelper : MonoBehaviour
     {
         debugOpen = false;
         debugMenu.SetActive(false);
+    }
+
+    public void disableDebugTp ()
+    {
+        canDebugTp = false;
+    }
+
+    public void enableDebugTp ()
+    {
+        canDebugTp = true;
     }
 
     #endregion

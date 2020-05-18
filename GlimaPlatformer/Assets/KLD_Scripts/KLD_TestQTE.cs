@@ -33,6 +33,7 @@ public class KLD_TestQTE : MonoBehaviour
 
 
     private GameObject player;
+    private PlayerController2D controller;
     private Transform parentTransform;
 
     void Awake()
@@ -43,6 +44,7 @@ public class KLD_TestQTE : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
+        controller = player.GetComponent<PlayerController2D>();
         sr.color = basic;
         events = player.GetComponent<KLD_PlayerEvents>();
         parentTransform = transform.parent;
@@ -112,7 +114,8 @@ public class KLD_TestQTE : MonoBehaviour
 
     private void doEnd ()
     {
-        player.GetComponent<PlayerController2D>().cantMove = false;
+        controller.cantMove = false;
+        controller.grabbed = false;
         player.GetComponent<KLD_DamageTaker>().startInvulnerability();
         Destroy(transform.parent.gameObject);
     }
