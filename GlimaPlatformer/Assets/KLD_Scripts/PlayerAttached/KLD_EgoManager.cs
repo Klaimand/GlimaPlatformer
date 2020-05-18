@@ -5,27 +5,41 @@ using UnityEngine.UI;
 
 public class KLD_EgoManager : MonoBehaviour
 {
-    [SerializeField, Range(1, 40)]
-    private int egoPointsPerBar = 0;
-    
-    [SerializeField]
-    private int curEgoPoints, egoPointsPerCan = 0, pointsAfter3BarsToFillSuperSayan = 0;
+    [SerializeField, Range(1, 20)]
+    private int egoPointsPerBar = 0, egoPointsPerCan = 0;
 
+    [SerializeField]
+    private float curEgoPoints;
+    [SerializeField, Tooltip("Cost of 1 second of sprinting")]
+    private float sprintSecondEnergyConsuption;
+    [SerializeField]
+    private float minimumEgoToSprint = 0f;
     
     private Image egoBarUI, egoBarAUI;
 
-    private float[] egoBarFillPoints = { 0f, 0.325f, 0.5935f, 0.8615f, 1f };
+    private float[] egoBarFillPoints = { 0f, 0.325f, 0.5935f, 0.8615f};
+
+    [SerializeField]
+    private bool isSprinting;
+
+    PlayerController2D controller;
+    KLD_DamageTaker damageTaker;
 
     public enum EgoState
     {
         ZeroBarFilled,
         OneBarFilled,
         TwoBarsFilled,
-        ThreeBarsFilled,
-        FourBarsFilled
+        ThreeBarsFilled
     }
 
     public EgoState curEgoState;
+
+    public void Awake()
+    {
+        controller = GetComponent<PlayerController2D>();
+        damageTaker = GetComponent<KLD_DamageTaker>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -38,54 +52,49 @@ public class KLD_EgoManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        doSprintInput();
+        checkEgoState();
+        updateEgoBarUI();
     }
 
     public void addEgo(int egoToAdd)
     {
-        curEgoPoints = Mathf.Min(curEgoPoints + egoToAdd, (egoPointsPerBar * 3) + pointsAfter3BarsToFillSuperSayan);
-        checkEgoState();
+        curEgoPoints = Mathf.Min(curEgoPoints + egoToAdd, (egoPointsPerBar * 3));
     }
 
     public void removeEgo ()
     {
         curEgoPoints = Mathf.Max(0, curEgoPoints - egoPointsPerBar);
-        checkEgoState();
     }
 
     void checkEgoState()
     {
-        if (curEgoPoints < egoPointsPerBar - 1)
+        if (curEgoPoints < egoPointsPerBar)
         {
             curEgoState = EgoState.ZeroBarFilled;
         }
-        else if (curEgoPoints >= egoPointsPerBar && curEgoPoints < (egoPointsPerBar * 2) - 1)
+        else if (curEgoPoints >= egoPointsPerBar && curEgoPoints < (egoPointsPerBar * 2))
         {
             curEgoState = EgoState.OneBarFilled;
         }
-        else if (curEgoPoints >= egoPointsPerBar * 2 && curEgoPoints < (egoPointsPerBar * 3) - 1)
+        else if (curEgoPoints >= egoPointsPerBar * 2 && curEgoPoints < (egoPointsPerBar * 3))
         {
             curEgoState = EgoState.TwoBarsFilled;
         }
-        else if (curEgoPoints >= egoPointsPerBar * 3 && curEgoPoints < (egoPointsPerBar * 3) + pointsAfter3BarsToFillSuperSayan)
+        else if (curEgoPoints >= egoPointsPerBar * 3)
         {
             curEgoState = EgoState.ThreeBarsFilled;
         }
-        else if (curEgoPoints == egoPointsPerBar * 3 + pointsAfter3BarsToFillSuperSayan)
-        {
-            curEgoState = EgoState.FourBarsFilled;
-        }
-        updateEgoBarUI();
     }
 
     private void updateEgoBarUI()
     {
         egoBarUI.fillAmount = egoBarFillPoints[(int)curEgoState];
         
-        if ((int)curEgoState != 4)
+        if ((int)curEgoState != 3)
         {
-            float thisBarFillingRatio = (int)curEgoState == 3 ? (float)(curEgoPoints % pointsAfter3BarsToFillSuperSayan) / (float)pointsAfter3BarsToFillSuperSayan : (float)(curEgoPoints % egoPointsPerBar) / (float)egoPointsPerBar;
-            float fillingDifferenceBetweenActualBar = (int)curEgoState == 3 ? 1f - egoBarFillPoints[(int)curEgoState] : egoBarFillPoints[(int)curEgoState + 1] - egoBarFillPoints[(int)curEgoState];
+            float thisBarFillingRatio = (float)(curEgoPoints % egoPointsPerBar) / (float)egoPointsPerBar;
+            float fillingDifferenceBetweenActualBar = egoBarFillPoints[(int)curEgoState + 1] - egoBarFillPoints[(int)curEgoState];
             
             egoBarAUI.fillAmount = egoBarFillPoints[(int)curEgoState] + (fillingDifferenceBetweenActualBar * thisBarFillingRatio);
         }
@@ -93,10 +102,38 @@ public class KLD_EgoManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Can"))
+        if (collision.gameObject.CompareTag("Can") && curEgoPoints < egoPointsPerBar * 3)
         {
             addEgo(egoPointsPerCan);
             Destroy(collision.gameObject);
         }
+    }
+
+    void doSprintInput ()
+    {
+        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButtonDown("Sprint"))
+        {
+            isSprinting = true;
+        }
+
+        else if (isSprinting && curEgoPoints <= 0f || isSprinting && !Input.GetButton("Sprint"))
+        {
+            isSprinting = false;
+        }
+
+        if (isSprinting)
+        {
+            curEgoPoints -= sprintSecondEnergyConsuption * Time.deltaTime;
+        }
+
+        controller.SetSprint(isSprinting);
+
+
+
+    }
+
+    public bool getSprintState()
+    {
+        return isSprinting;
     }
 }
