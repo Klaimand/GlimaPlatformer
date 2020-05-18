@@ -23,6 +23,7 @@ public class KLD_EgoManager : MonoBehaviour
     private bool isSprinting;
 
     PlayerController2D controller;
+    KLD_DamageTaker damageTaker;
 
     public enum EgoState
     {
@@ -34,10 +35,15 @@ public class KLD_EgoManager : MonoBehaviour
 
     public EgoState curEgoState;
 
+    public void Awake()
+    {
+        controller = GetComponent<PlayerController2D>();
+        damageTaker = GetComponent<KLD_DamageTaker>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
         egoBarUI = GameObject.Find("EgoBar").GetComponent<Image>();
         egoBarAUI = GameObject.Find("EgoBarA").GetComponent<Image>();
         checkEgoState();
@@ -121,5 +127,13 @@ public class KLD_EgoManager : MonoBehaviour
         }
 
         controller.SetSprint(isSprinting);
+
+
+
+    }
+
+    public bool getSprintState()
+    {
+        return isSprinting;
     }
 }
