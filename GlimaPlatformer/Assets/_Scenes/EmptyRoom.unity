@@ -3231,7 +3231,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1139996611392143660}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1326616985}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a14ed209f7e60674ead8a18af1ea36f1, type: 3}
@@ -3318,6 +3318,78 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &349052387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 349052390}
+  - component: {fileID: 349052389}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &349052389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349052387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3420fe785d6d6f44a2fe70e924ac272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Step00
+    clip: {fileID: 8300000, guid: 69bbd95d75628874ab53f29c63650bcd, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: Step01
+    clip: {fileID: 8300000, guid: 39905a06f39db1c49a1d2a0aeffbc81f, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: JumpWoosh
+    clip: {fileID: 8300000, guid: 0591bfde69454854c893c24cd5197141, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: WallJumpWoosh
+    clip: {fileID: 8300000, guid: 0591bfde69454854c893c24cd5197141, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+--- !u!4 &349052390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349052387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &356866487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 622173163681523117, guid: 8e6d7a0d8d638604f87dcd123ef6267f,
@@ -9702,6 +9774,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15b81bf6e61ca0c49b1225ae1d4f85e2, type: 3}
+--- !u!1 &1326616985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1139996610849355492, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1139996611392143660}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1326616986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326616985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e821a6ced992041b70afff9eac5954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1339575912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52593,6 +52683,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1326616986}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlaySound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnJump.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: JumpWoosh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1326616986}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlaySound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644083150, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
+      propertyPath: OnWallJump.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: WallJumpWoosh
+      objectReference: {fileID: 0}
     - target: {fileID: 1816342173, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
       propertyPath: virtualCam
       value: 
