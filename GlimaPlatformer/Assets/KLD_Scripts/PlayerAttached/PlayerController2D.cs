@@ -392,7 +392,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void checkFall ()
     {
-        if (rb.velocity.y < 0 && !lastJumpIsBounce) //check if we're falling
+        if (rb.velocity.y < 0) //check if we're falling
         {
             if ((isAgainstLeftWall || isAgainstRightWall) && !isCrouching)
             {
@@ -408,10 +408,6 @@ public class PlayerController2D : MonoBehaviour
         else if (rb.velocity.y > 0 && !Input.GetButton("Fire1") && !lastJumpIsWallJump && !lastJumpIsBounce)  //check if we're jumping and gaining height
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
-        else if (lastJumpIsBounce)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -786,6 +782,18 @@ public class PlayerController2D : MonoBehaviour
     public void SetLastJumpIsBounce (bool value)
     {
         lastJumpIsBounce = value;
+        StartCoroutine(SetLastJumpIsBounceNextFrames(5, value));
+    }
+
+    IEnumerator SetLastJumpIsBounceNextFrames(int nbFrames, bool value)
+    {
+        float i = 0;
+        while (i < nbFrames)
+        {
+            yield return new WaitForFixedUpdate();
+            lastJumpIsBounce = value;
+            i++;
+        }
     }
 
     #endregion

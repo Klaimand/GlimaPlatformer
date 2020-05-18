@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/_Scenes/LUB_LDBeginning.unity
-    guid: 7eec0e51e739c1844bba8db57be1e67c
+    path: Assets/_Scenes/KLD_SplashScreen.unity
+    guid: e42004fc7ed867e40b3358496bb9a814
+  - enabled: 1
+    path: Assets/_Scenes/KLD_LD_FINIMMEUBLE_CAM_PP_CONF_SS.unity
+    guid: c4f25b793d737204992c68f2eb3ff142
   m_configObjects: {}
