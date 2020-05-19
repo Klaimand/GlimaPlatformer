@@ -13,6 +13,7 @@ public class KLD_Mines : MonoBehaviour
     //private SpriteRenderer buttonSr;
 
     private KLD_DamageTaker damageTaker;
+    private KLD_AudioManager audioManager;
 
     [SerializeField]
     private float timeBeforeExplosion = 0f, explosionRadius = 0f, explosionForce = 0f;
@@ -21,6 +22,7 @@ public class KLD_Mines : MonoBehaviour
     void Start()
     {
         damageTaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
         thisSr = GetComponent<SpriteRenderer>();
         //buttonSr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         //buttonSr.color = buttonOff;
@@ -62,5 +64,6 @@ public class KLD_Mines : MonoBehaviour
                 damageTaker.doDamageTaking(DamageType.Explosion, transform, explosionForce);
             }
         }
+        audioManager.PlaySound("MineExplosion");
     }
 }

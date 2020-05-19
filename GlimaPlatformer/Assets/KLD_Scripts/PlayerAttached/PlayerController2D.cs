@@ -193,6 +193,7 @@ public class PlayerController2D : MonoBehaviour
         doOnStairsGravityDisable();
         //doSlopeSlideDetection();
         doHorizontalMove();
+        checkGroundRecovery();
         checkLastGroundState();
         checkLastWallState();
     }
@@ -614,6 +615,14 @@ public class PlayerController2D : MonoBehaviour
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
         cantMoveTrigger = false;
+    }
+
+    private void checkGroundRecovery ()
+    {
+        if (!lastFrameGrounded && isGrounded && !cantMove)
+        {
+            events.InvokeGroundRecovery();
+        }
     }
 
     #endregion

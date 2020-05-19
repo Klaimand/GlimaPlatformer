@@ -140,8 +140,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.275
-    functionName: PlaySound
-    data: Step01
+    functionName: PlayRightFoot
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

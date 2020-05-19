@@ -3376,6 +3376,62 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.1
+  - name: FlatSlide
+    clip: {fileID: 8300000, guid: 605087008b69ad74db0b1dc70de60bf1, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Step02
+    clip: {fileID: 8300000, guid: e24d61b29034bb2458cd7effc3ac253b, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: SlopeSlide
+    clip: {fileID: 8300000, guid: 605087008b69ad74db0b1dc70de60bf1, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: StandSlide
+    clip: {fileID: 8300000, guid: 605087008b69ad74db0b1dc70de60bf1, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: CrouchStep00
+    clip: {fileID: 8300000, guid: 69bbd95d75628874ab53f29c63650bcd, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: CrouchStep01
+    clip: {fileID: 8300000, guid: 39905a06f39db1c49a1d2a0aeffbc81f, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: CrouchStep02
+    clip: {fileID: 8300000, guid: e24d61b29034bb2458cd7effc3ac253b, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: MineExplosion
+    clip: {fileID: 8300000, guid: 167e1b76b225fd54da3326be8d387fc0, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 0.5
+    randomVolume: 0.15
+    randomPitch: 0.2
 --- !u!4 &349052390
 Transform:
   m_ObjectHideFlags: 0
