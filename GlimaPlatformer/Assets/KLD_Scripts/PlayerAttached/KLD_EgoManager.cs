@@ -24,6 +24,7 @@ public class KLD_EgoManager : MonoBehaviour
 
     PlayerController2D controller;
     KLD_DamageTaker damageTaker;
+    KLD_AudioManager audioManager;
 
     public enum EgoState
     {
@@ -46,6 +47,7 @@ public class KLD_EgoManager : MonoBehaviour
     {
         egoBarUI = GameObject.Find("EgoBar").GetComponent<Image>();
         egoBarAUI = GameObject.Find("EgoBarA").GetComponent<Image>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
         checkEgoState();
     }
 
@@ -105,6 +107,7 @@ public class KLD_EgoManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Can") && curEgoPoints < egoPointsPerBar * 3)
         {
             addEgo(egoPointsPerCan);
+            audioManager.PlaySound("CanPickup");
             Destroy(collision.gameObject);
         }
     }

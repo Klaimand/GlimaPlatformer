@@ -772,6 +772,18 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public bool getWallSlideStatus()
+    {
+        if (playerState == PlayerState.WallSliding)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool getSlopeSlideStatus ()
     {
         if (playerState == PlayerState.SlopeSliding)

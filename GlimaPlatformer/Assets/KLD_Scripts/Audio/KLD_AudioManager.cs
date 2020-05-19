@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Audio;
 
 [System.Serializable]
@@ -63,15 +65,17 @@ public class KLD_AudioManager : MonoBehaviour
 
     public void PlaySound (string _name)
     {
+        bool foundsmthng = false;
         foreach (Sound sound in sounds)
         {
             if (sound.name == _name)
             {
                 sound.Play();
-                return;
+                foundsmthng = true;
+                //return;
             }
         }
-
+        if (!foundsmthng)
         Debug.LogWarning("No found sound '" + _name + "'");
     }
 
@@ -92,9 +96,46 @@ public class KLD_AudioManager : MonoBehaviour
 
     private void Update()
     {
+        doWallSlideSound();
         doFlatSlideSound();
         doSlopeSlideSound();
         doStandSlideSound();
+    }
+
+    void FadeOutInst (AudioSource _source, float time)
+    {
+        StartCoroutine(FadeOut(_source, time));
+    }
+
+    IEnumerator FadeOut (AudioSource _source, float time)
+    {
+        float curTime = 0f;
+        float startVolume = _source.volume;
+
+        while (curTime < time)
+        {
+            _source.volume = Mathf.Lerp(startVolume, 0f, curTime/time);
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+        _source.volume = 0f;
+
+        _source.Stop();
+        
+    }
+
+
+    void doWallSlideSound()
+    {
+        if (controller.getWallSlideStatus() && !GetSound("WallSlide").GetSource().isPlaying)
+        {
+            PlaySound("WallSlide");
+        }
+        else if (!controller.getWallSlideStatus() && GetSound("WallSlide").GetSource().isPlaying)
+        {
+            FadeOutInst(GetSound("WallSlide").GetSource(), 0.1f);
+        }
+        
     }
 
     void doFlatSlideSound()
@@ -105,7 +146,7 @@ public class KLD_AudioManager : MonoBehaviour
         }
         else if (!controller.getFlatSlideStatus() && GetSound("FlatSlide").GetSource().isPlaying)
         {
-            GetSound("FlatSlide").GetSource().Stop();
+            FadeOutInst(GetSound("FlatSlide").GetSource(), 0.1f);
         }
 
         GetSound("FlatSlide").GetSource().volume = controller.getFlatSlideSpeedPercentage();
@@ -119,7 +160,7 @@ public class KLD_AudioManager : MonoBehaviour
         }
         else if (!controller.getSlopeSlideStatus() && GetSound("SlopeSlide").GetSource().isPlaying)
         {
-            GetSound("SlopeSlide").GetSource().Stop();
+            FadeOutInst(GetSound("SlopeSlide").GetSource(), 0.1f);
         }
     }
 
@@ -128,11 +169,10 @@ public class KLD_AudioManager : MonoBehaviour
         if (controller.getSlopeStandStatus() && !GetSound("StandSlide").GetSource().isPlaying)
         {
             PlaySound("StandSlide");
-            print("played standslide sound");
         }
         else if (!controller.getSlopeStandStatus() && GetSound("StandSlide").GetSource().isPlaying)
         {
-            GetSound("StandSlide").GetSource().Stop();
+            FadeOutInst(GetSound("SlopeSlide").GetSource(), 0.1f);
         }
     }
 
