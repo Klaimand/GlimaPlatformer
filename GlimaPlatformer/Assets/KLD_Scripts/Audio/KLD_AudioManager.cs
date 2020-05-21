@@ -51,6 +51,9 @@ public class KLD_AudioManager : MonoBehaviour
 
     PlayerController2D controller;
 
+    [SerializeField]
+    string[] soundsToPlayOnStart;
+
     private void Start()
     {
         controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
@@ -61,6 +64,12 @@ public class KLD_AudioManager : MonoBehaviour
             _go.transform.parent = transform;
             sounds[i].SetSource(_go.AddComponent<AudioSource>());
         }
+
+        foreach (string sound in soundsToPlayOnStart)
+        {
+            PlaySound(sound);
+        }
+
     }
 
     public void PlaySound (string _name)
@@ -93,6 +102,16 @@ public class KLD_AudioManager : MonoBehaviour
         return null;
 
     }
+
+    public void PlayQte ()
+    {
+        KLD_TestQTE curQteScript = GameObject.Find("QTEfill").GetComponent<KLD_TestQTE>();
+        float curFillPercentage = curQteScript.currentPoints / curQteScript.maxPoints;
+
+        GetSound("QteClick").GetSource().pitch = 1f + curFillPercentage;
+        GetSound("QteClick").GetSource().Play();
+    }
+
 
     private void Update()
     {
@@ -148,8 +167,8 @@ public class KLD_AudioManager : MonoBehaviour
         {
             FadeOutInst(GetSound("FlatSlide").GetSource(), 0.1f);
         }
-
-        GetSound("FlatSlide").GetSource().volume = controller.getFlatSlideSpeedPercentage();
+        
+        GetSound("FlatSlide").GetSource().volume = (controller.getFlatSlideSpeedPercentage() / 0.7f) * GetSound("FlatSlide").volume - 0.1f;
     }
 
     void doSlopeSlideSound()
@@ -172,7 +191,7 @@ public class KLD_AudioManager : MonoBehaviour
         }
         else if (!controller.getSlopeStandStatus() && GetSound("StandSlide").GetSource().isPlaying)
         {
-            FadeOutInst(GetSound("SlopeSlide").GetSource(), 0.1f);
+            FadeOutInst(GetSound("StandSlide").GetSource(), 0.1f);
         }
     }
 

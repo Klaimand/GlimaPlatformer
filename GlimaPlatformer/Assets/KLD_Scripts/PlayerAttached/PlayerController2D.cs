@@ -135,7 +135,8 @@ public class PlayerController2D : MonoBehaviour
         BlowedAscending, //12
         BlowedFalling, //13
         Downed, //14
-        Grabbed //15
+        Grabbed, //15
+        Sprinting //16
     };
 
     [Header("Animations Handling")]
@@ -619,7 +620,8 @@ public class PlayerController2D : MonoBehaviour
 
     private void checkGroundRecovery ()
     {
-        if (!lastFrameGrounded && isGrounded && !cantMove)
+        if (!lastFrameGrounded && isGrounded && !cantMove
+            && !isFlatSliding)
         {
             events.InvokeGroundRecovery();
         }
@@ -878,7 +880,16 @@ public class PlayerController2D : MonoBehaviour
                 {
                     if (isGrounded)
                     {
-                        playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.Running : PlayerState.Idle;
+                        //playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.Running : PlayerState.Idle;
+                        if (Mathf.Abs(rb.velocity.x) > moveStateThreshold)
+                        {
+                            playerState = isSprinting ? PlayerState.Sprinting : PlayerState.Running;
+                        }
+                        else
+                        {
+                            playerState = PlayerState.Idle;
+                        }
+
                         if ((Mathf.Sign(rb.velocity.x) != Input.GetAxisRaw("Horizontal")) && Input.GetAxisRaw("Horizontal") != 0f)
                         {
                             //Retournement trigger
@@ -963,7 +974,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void doFlipX ()
     {
-        if (playerState == PlayerState.Running || playerState == PlayerState.Jumping || playerState == PlayerState.Falling ||
+        if (playerState == PlayerState.Running || playerState == PlayerState.Sprinting || playerState == PlayerState.Jumping || playerState == PlayerState.Falling ||
             playerState == PlayerState.CrouchWalk || playerState == PlayerState.CrouchAir)
         {
             if (Mathf.Abs(virtualXAxis) > moveStateThreshold && !cantControlHorizontal) {

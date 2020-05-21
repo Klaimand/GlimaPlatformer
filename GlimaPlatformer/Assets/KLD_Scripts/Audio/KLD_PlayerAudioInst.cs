@@ -37,4 +37,10 @@ public class KLD_PlayerAudioInst : MonoBehaviour
 
         //print("Played : " + stepToPlay);
     }
+
+    public void PlayQteInst ()
+    {
+        audioManager.PlayQte();
+    }
+
 }

@@ -15,12 +15,11 @@ public class KLD_Parallax : MonoBehaviour
     float endPosition;
     float deltaPosition;
 
-    public List<SpriteRenderer> SpriteRenderers = new List<SpriteRenderer>();
+    public SpriteRenderer[] SpriteRenderers;
 
     [SerializeField]
     bool isVisiblee;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         getRenderers();
@@ -32,8 +31,7 @@ public class KLD_Parallax : MonoBehaviour
     {
         checkIfASrIsVisible();
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         doParallax();
@@ -41,17 +39,7 @@ public class KLD_Parallax : MonoBehaviour
 
     void getRenderers ()
     {
-        if (TryGetComponent(out SpriteRenderer sr))
-        {
-            SpriteRenderers.Add(sr);
-        }
-        foreach (Transform child in transform)
-        {
-            if (child.TryGetComponent(out SpriteRenderer childsr))
-            {
-                SpriteRenderers.Add(childsr);
-            }
-        }
+        SpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void checkIfASrIsVisible ()

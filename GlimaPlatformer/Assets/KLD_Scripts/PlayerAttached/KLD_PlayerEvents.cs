@@ -18,6 +18,7 @@ public class KLD_PlayerEvents : MonoBehaviour
     public UnityEvent OnDoorOpen;
     public UnityEvent OnBouncyPlatformJump;
     public UnityEvent OnQTEPress;
+    public UnityEvent OnQTEComplete;
 
     public void InvokeJump ()
     {
@@ -77,6 +78,11 @@ public class KLD_PlayerEvents : MonoBehaviour
     public void InvokeQTEPress ()
     {
         OnQTEPress.Invoke();
+    }
+
+    public void InvokeQTEComplete()
+    {
+        OnQTEComplete.Invoke();
     }
 
 }

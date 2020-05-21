@@ -5,7 +5,7 @@ using UnityEngine;
 public class KLD_TestQTE : MonoBehaviour
 {
     public float maxPoints;
-    private float currentPoints;
+    public float currentPoints;
     public float pointsPerInput;
     public float pointsLostPerSecond;
 
@@ -117,6 +117,7 @@ public class KLD_TestQTE : MonoBehaviour
         controller.cantMove = false;
         controller.grabbed = false;
         player.GetComponent<KLD_DamageTaker>().startInvulnerability();
+        events.InvokeQTEComplete();
         Destroy(transform.parent.gameObject);
     }
 

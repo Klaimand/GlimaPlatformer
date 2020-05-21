@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class KLD_Grabber : MonoBehaviour
 {
-    [SerializeField]
-    Color defaultColor = Color.blue, grabColor = Color.red;
-
     bool grabbing;
 
     SpriteRenderer sr;
     KLD_DamageTaker damageTaker;
     PlayerController2D controller;
+    Animator animator;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -22,15 +21,18 @@ public class KLD_Grabber : MonoBehaviour
     {
         damageTaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
         controller = damageTaker.transform.GetComponent<PlayerController2D>();
-        sr.color = defaultColor;
     }
-    
+
+    private void Update()
+    {
+        animator.SetBool("Grabbing", grabbing);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !damageTaker.isInvulnerable && !controller.getFlatSlideStatus())
         {
             grabbing = true;
-            sr.color = grabColor;
             damageTaker.doDamageTaking(DamageType.Grab, transform.GetChild(0), 0f);
         }
     }
@@ -40,7 +42,6 @@ public class KLD_Grabber : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && damageTaker.isInvulnerable && grabbing)
         {
             grabbing = false;
-            sr.color = defaultColor;
         }
     }
 }
