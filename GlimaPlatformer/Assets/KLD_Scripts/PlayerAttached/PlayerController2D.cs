@@ -786,6 +786,11 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public bool getIsWallSlidingLeft ()
+    {
+        return isAgainstLeftWall;
+    }
+
     public bool getSlopeSlideStatus ()
     {
         if (playerState == PlayerState.SlopeSliding)

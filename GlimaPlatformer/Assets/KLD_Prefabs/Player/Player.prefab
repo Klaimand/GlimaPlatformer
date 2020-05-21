@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 971501571}
   - component: {fileID: 1816342173}
   - component: {fileID: 1326616986}
+  - component: {fileID: 1139996611392143662}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -400,6 +401,17 @@ MonoBehaviour:
           m_StringArgument: WallJumpWoosh
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: CreateWallJumpDustParticles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSlopeJump:
     m_PersistentCalls:
       m_Calls:
@@ -473,6 +485,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: GroundRecovery
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: CreateFallParticle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   OnFlatSlide:
@@ -681,6 +704,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e821a6ced992041b70afff9eac5954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1139996611392143662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec68c996049d5b64bb49423ceb7edf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WallJumpDustParticlesLeft: {fileID: 9189426295876359296, guid: a44a6a5f9231c2f4fb7c83da2e73fd28,
+    type: 3}
+  WallJumpDustParticlesRight: {fileID: 9189426295876359296, guid: ab94e6105954d1f44a9d7a2111f45257,
+    type: 3}
+  FallParticle: {fileID: 3896188950875255461, guid: 71e7a39017d400c40b94e85bf6fe5399,
+    type: 3}
 --- !u!1 &1139996611386880386
 GameObject:
   m_ObjectHideFlags: 0
