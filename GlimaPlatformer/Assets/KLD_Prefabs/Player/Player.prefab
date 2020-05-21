@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 1644083150}
   - component: {fileID: 971501571}
   - component: {fileID: 1816342173}
+  - component: {fileID: 1326616986}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -214,6 +215,7 @@ MonoBehaviour:
   accelerationFrame: 6
   decelerationFrame: 8
   cantMove: 0
+  grabbed: 0
   jumpForce: {x: 3, y: 15}
   addAirSpeed: 32
   maxAirSpeed: 9
@@ -305,6 +307,7 @@ MonoBehaviour:
     type: 3}
   invulnerableTimeAfterDamageTaking: 1.5
   isInvulnerable: 0
+  isDamageInvulnerable: 0
 --- !u!95 &1139996611729343310
 Animator:
   serializedVersion: 3
@@ -350,6 +353,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: JumpWoosh
+          m_BoolArgument: 0
+        m_CallState: 2
   OnWallJump:
     m_PersistentCalls:
       m_Calls:
@@ -373,6 +387,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: WallJumpWoosh
           m_BoolArgument: 0
         m_CallState: 2
   OnSlopeJump:
@@ -400,6 +425,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SlopeSlideJump
+          m_BoolArgument: 0
+        m_CallState: 2
   OnStandSlopeJump:
     m_PersistentCalls:
       m_Calls:
@@ -412,6 +448,31 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: StandSlideJump
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGroundRecovery:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GroundRecovery
           m_BoolArgument: 0
         m_CallState: 2
   OnFlatSlide:
@@ -484,6 +545,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DoorOpen
+          m_BoolArgument: 0
+        m_CallState: 2
   OnBouncyPlatformJump:
     m_PersistentCalls:
       m_Calls:
@@ -498,6 +570,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BouncyJump
+          m_BoolArgument: 0
+        m_CallState: 2
   OnQTEPress:
     m_PersistentCalls:
       m_Calls:
@@ -510,6 +593,31 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlayQteInst
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: QteClick
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnQTEComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: QteComplete
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &971501571
@@ -561,6 +669,18 @@ MonoBehaviour:
   DoorOpenPower: 6
   QTEPressLenght: 0.1
   QTEPressPower: 4
+--- !u!114 &1326616986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e821a6ced992041b70afff9eac5954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1139996611386880386
 GameObject:
   m_ObjectHideFlags: 0

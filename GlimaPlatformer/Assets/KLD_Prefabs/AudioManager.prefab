@@ -1,0 +1,201 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4643679716937191462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4643679716937191459}
+  - component: {fileID: 4643679716937191456}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4643679716937191459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643679716937191462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4643679716937191456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643679716937191462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3420fe785d6d6f44a2fe70e924ac272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Step00
+    clip: {fileID: 8300000, guid: 1badc28e511514a448f6f0de57d33e1c, type: 3}
+    group: {fileID: 1575234953924546452, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0.2
+  - name: Step01
+    clip: {fileID: 8300000, guid: 546b759a37271de4ea5b58ab9d1d57aa, type: 3}
+    group: {fileID: 1575234953924546452, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0.2
+  - name: JumpWoosh
+    clip: {fileID: 8300000, guid: cf77d70b1c1491240b0e9420ea550bea, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.8
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: WallJumpWoosh
+    clip: {fileID: 8300000, guid: cf77d70b1c1491240b0e9420ea550bea, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.8
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: FlatSlide
+    clip: {fileID: 8300000, guid: 96eb080085ec75b4fa45c00a16e8e42b, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.6
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Step02
+    clip: {fileID: 8300000, guid: 6ba40f4ebc9dd1c418569dad55433925, type: 3}
+    group: {fileID: 1575234953924546452, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.6
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0.2
+  - name: SlopeSlide
+    clip: {fileID: 8300000, guid: 96eb080085ec75b4fa45c00a16e8e42b, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.6
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: StandSlide
+    clip: {fileID: 8300000, guid: 96eb080085ec75b4fa45c00a16e8e42b, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.6
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: CrouchStep00
+    clip: {fileID: 8300000, guid: 1badc28e511514a448f6f0de57d33e1c, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.1
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: CrouchStep01
+    clip: {fileID: 8300000, guid: 546b759a37271de4ea5b58ab9d1d57aa, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.1
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: CrouchStep02
+    clip: {fileID: 8300000, guid: 6ba40f4ebc9dd1c418569dad55433925, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.1
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: MineExplosion
+    clip: {fileID: 8300000, guid: 167e1b76b225fd54da3326be8d387fc0, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 0.5
+    randomVolume: 0.15
+    randomPitch: 0.2
+  - name: SlopeSlideJump
+    clip: {fileID: 8300000, guid: cf77d70b1c1491240b0e9420ea550bea, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.8
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: StandSlideJump
+    clip: {fileID: 8300000, guid: cf77d70b1c1491240b0e9420ea550bea, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.8
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: GroundRecovery
+    clip: {fileID: 8300000, guid: b70a5f51488718e4cb2b99bd221f7279, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0.2
+  - name: BouncyJump
+    clip: {fileID: 8300000, guid: 3e6a873ed1f1ffa41bbb8f10739bf588, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.8
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: WallSlide
+    clip: {fileID: 8300000, guid: 96eb080085ec75b4fa45c00a16e8e42b, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: CanPickup
+    clip: {fileID: 8300000, guid: f8a0a69ec13abd4419727b33a6b6ce0f, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: DoorOpen
+    clip: {fileID: 8300000, guid: ba3a3469383654041a6fae7f621f1f3d, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.03
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: QteClick
+    clip: {fileID: 8300000, guid: d4b204b20b81b1e48b3b7681e281a7d5, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+  - name: QteComplete
+    clip: {fileID: 8300000, guid: 937fe8fc5018d0f4594797306f7deab4, type: 3}
+    group: {fileID: 4471887295508666660, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: RazorMind
+    clip: {fileID: 8300000, guid: 65c5b1ede3da8e94bb01ce9b07d595b1, type: 3}
+    group: {fileID: 7379434044419954658, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  soundsToPlayOnStart: []

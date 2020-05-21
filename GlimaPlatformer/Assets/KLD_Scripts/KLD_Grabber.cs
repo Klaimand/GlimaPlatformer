@@ -5,6 +5,7 @@ using UnityEngine;
 public class KLD_Grabber : MonoBehaviour
 {
     bool grabbing;
+    bool inZone;
 
     SpriteRenderer sr;
     KLD_DamageTaker damageTaker;
@@ -26,6 +27,7 @@ public class KLD_Grabber : MonoBehaviour
     private void Update()
     {
         animator.SetBool("Grabbing", grabbing);
+        waitForQteToLeaveGrab();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +35,7 @@ public class KLD_Grabber : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !damageTaker.isInvulnerable && !controller.getFlatSlideStatus())
         {
             grabbing = true;
+            inZone = true;
             damageTaker.doDamageTaking(DamageType.Grab, transform.GetChild(0), 0f);
         }
     }
@@ -41,7 +44,16 @@ public class KLD_Grabber : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && damageTaker.isInvulnerable && grabbing)
         {
+            inZone = false;
+        }
+    }
+
+    void waitForQteToLeaveGrab ()
+    {
+        if (!inZone && !controller.cantMove)
+        {
             grabbing = false;
         }
     }
+
 }

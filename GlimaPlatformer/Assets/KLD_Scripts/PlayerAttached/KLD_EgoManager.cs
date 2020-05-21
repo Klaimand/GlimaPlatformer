@@ -114,7 +114,7 @@ public class KLD_EgoManager : MonoBehaviour
 
     void doSprintInput ()
     {
-        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButtonDown("Sprint"))
+        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButton("Sprint"))
         {
             isSprinting = true;
         }
