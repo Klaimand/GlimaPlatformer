@@ -5,7 +5,6 @@ using UnityEngine;
 public class ParticlesController : MonoBehaviour
 {
     public GameObject WallJumpDustParticles;
-    public Vector2 WallJumpDustParticlesOffset;
     public bool IsToTheRight; 
 
     public float SlopeJumpDustParticles;
@@ -21,6 +20,7 @@ public class ParticlesController : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
+        
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class ParticlesController : MonoBehaviour
     }
     public void CreateWallJumpDustParticles()
     {
-        Instantiate(WallJumpDustParticles, player.position + (Vector3)WallJumpDustParticlesOffset, Quaternion.identity);
-        print("eaeaezezzezzezz");
+        Instantiate(WallJumpDustParticles, player.position, Quaternion.identity);
+
     }
 }
