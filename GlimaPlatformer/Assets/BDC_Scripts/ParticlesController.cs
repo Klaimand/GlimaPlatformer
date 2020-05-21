@@ -30,6 +30,7 @@ public class ParticlesController : MonoBehaviour
         
 
     }
+
     public void CreateWallJumpDustParticles()
     {
         Instantiate(WallJumpDustParticles, player.position, Quaternion.identity);
