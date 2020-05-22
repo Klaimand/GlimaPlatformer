@@ -16,15 +16,23 @@ public class KLD_TurretBehavior : MonoBehaviour
     public Transform playerTarget;
     private Transform target;
     public GameObject bulletObj;
+    private LineRenderer lineRenderer;
 
     private KLD_DamageTaker damagetaker;
+
+    public LayerMask tileMapLayer;
+
+    private void Awake()
+    {
+        canShoot = true;
+        target = turretIdletarget;
+        lineRenderer = GetComponent<LineRenderer>();
+    }
 
     void Start()
     {
         playerTarget = GameObject.Find("Player").transform.GetChild(4);
         damagetaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
-        canShoot = true;
-        target = turretIdletarget;
     }
     
 
@@ -34,6 +42,10 @@ public class KLD_TurretBehavior : MonoBehaviour
         chooseTarget();
         aimTarget();
         checkIfTurretCanShoot();
+        if (lineRenderer != null)
+        {
+            drawLaser();
+        }
         if (drawDebugRays)
         {
             drawRays();
@@ -112,10 +124,17 @@ public class KLD_TurretBehavior : MonoBehaviour
     {
         //turret sight
         RaycastHit2D hitt = Physics2D.Raycast((Vector2)transform.position, (Vector2)transform.up, Mathf.Infinity);
-        Debug.DrawRay(transform.position + transform.up * 0.625f, transform.up * (hitt.distance - 0.625f), Color.red);
+        Debug.DrawRay(transform.position + transform.up * 0.625f, transform.up * (hitt.distance - 0.625f), Color.red); //celui là
 
         //Debug.DrawRay(transform.position, (Quaternion.Euler(0f, 0f, angleToShoot) * transform.up).normalized * maxRange, new Color(0f, 1f, 0f, 0.2f));
         //Debug.DrawRay(transform.position, (Quaternion.Euler(0f, 0f, -angleToShoot) * transform.up).normalized * maxRange, new Color(0f, 1f, 0f, 0.2f));
+    }
+
+    private void drawLaser ()
+    {
+        RaycastHit2D hitt = Physics2D.Raycast((Vector2)transform.position, (Vector2)transform.up, Mathf.Infinity, tileMapLayer);
+        lineRenderer.SetPosition(0, transform.position + transform.up * 0.625f);
+        lineRenderer.SetPosition(1, hitt.point     );
     }
 
 }
