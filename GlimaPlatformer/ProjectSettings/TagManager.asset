@@ -10,6 +10,7 @@ TagManager:
   - StairsToTheLeft
   - StairsToTheRight
   - SegmentCheckpoint
+  - FinalCheckpoint
   layers:
   - Default
   - TransparentFX

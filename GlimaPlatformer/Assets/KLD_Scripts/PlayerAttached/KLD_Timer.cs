@@ -8,6 +8,9 @@ public class KLD_Timer : MonoBehaviour
     public List<float> segmentTimes = new List<float>();
     public float totalTime = 0f;
 
+    public float finalTotalTime = 0f;
+    bool finished = false;
+
     public int minutes, seconds;
     public string milli;
 
@@ -30,8 +33,10 @@ public class KLD_Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        addFrameTime();
-        updateMinsAndSecs();
+        if (!finished) {
+            addFrameTime();
+            updateMinsAndSecs();
+        }
         if (updateUI)
         {
             updateTimerText();
@@ -50,6 +55,11 @@ public class KLD_Timer : MonoBehaviour
             changeSegment();
             collider.gameObject.GetComponent<KLD_Checkpoint>().destroyLinkedCheckpoints();
         }
+        else if (collider.gameObject.CompareTag("FinalCheckpoint"))
+        {
+            endTimer();
+            collider.gameObject.GetComponent<KLD_Checkpoint>().destroyLinkedCheckpoints();
+        }
     }
 
     void changeSegment ()
@@ -65,6 +75,13 @@ public class KLD_Timer : MonoBehaviour
         updateUI = true;
     }
 
+    void endTimer ()
+    {
+        finished = true;
+        segmentTimes.Add(totalTime);
+        finalTotalTime = totalTime;
+    }
+
     void updateMinsAndSecs ()
     {
         minutes = Mathf.FloorToInt(totalTime) / 60;
@@ -78,6 +95,21 @@ public class KLD_Timer : MonoBehaviour
         minutesText.text = minutes.ToString() + ":";
         secondsText.text = seconds.ToString("00") + ":";
         milliText.text = milli;
+    }
+
+    public float GetSegmentTime (int segmentIndex)
+    {
+        float segmentTime = 0f; 
+
+        if (segmentIndex == 0)
+        {
+            segmentTime = segmentTimes[0];
+        }
+        else
+        {
+            segmentTime = segmentTimes[segmentIndex] - segmentTimes[segmentIndex - 1];
+        }
+        return segmentTime;
     }
 
 
