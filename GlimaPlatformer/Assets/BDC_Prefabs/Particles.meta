@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:GlimaPlatformer/Assets/LUB_Prefabs/New Folder.meta
+guid: e11219e755908664785370a0983f8081
+=======
 guid: a4799785ae480954abc5dde3d86dd05e
+>>>>>>> origin/M_KLD_develop:GlimaPlatformer/Assets/BDC_Prefabs/Particles.meta
+=======
+guid: a4799785ae480954abc5dde3d86dd05e
+>>>>>>> origin/M_KLD_develop
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

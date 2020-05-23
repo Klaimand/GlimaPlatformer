@@ -10,6 +10,7 @@ public class KLD_DamageTaker : MonoBehaviour
     float invulnerableTimeAfterDamageTaking = 0f;
     //[HideInInspector]
     public bool isInvulnerable;
+    public bool isDamageInvulnerable;
 
     PlayerController2D controller;
     KLD_EgoManager egoManager;
@@ -22,18 +23,17 @@ public class KLD_DamageTaker : MonoBehaviour
         egoManager = GetComponent<KLD_EgoManager>();
         events = GetComponent<KLD_PlayerEvents>();
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    void Update()
     {
-
+        doInvulnerability();
     }
     
     public void doDamageTaking (DamageType damageType, Transform mine, float explosionForce)
     {
         events.InvokeDamageTaking();
         //arreter le joueur
-        isInvulnerable = true;
+        isDamageInvulnerable = true;
         controller.cantMove = true;
         if (damageType == DamageType.Explosion) {
             controller.addExplosionForce(mine, explosionForce);
@@ -119,7 +119,19 @@ public class KLD_DamageTaker : MonoBehaviour
     private IEnumerator startInvul ()
     {
         yield return new WaitForSeconds(invulnerableTimeAfterDamageTaking);
-        isInvulnerable = false;
+        isDamageInvulnerable = false;
+    }
+
+    private void doInvulnerability ()
+    {
+        if (isDamageInvulnerable || egoManager.getSprintState())
+        {
+            isInvulnerable = true;
+        }
+        else
+        {
+            isInvulnerable = false;
+        }
     }
 
 }
