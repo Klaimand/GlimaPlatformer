@@ -55,10 +55,12 @@ public class KLD_BouncyPlatform : MonoBehaviour
         if (player.position.y > transform.position.y && Mathf.Abs(playerRb.velocity.y) > mminVel && !controller.cantMove)
         {
             thisCollider.isTrigger = true;
+            gameObject.layer = LayerMask.NameToLayer("Default");
         }
         else
         {
             thisCollider.isTrigger = false;
+            gameObject.layer = LayerMask.NameToLayer("Ground");
         }
     }
 

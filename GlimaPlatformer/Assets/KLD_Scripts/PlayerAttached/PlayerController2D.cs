@@ -146,6 +146,7 @@ public class PlayerController2D : MonoBehaviour
     public float rollLenght;
     public float rollSpeed;
     private bool doneRoll;
+    public bool FlipXInst;
 
     #endregion
 
@@ -998,6 +999,9 @@ public class PlayerController2D : MonoBehaviour
         {
             flip = isSlidingToTheLeft;
         }
+
+        FlipXInst = flip;
+
         spriterenderer.flipX = flip;
     }
 

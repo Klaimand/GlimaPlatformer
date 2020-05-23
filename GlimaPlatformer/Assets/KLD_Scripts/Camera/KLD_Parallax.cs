@@ -11,20 +11,25 @@ public class KLD_Parallax : MonoBehaviour
 
     float propStartPos;
 
+    /*
     float startPosition;
     float endPosition;
     float deltaPosition;
+    */
+
+    Vector2 startPosition, endPosition, deltaPosition;
 
     public SpriteRenderer[] SpriteRenderers;
 
     [SerializeField]
-    bool isVisiblee;
+    bool isVisiblee, doVerticalParallax = false;
     
     void Start()
     {
         getRenderers();
         player = GameObject.Find("Player").transform;
-        endPosition = player.position.x;
+        //endPosition = player.position.x;
+        endPosition = player.position;
     }
 
     private void Update()
@@ -55,6 +60,7 @@ public class KLD_Parallax : MonoBehaviour
         isVisiblee = isVisible;
     }
 
+    /*
     void doParallax()
     {
             startPosition = endPosition;
@@ -64,6 +70,25 @@ public class KLD_Parallax : MonoBehaviour
         if (isVisiblee)
         {
             transform.position += Vector3.right * deltaPosition * (parallaxCoef);
+        }
+    }*/
+
+    void doParallax()
+    {
+        startPosition = endPosition;
+        endPosition = player.position;
+        deltaPosition = endPosition - startPosition;
+
+        if (isVisiblee)
+        {
+            if (!doVerticalParallax)
+            {
+                transform.position += new Vector3(deltaPosition.x, 0f, 0f) * (parallaxCoef);
+            }
+            else
+            {
+                transform.position += (Vector3)deltaPosition * parallaxCoef;
+            }
         }
     }
 
