@@ -10,7 +10,7 @@ public class KLD_LdHelper : MonoBehaviour
     private new Camera camera;
     private GameObject debugMenu;
 
-    private bool canDebugTp = true;
+    public bool canDebugTp = true;
 
     private float lastDpadX;
     private float lastDpadY;
