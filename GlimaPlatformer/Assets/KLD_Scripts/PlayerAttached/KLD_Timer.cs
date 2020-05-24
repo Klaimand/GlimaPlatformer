@@ -92,8 +92,8 @@ public class KLD_Timer : MonoBehaviour
 
     void updateTimerText ()
     {
-        minutesText.text = minutes.ToString() + ":";
-        secondsText.text = seconds.ToString("00") + ":";
+        minutesText.text = minutes.ToString() + "'";
+        secondsText.text = seconds.ToString("00") + "\"";
         milliText.text = milli;
     }
 
