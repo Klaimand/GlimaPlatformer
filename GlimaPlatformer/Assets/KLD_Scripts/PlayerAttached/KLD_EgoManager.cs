@@ -27,6 +27,8 @@ public class KLD_EgoManager : MonoBehaviour
     KLD_DamageTaker damageTaker;
     KLD_AudioManager audioManager;
 
+    Animator egoEmptyAnimator;
+
     public enum EgoState
     {
         ZeroBarFilled,
@@ -50,6 +52,7 @@ public class KLD_EgoManager : MonoBehaviour
         egoBarAUI = GameObject.Find("EgoBarA").GetComponent<Image>();
         egoBarEclairs = GameObject.Find("EgoBarEclairs").GetComponent<Image>();
         audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
+        egoEmptyAnimator = GameObject.Find("EgoBar_Ego").GetComponent<Animator>();
         checkEgoState();
     }
 
@@ -60,6 +63,7 @@ public class KLD_EgoManager : MonoBehaviour
         checkEgoState();
         updateEgoBarUI();
         updateEclairsOnSprint();
+        updateEgoBarShake();
     }
 
     public void addEgo(int egoToAdd)
@@ -161,5 +165,11 @@ public class KLD_EgoManager : MonoBehaviour
     public bool getSprintState()
     {
         return isSprinting;
+    }
+
+
+    void updateEgoBarShake ()
+    {
+        egoEmptyAnimator.SetBool("isShaking", isSprinting);
     }
 }

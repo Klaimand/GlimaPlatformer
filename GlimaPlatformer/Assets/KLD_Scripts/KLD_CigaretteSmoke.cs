@@ -114,7 +114,7 @@ public class KLD_CigaretteSmoke : MonoBehaviour
         positions[0] = tr.position;
         line.SetPosition(0, tr.position);
 
-        //
+        /*
         float firstPointBaseHeight = 0.5f;
         float firstPointHeightVariance = 0.15f;
         float firstPointHeightSpeed = 6f;
@@ -131,7 +131,7 @@ public class KLD_CigaretteSmoke : MonoBehaviour
 
         positions[1] = tr.position + new Vector3(thisFrameX, thisFrameHeight, 0f);
         line.SetPosition(1, tr.position + new Vector3(thisFrameX, thisFrameHeight, 0f));
-        //
+        */
         if (allPointsAdded)
         {
             lineMaterial.mainTextureOffset = new Vector2(lineSegment * (timeSinceUpdate / updateSpeed), lineMaterial.mainTextureOffset.y);

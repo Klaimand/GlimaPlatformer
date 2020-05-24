@@ -17,6 +17,12 @@ public class KLD_Timer : MonoBehaviour
     private bool updateUI = true;
     public float noUpdateTimeOnCheckpoint = 2f;
 
+    
+    [SerializeField]
+    float blinkTime, blinkDuration;
+    CanvasGroup timerCanvasGroup;
+
+
 
     Text minutesText;
     Text secondsText;
@@ -28,6 +34,8 @@ public class KLD_Timer : MonoBehaviour
         minutesText = GameObject.Find("MinutesTimer").GetComponent<Text>();
         secondsText = GameObject.Find("SecondsTimer").GetComponent<Text>();
         milliText = GameObject.Find("MilliTimer").GetComponent<Text>();
+
+        timerCanvasGroup = GameObject.Find("TimeCanvas").GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
@@ -66,6 +74,7 @@ public class KLD_Timer : MonoBehaviour
     {
         segmentTimes.Add(totalTime);
         StartCoroutine(lockUI(noUpdateTimeOnCheckpoint));
+        StartCoroutine(blink());
     }
 
     IEnumerator lockUI (float time)
@@ -73,6 +82,31 @@ public class KLD_Timer : MonoBehaviour
         updateUI = false;
         yield return new WaitForSeconds(time);
         updateUI = true;
+    }
+
+    IEnumerator blink()
+    {
+        float totalElapsedTime = 0f;
+        float blinkElapsedTime = 0f;
+        bool isVisible = false;
+
+        while (totalElapsedTime < blinkDuration)
+        {
+            if (blinkElapsedTime > blinkTime)
+            {
+                isVisible = !isVisible;
+                blinkElapsedTime = 0f;
+
+                timerCanvasGroup.alpha = isVisible ? 1f : 0f;
+            }
+
+
+            blinkElapsedTime += Time.deltaTime;
+            totalElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        timerCanvasGroup.alpha = 1f;
     }
 
     void endTimer ()
