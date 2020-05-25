@@ -9503,6 +9503,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1308219972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4643679716937191456, guid: 6b3d146927b4bff46bd1e657f961a736,
+    type: 3}
+  m_PrefabInstance: {fileID: 4643679717268147653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3420fe785d6d6f44a2fe70e924ac272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1312374076
 GameObject:
   m_ObjectHideFlags: 0
@@ -54284,27 +54296,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 425902715, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime1
-      value: 34695
-      objectReference: {fileID: 0}
-    - target: {fileID: 425902715, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: m_Parameters.colorGradient.atime1
-      value: 34695
-      objectReference: {fileID: 0}
-    - target: {fileID: 425902715, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
-      propertyPath: m_Parameters.colorGradient.m_NumAlphaKeys
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1816342173, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
       propertyPath: virtualCam
       value: 
       objectReference: {fileID: 929807798}
-    - target: {fileID: 772187222574316539, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
-        type: 3}
-      propertyPath: canDebugTp
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1139996610849355492, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
         type: 3}
       propertyPath: m_Name
@@ -54365,16 +54360,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4740831783409130732, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
-        type: 3}
-      propertyPath: blinkTime
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740831783409130732, guid: c5cc3e2818b6f8a4b9382eaf17fca57e,
-        type: 3}
-      propertyPath: blinkDuration
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5cc3e2818b6f8a4b9382eaf17fca57e, type: 3}
 --- !u!1001 &1576255258279658692
@@ -54393,12 +54378,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2130418052}
+      objectReference: {fileID: 1308219972}
     - target: {fileID: 1576255258311544932, guid: 1e5df8748e6cd40449c95c17ad3532d1,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2130418052}
+      objectReference: {fileID: 1308219972}
     - target: {fileID: 3546711262275565402, guid: 1e5df8748e6cd40449c95c17ad3532d1,
         type: 3}
       propertyPath: m_Camera

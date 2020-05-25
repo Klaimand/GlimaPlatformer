@@ -49,6 +49,11 @@ public class KLD_Timer : MonoBehaviour
         {
             updateTimerText();
         }
+        /*
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            print(GetTimeString(GetSegmentTime(0)));
+        }*/
     }
 
     void addFrameTime ()
@@ -144,6 +149,19 @@ public class KLD_Timer : MonoBehaviour
             segmentTime = segmentTimes[segmentIndex] - segmentTimes[segmentIndex - 1];
         }
         return segmentTime;
+    }
+
+    public string GetTimeString (float _segmentTime)
+    {
+        int _segmentMinutes = Mathf.FloorToInt(_segmentTime) / 60;
+        int _segmentSeconds = Mathf.FloorToInt(_segmentTime) % 60;
+        string _segmentMilli = _segmentTime.ToString("F3");
+        _segmentMilli = _segmentMilli.Substring(_segmentMilli.Length - 3);
+
+        return
+            (_segmentMinutes == 0 ? "" : _segmentMinutes.ToString() + "'") +
+            (_segmentSeconds.ToString("00") + "\"") +
+            (_segmentMilli);
     }
 
 

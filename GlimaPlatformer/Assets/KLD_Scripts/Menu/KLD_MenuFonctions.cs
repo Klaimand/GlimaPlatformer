@@ -11,6 +11,7 @@ public class KLD_MenuFonctions : MonoBehaviour
     GameObject resumeScreenCanvas;
     Button resumeButton;
     PlayerController2D controller;
+    KLD_AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class KLD_MenuFonctions : MonoBehaviour
         resumeButton = GameObject.Find("ResumeButton").GetComponent<Button>();
         resumeScreenCanvas = GameObject.Find("ResumeScreenCanvas");
         controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
         resumeScreenCanvas.SetActive(false);
     }
 
@@ -57,6 +59,7 @@ public class KLD_MenuFonctions : MonoBehaviour
         controller.SetPause(true);
         Time.timeScale = 0;
         resumeScreenCanvas.SetActive(true);
+        audioManager.PlaySound("ClickUI");
     }
 
     public void closeResumeScreen ()
@@ -65,6 +68,7 @@ public class KLD_MenuFonctions : MonoBehaviour
         controller.SetPause(false);
         Time.timeScale = 1;
         resumeScreenCanvas.SetActive(false);
+        audioManager.PlaySound("ClickUI");
     }
 
 

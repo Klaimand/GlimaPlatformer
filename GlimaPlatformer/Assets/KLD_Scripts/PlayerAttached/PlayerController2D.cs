@@ -197,6 +197,7 @@ public class PlayerController2D : MonoBehaviour
         doOnStairsGravityDisable();
         //doSlopeSlideDetection();
         doHorizontalMove();
+        checkIfSprintingInAir();
         checkGroundRecovery();
         checkLastGroundState();
         checkLastWallState();
@@ -627,6 +628,14 @@ public class PlayerController2D : MonoBehaviour
             && !isFlatSliding)
         {
             events.InvokeGroundRecovery();
+        }
+    }
+
+    private void checkIfSprintingInAir ()
+    {
+        if (lastJumpIsSprintJump && !isSprinting)
+        {
+            lastJumpIsSprintJump = false;
         }
     }
 
