@@ -1,0 +1,1159 @@
+fileFormatVersion: 2
+guid: 256979e24fd9af54b8b1f370a5cff6c3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 970435802215740567
+    second: props slice bon_0
+  - first:
+      213: -6088397818538477111
+    second: props slice bon_1
+  - first:
+      213: 2803522689229285307
+    second: props slice bon_2
+  - first:
+      213: -2424347153371147307
+    second: props slice bon_3
+  - first:
+      213: -7926396931618052972
+    second: props slice bon_4
+  - first:
+      213: 5794795845178609228
+    second: props slice bon_5
+  - first:
+      213: -8402947494653860196
+    second: props slice bon_6
+  - first:
+      213: -1574007283741336715
+    second: props slice bon_7
+  - first:
+      213: -4898855217410284660
+    second: props slice bon_8
+  - first:
+      213: 4479388541960410865
+    second: props slice bon_9
+  - first:
+      213: -8086682025794803039
+    second: props slice bon_10
+  - first:
+      213: 2040439310923487019
+    second: props slice bon_11
+  - first:
+      213: 6370750289390918163
+    second: props slice bon_12
+  - first:
+      213: -8390997258622072061
+    second: props slice bon_13
+  - first:
+      213: 5365034075000246694
+    second: props slice bon_14
+  - first:
+      213: 28211230511066885
+    second: props slice bon_15
+  - first:
+      213: -3768179009363034487
+    second: props slice bon_16
+  - first:
+      213: 4898594816472746822
+    second: props slice bon_17
+  - first:
+      213: 8140567574140395613
+    second: props slice bon_18
+  - first:
+      213: 6722384949201420376
+    second: props slice bon_19
+  - first:
+      213: 8732592708826288332
+    second: props slice bon_20
+  - first:
+      213: 3573383788321941080
+    second: props slice bon_21
+  - first:
+      213: -6771787581779343094
+    second: props slice bon_22
+  - first:
+      213: 4523202593095032796
+    second: props slice bon_23
+  - first:
+      213: 1221933819467125868
+    second: props slice bon_24
+  - first:
+      213: -5626171713722527077
+    second: props slice bon_25
+  - first:
+      213: -2728692319637494554
+    second: props slice bon_26
+  - first:
+      213: -7032887305549987802
+    second: props slice bon_27
+  - first:
+      213: -8825745323948780772
+    second: props slice bon_28
+  - first:
+      213: 6374492655431835298
+    second: props slice bon_29
+  - first:
+      213: -7446161672940011404
+    second: props slice bon_30
+  - first:
+      213: -281257555207069749
+    second: props slice bon_31
+  - first:
+      213: -2153811341449935115
+    second: props slice bon_32
+  - first:
+      213: -4648298194075271731
+    second: props slice bon_33
+  - first:
+      213: 4952336106417423404
+    second: props slice bon_34
+  - first:
+      213: 9042766766597073128
+    second: props slice bon_35
+  - first:
+      213: 748856989419726049
+    second: props slice bon_36
+  - first:
+      213: 5450874204803392438
+    second: props slice bon_37
+  - first:
+      213: 90778252713804002
+    second: props slice bon_38
+  - first:
+      213: 1914104116229738892
+    second: props slice bon_39
+  - first:
+      213: 1515729599042757481
+    second: props slice bon_40
+  - first:
+      213: -2823483907295948204
+    second: props slice bon_41
+  - first:
+      213: 960686409151694438
+    second: props slice bon_42
+  - first:
+      213: 6802395243706334068
+    second: props slice bon_43
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: props slice bon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 294
+        width: 78
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 794f364783ea77d00800000000000000
+      internalID: 970435802215740567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_1
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 345
+        width: 31
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c930c6117aa18ba0800000000000000
+      internalID: -6088397818538477111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_2
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 337
+        width: 40
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb7624b380d18e620800000000000000
+      internalID: 2803522689229285307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_3
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 336
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d35517db1dfa5ed0800000000000000
+      internalID: -2424347153371147307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_4
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 326
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 494e82e8cf7cff190800000000000000
+      internalID: -7926396931618052972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_5
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 319
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ec7c97e104b6050800000000000000
+      internalID: 5794795845178609228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_6
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 297
+        width: 79
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c96e5ea36cbb26b80800000000000000
+      internalID: -8402947494653860196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_7
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 337
+        width: 26
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57b58b207b0082ae0800000000000000
+      internalID: -1574007283741336715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_8
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 324
+        width: 31
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c83e0309225c30cb0800000000000000
+      internalID: -4898855217410284660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_9
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 298
+        width: 31
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f65186652cf92e30800000000000000
+      internalID: 4479388541960410865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 251
+        width: 40
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aae6f8ea8556cf80800000000000000
+      internalID: -8086682025794803039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_11
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 251
+        width: 35
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2756591eb8115c10800000000000000
+      internalID: 2040439310923487019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_12
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 267
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31adcdf62a3796850800000000000000
+      internalID: 6370750289390918163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_13
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 251
+        width: 9
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30b0e8063703d8b80800000000000000
+      internalID: -8390997258622072061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_14
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 264
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a19148e01e647a40800000000000000
+      internalID: 5365034075000246694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_15
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 253
+        width: 41
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50fe945f6f9346000800000000000000
+      internalID: 28211230511066885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_16
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 198
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98e35d8d72db4bbc0800000000000000
+      internalID: -3768179009363034487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_17
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 194
+        width: 55
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64b8d6e180e4bf340800000000000000
+      internalID: 4898594816472746822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_18
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 166
+        width: 36
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d50a3bef31b19f070800000000000000
+      internalID: 8140567574140395613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_19
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 184
+        width: 61
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 850459c9e75ba4d50800000000000000
+      internalID: 6722384949201420376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_20
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 206
+        width: 25
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc0d1c92dc6603970800000000000000
+      internalID: 8732592708826288332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_21
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 187
+        width: 40
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 856a1157f95379130800000000000000
+      internalID: 3573383788321941080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_22
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 154
+        width: 46
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0904a5a217c502a0800000000000000
+      internalID: -6771787581779343094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_23
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 4
+        width: 25
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdf1e802bc4a5ce30800000000000000
+      internalID: 4523202593095032796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_24
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 100
+        width: 26
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c64df50b55e25f010800000000000000
+      internalID: 1221933819467125868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_25
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 113
+        width: 5
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b92d73692a2dbe1b0800000000000000
+      internalID: -5626171713722527077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_26
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 110
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e4aba2eaccb12ad0800000000000000
+      internalID: -2728692319637494554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_27
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 105
+        width: 53
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 620c657e14a266e90800000000000000
+      internalID: -7032887305549987802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_28
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 88
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c13d7ff7367a48580800000000000000
+      internalID: -8825745323948780772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_29
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 113
+        width: 68
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aed95eeb4fb67850800000000000000
+      internalID: 6374492655431835298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_30
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 105
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4704840f86be9a890800000000000000
+      internalID: -7446161672940011404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_31
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 76
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcfdc736eb5c81cf0800000000000000
+      internalID: -281257555207069749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_32
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 56
+        width: 68
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f64baf0fff1c12e0800000000000000
+      internalID: -2153811341449935115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_33
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 6
+        width: 18
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcdbd049b6ded7fb0800000000000000
+      internalID: -4648298194075271731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_34
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 71
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c240a5f337b3ab440800000000000000
+      internalID: 4952336106417423404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_35
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 73
+        width: 66
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e8e9bda67c5e7d70800000000000000
+      internalID: 9042766766597073128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_36
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 3
+        width: 66
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e46ee9d679746a00800000000000000
+      internalID: 748856989419726049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_37
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 56
+        width: 33
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b365a4953565ab40800000000000000
+      internalID: 5450874204803392438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_38
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 34
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e046520752824100800000000000000
+      internalID: 90778252713804002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_39
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 3
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c819cf66d83409a10800000000000000
+      internalID: 1914104116229738892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_40
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 7
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9632d762a04f80510800000000000000
+      internalID: 1515729599042757481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_41
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 2
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 452d7948858f0d8d0800000000000000
+      internalID: -2823483907295948204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_42
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 3
+        width: 61
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 666480ef23b055d00800000000000000
+      internalID: 960686409151694438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props slice bon_43
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 10
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47b3ceafe66f66e50800000000000000
+      internalID: 6802395243706334068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
