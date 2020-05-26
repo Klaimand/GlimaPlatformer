@@ -11,29 +11,32 @@ public class KLD_Parallax : MonoBehaviour
 
     float propStartPos;
 
+    /*
     float startPosition;
     float endPosition;
     float deltaPosition;
+    */
 
-    public List<SpriteRenderer> SpriteRenderers = new List<SpriteRenderer>();
+    Vector2 startPosition, endPosition, deltaPosition;
+
+    public SpriteRenderer[] SpriteRenderers;
 
     [SerializeField]
-    bool isVisiblee;
-
-    // Start is called before the first frame update
+    bool isVisiblee, doVerticalParallax = false;
+    
     void Start()
     {
         getRenderers();
         player = GameObject.Find("Player").transform;
-        endPosition = player.position.x;
+        //endPosition = player.position.x;
+        endPosition = player.position;
     }
 
     private void Update()
     {
         checkIfASrIsVisible();
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         doParallax();
@@ -41,17 +44,7 @@ public class KLD_Parallax : MonoBehaviour
 
     void getRenderers ()
     {
-        if (TryGetComponent(out SpriteRenderer sr))
-        {
-            SpriteRenderers.Add(sr);
-        }
-        foreach (Transform child in transform)
-        {
-            if (child.TryGetComponent(out SpriteRenderer childsr))
-            {
-                SpriteRenderers.Add(childsr);
-            }
-        }
+        SpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void checkIfASrIsVisible ()
@@ -67,6 +60,7 @@ public class KLD_Parallax : MonoBehaviour
         isVisiblee = isVisible;
     }
 
+    /*
     void doParallax()
     {
             startPosition = endPosition;
@@ -76,6 +70,25 @@ public class KLD_Parallax : MonoBehaviour
         if (isVisiblee)
         {
             transform.position += Vector3.right * deltaPosition * (parallaxCoef);
+        }
+    }*/
+
+    void doParallax()
+    {
+        startPosition = endPosition;
+        endPosition = player.position;
+        deltaPosition = endPosition - startPosition;
+
+        if (isVisiblee)
+        {
+            if (!doVerticalParallax)
+            {
+                transform.position += new Vector3(deltaPosition.x, 0f, 0f) * (parallaxCoef);
+            }
+            else
+            {
+                transform.position += (Vector3)deltaPosition * parallaxCoef;
+            }
         }
     }
 

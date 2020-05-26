@@ -14,16 +14,20 @@ public class KLD_EgoManager : MonoBehaviour
     private float sprintSecondEnergyConsuption;
     [SerializeField]
     private float minimumEgoToSprint = 0f;
-    
-    private Image egoBarUI, egoBarAUI;
 
-    private float[] egoBarFillPoints = { 0f, 0.325f, 0.5935f, 0.8615f};
+    private Image egoBarUI, egoBarAUI, egoBarEclairs;
+
+    //private float[] egoBarFillPoints = { 0f, 0.325f, 0.5935f, 0.8615f};
+    private float[] egoBarFillPoints = { 0f, 0.272f, 0.543f, 0.815f };
 
     [SerializeField]
     private bool isSprinting;
 
     PlayerController2D controller;
     KLD_DamageTaker damageTaker;
+    KLD_AudioManager audioManager;
+
+    Animator egoEmptyAnimator;
 
     public enum EgoState
     {
@@ -46,6 +50,9 @@ public class KLD_EgoManager : MonoBehaviour
     {
         egoBarUI = GameObject.Find("EgoBar").GetComponent<Image>();
         egoBarAUI = GameObject.Find("EgoBarA").GetComponent<Image>();
+        egoBarEclairs = GameObject.Find("EgoBarEclairs").GetComponent<Image>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
+        egoEmptyAnimator = GameObject.Find("EgoBar_Ego").GetComponent<Animator>();
         checkEgoState();
     }
 
@@ -55,6 +62,8 @@ public class KLD_EgoManager : MonoBehaviour
         doSprintInput();
         checkEgoState();
         updateEgoBarUI();
+        updateEclairsOnSprint();
+        updateEgoBarShake();
     }
 
     public void addEgo(int egoToAdd)
@@ -87,6 +96,7 @@ public class KLD_EgoManager : MonoBehaviour
         }
     }
 
+    /*
     private void updateEgoBarUI()
     {
         egoBarUI.fillAmount = egoBarFillPoints[(int)curEgoState];
@@ -98,6 +108,25 @@ public class KLD_EgoManager : MonoBehaviour
             
             egoBarAUI.fillAmount = egoBarFillPoints[(int)curEgoState] + (fillingDifferenceBetweenActualBar * thisBarFillingRatio);
         }
+    }*/
+
+    private void updateEgoBarUI ()
+    {
+        float filledAmount = ((float)curEgoPoints * egoBarFillPoints[3]) / ((float)egoPointsPerBar * 3f);
+        egoBarAUI.fillAmount = filledAmount;
+        egoBarUI.fillAmount = 1f - filledAmount;
+    }
+
+    private void updateEclairsOnSprint ()
+    {
+        if (isSprinting)
+        {
+            egoBarEclairs.color = Color.white;
+        }
+        else
+        {
+            egoBarEclairs.color = new Color(1f, 1f, 1f, 0f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -105,13 +134,14 @@ public class KLD_EgoManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Can") && curEgoPoints < egoPointsPerBar * 3)
         {
             addEgo(egoPointsPerCan);
+            audioManager.PlaySound("CanPickup");
             Destroy(collision.gameObject);
         }
     }
 
     void doSprintInput ()
     {
-        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButtonDown("Sprint"))
+        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButton("Sprint"))
         {
             isSprinting = true;
         }
@@ -135,5 +165,11 @@ public class KLD_EgoManager : MonoBehaviour
     public bool getSprintState()
     {
         return isSprinting;
+    }
+
+
+    void updateEgoBarShake ()
+    {
+        egoEmptyAnimator.SetBool("isShaking", isSprinting);
     }
 }

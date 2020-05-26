@@ -61,10 +61,6 @@ public class KLD_ScreenShake : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            StartShake(1f, 1f);
-        }
         checkSlide();
     }
 

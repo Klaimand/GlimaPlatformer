@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class ParticlesController : MonoBehaviour
 {
-    public GameObject WallJumpDustParticles;
-    public Vector2 WallJumpDustParticlesOffset;
-    public bool IsToTheRight; 
-
-    public float SlopeJumpDustParticles;
-
-    public float SlopeSlideDustParticles;
-
-    public float FlatSlideDustParticles;
-
+    public GameObject WallJumpDustParticlesLeft;
+    public GameObject WallJumpDustParticlesRight;
+    public GameObject FallParticle;
 
     private Transform player;
-   
+    PlayerController2D controller;
 
     void Start()
     {
         player = GameObject.Find("Player").transform;
+        controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
     }
 
     // Update is called once per frame
@@ -30,9 +24,22 @@ public class ParticlesController : MonoBehaviour
         
 
     }
+
     public void CreateWallJumpDustParticles()
     {
-        Instantiate(WallJumpDustParticles, player.position + (Vector3)WallJumpDustParticlesOffset, Quaternion.identity);
-        print("eaeaezezzezzezz");
+        if (controller.getIsWallSlidingLeft())
+        {
+            Instantiate(WallJumpDustParticlesLeft, player.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(WallJumpDustParticlesRight, player.position, Quaternion.identity);
+        }
     }
+
+    public void CreateFallParticle ()
+    {
+        Instantiate(FallParticle, player.position, Quaternion.identity);
+    }
+
 }
