@@ -844,6 +844,11 @@ public class PlayerController2D : MonoBehaviour
         return 1 - (flatSlidingMinSpeed / Mathf.Abs(rb.velocity.x));
     }
 
+    public bool getSprintState ()
+    {
+        return isSprinting;
+    }
+
     public void SetLastJumpIsBounce (bool value)
     {
         lastJumpIsBounce = value;
