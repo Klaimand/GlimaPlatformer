@@ -90,8 +90,12 @@ public class KLD_MenuFonctions : MonoBehaviour
         audioManager.PlaySound("ClickUI");
     }
 
+    public void openEndGameScreen ()
+    {
+        endGameCanvas.SetActive(true);
+    }
 
-    void doTimeRevealInst ()
+    public void doTimeRevealInst ()
     {
         StartCoroutine(doTimeReveal());
     }

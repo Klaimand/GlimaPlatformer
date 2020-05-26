@@ -28,9 +28,14 @@ public class KLD_Timer : MonoBehaviour
     Text secondsText;
     Text milliText;
 
+
+    KLD_MenuFonctions menuFonctions;
+
     // Start is called before the first frame update
     void Start()
     {
+        menuFonctions = GameObject.Find("MenuFunctions").GetComponent<KLD_MenuFonctions>();
+
         minutesText = GameObject.Find("MinutesTimer").GetComponent<Text>();
         secondsText = GameObject.Find("SecondsTimer").GetComponent<Text>();
         milliText = GameObject.Find("MilliTimer").GetComponent<Text>();
@@ -72,6 +77,11 @@ public class KLD_Timer : MonoBehaviour
         {
             endTimer();
             collider.gameObject.GetComponent<KLD_Checkpoint>().destroyLinkedCheckpoints();
+
+
+            menuFonctions.openEndGameScreen();
+            menuFonctions.doTimeRevealInst();
+
         }
     }
 

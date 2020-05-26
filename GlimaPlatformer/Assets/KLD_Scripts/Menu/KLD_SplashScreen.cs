@@ -76,6 +76,6 @@ public class KLD_SplashScreen : MonoBehaviour
 
     void callOnFadeFinish ()
     {
-        SceneManager.LoadScene("KLD_LD_FINIMMEUBLE_CAM_PP_CONF_SS");
+        SceneManager.LoadScene("KLD_MenuPrincipal");
     }
 }

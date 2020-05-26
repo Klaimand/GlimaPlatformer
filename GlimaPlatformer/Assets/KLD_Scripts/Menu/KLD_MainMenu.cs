@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class KLD_MainMenu : MonoBehaviour
 {
@@ -124,6 +125,16 @@ public class KLD_MainMenu : MonoBehaviour
 
             }
         }
+    }
+
+    public void launchScene2705 ()
+    {
+        SceneManager.LoadScene("KLD_2705_LD");
+    }
+
+    public void quitApplication ()
+    {
+        Application.Quit();
     }
 
 }
