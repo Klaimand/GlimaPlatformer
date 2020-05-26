@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8a7b22976b1d042a179188a73840ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QTEPrefab: {fileID: 2881500887123653549, guid: 96ab46087e8dc514a82f81de51568449,
+  QTEPrefab: {fileID: 4759268434577313724, guid: 2acc3bda7afaae949b69bf6af8c05ab6,
     type: 3}
   invulnerableTimeAfterDamageTaking: 1.5
   isInvulnerable: 0
