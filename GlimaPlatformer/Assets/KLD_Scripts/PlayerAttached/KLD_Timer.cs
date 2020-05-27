@@ -17,17 +17,30 @@ public class KLD_Timer : MonoBehaviour
     private bool updateUI = true;
     public float noUpdateTimeOnCheckpoint = 2f;
 
+    
+    [SerializeField]
+    float blinkTime, blinkDuration;
+    CanvasGroup timerCanvasGroup;
+
+
 
     Text minutesText;
     Text secondsText;
     Text milliText;
 
+
+    KLD_MenuFonctions menuFonctions;
+
     // Start is called before the first frame update
     void Start()
     {
+        menuFonctions = GameObject.Find("MenuFunctions").GetComponent<KLD_MenuFonctions>();
+
         minutesText = GameObject.Find("MinutesTimer").GetComponent<Text>();
         secondsText = GameObject.Find("SecondsTimer").GetComponent<Text>();
         milliText = GameObject.Find("MilliTimer").GetComponent<Text>();
+
+        timerCanvasGroup = GameObject.Find("TimeCanvas").GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
@@ -41,6 +54,11 @@ public class KLD_Timer : MonoBehaviour
         {
             updateTimerText();
         }
+        /*
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            print(GetTimeString(GetSegmentTime(0)));
+        }*/
     }
 
     void addFrameTime ()
@@ -59,6 +77,11 @@ public class KLD_Timer : MonoBehaviour
         {
             endTimer();
             collider.gameObject.GetComponent<KLD_Checkpoint>().destroyLinkedCheckpoints();
+
+
+            menuFonctions.openEndGameScreen();
+            menuFonctions.doTimeRevealInst();
+
         }
     }
 
@@ -66,6 +89,7 @@ public class KLD_Timer : MonoBehaviour
     {
         segmentTimes.Add(totalTime);
         StartCoroutine(lockUI(noUpdateTimeOnCheckpoint));
+        StartCoroutine(blink());
     }
 
     IEnumerator lockUI (float time)
@@ -73,6 +97,31 @@ public class KLD_Timer : MonoBehaviour
         updateUI = false;
         yield return new WaitForSeconds(time);
         updateUI = true;
+    }
+
+    IEnumerator blink()
+    {
+        float totalElapsedTime = 0f;
+        float blinkElapsedTime = 0f;
+        bool isVisible = false;
+
+        while (totalElapsedTime < blinkDuration)
+        {
+            if (blinkElapsedTime > blinkTime)
+            {
+                isVisible = !isVisible;
+                blinkElapsedTime = 0f;
+
+                timerCanvasGroup.alpha = isVisible ? 1f : 0f;
+            }
+
+
+            blinkElapsedTime += Time.deltaTime;
+            totalElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        timerCanvasGroup.alpha = 1f;
     }
 
     void endTimer ()
@@ -92,8 +141,8 @@ public class KLD_Timer : MonoBehaviour
 
     void updateTimerText ()
     {
-        minutesText.text = minutes.ToString() + ":";
-        secondsText.text = seconds.ToString("00") + ":";
+        minutesText.text = minutes.ToString() + "'";
+        secondsText.text = seconds.ToString("00") + "\"";
         milliText.text = milli;
     }
 
@@ -110,6 +159,19 @@ public class KLD_Timer : MonoBehaviour
             segmentTime = segmentTimes[segmentIndex] - segmentTimes[segmentIndex - 1];
         }
         return segmentTime;
+    }
+
+    public string GetTimeString (float _segmentTime)
+    {
+        int _segmentMinutes = Mathf.FloorToInt(_segmentTime) / 60;
+        int _segmentSeconds = Mathf.FloorToInt(_segmentTime) % 60;
+        string _segmentMilli = _segmentTime.ToString("F3");
+        _segmentMilli = _segmentMilli.Substring(_segmentMilli.Length - 3);
+
+        return
+            (_segmentMinutes == 0 ? "" : _segmentMinutes.ToString() + "'") +
+            (_segmentSeconds.ToString("00") + "\"") +
+            (_segmentMilli);
     }
 
 

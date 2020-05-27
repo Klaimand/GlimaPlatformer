@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class KLD_Hider : MonoBehaviour
 {
@@ -9,13 +10,16 @@ public class KLD_Hider : MonoBehaviour
 
     private float alpha;
 
-    new Renderer renderer;
+    //new Renderer renderer;
+    Tilemap tileMap;
+
     Color materialColor;
 
     private void Awake()
     {
-        renderer = GetComponent<Renderer>();
-        materialColor = renderer.material.color;
+        //renderer = GetComponent<Renderer>();
+        tileMap = GetComponent<Tilemap>();
+        materialColor = tileMap.color;
     }
 
     // Start is called before the first frame update
@@ -34,7 +38,8 @@ public class KLD_Hider : MonoBehaviour
     {
         alpha += Time.fixedDeltaTime * revealSpeed;
         alpha = Mathf.Clamp01(alpha);
-        renderer.material.color = new Color(materialColor.r, materialColor.g, materialColor.b, alpha);
+        //renderer.material.color = new Color(materialColor.r, materialColor.g, materialColor.b, alpha);
+        tileMap.color = new Color(materialColor.r, materialColor.g, materialColor.b, alpha);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -110,10 +110,12 @@ public class PlayerController2D : MonoBehaviour
     private bool isOnStairs;
     private bool stairsToTheLeft;
     private bool jumpTrigger;
-    
+
     [Header("Getters and Setters")]
+    private bool isPaused;
     private bool canTriggerJumpGetter;
     
+
     [Space(10)]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
@@ -166,7 +168,7 @@ public class PlayerController2D : MonoBehaviour
     void Update()
     {
         checkGround();
-        if (!cantMove)
+        if (!cantMove && !isPaused)
         {
             doJump();
             doWallJump();
@@ -195,6 +197,7 @@ public class PlayerController2D : MonoBehaviour
         doOnStairsGravityDisable();
         //doSlopeSlideDetection();
         doHorizontalMove();
+        checkIfSprintingInAir();
         checkGroundRecovery();
         checkLastGroundState();
         checkLastWallState();
@@ -628,6 +631,14 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    private void checkIfSprintingInAir ()
+    {
+        if (lastJumpIsSprintJump && !isSprinting)
+        {
+            lastJumpIsSprintJump = false;
+        }
+    }
+
     #endregion
 
     #region Crouching and Sliding
@@ -833,6 +844,11 @@ public class PlayerController2D : MonoBehaviour
         return 1 - (flatSlidingMinSpeed / Mathf.Abs(rb.velocity.x));
     }
 
+    public bool getSprintState ()
+    {
+        return isSprinting;
+    }
+
     public void SetLastJumpIsBounce (bool value)
     {
         lastJumpIsBounce = value;
@@ -870,6 +886,11 @@ public class PlayerController2D : MonoBehaviour
     public void SetSprint(bool state)
     {
         isSprinting = state;
+    }
+
+    public void SetPause (bool state)
+    {
+        isPaused = state;
     }
 
     #endregion

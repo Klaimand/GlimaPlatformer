@@ -114,6 +114,24 @@ public class KLD_CigaretteSmoke : MonoBehaviour
         positions[0] = tr.position;
         line.SetPosition(0, tr.position);
 
+        /*
+        float firstPointBaseHeight = 0.5f;
+        float firstPointHeightVariance = 0.15f;
+        float firstPointHeightSpeed = 6f;
+
+        float thisFrameHeight = Mathf.Lerp(firstPointBaseHeight - Random.Range(0, firstPointHeightVariance), firstPointBaseHeight + Random.Range(0, firstPointHeightVariance),
+            Mathf.SmoothStep(0f, 1f, Mathf.PingPong(Time.time * firstPointHeightSpeed / 10, 1)));
+
+        float firstPointBaseX = 0.15f;
+        float firstPointXVariance = 0.05f;
+        float firstPointXSpeed = 4f;
+
+        float thisFrameX = Mathf.Lerp(firstPointBaseX - Random.Range(0, firstPointXVariance), firstPointBaseX + Random.Range(0, firstPointXVariance),
+            Mathf.SmoothStep(0f, 1f, Mathf.PingPong(Time.time * firstPointXSpeed / 10, 1)));
+
+        positions[1] = tr.position + new Vector3(thisFrameX, thisFrameHeight, 0f);
+        line.SetPosition(1, tr.position + new Vector3(thisFrameX, thisFrameHeight, 0f));
+        */
         if (allPointsAdded)
         {
             lineMaterial.mainTextureOffset = new Vector2(lineSegment * (timeSinceUpdate / updateSpeed), lineMaterial.mainTextureOffset.y);

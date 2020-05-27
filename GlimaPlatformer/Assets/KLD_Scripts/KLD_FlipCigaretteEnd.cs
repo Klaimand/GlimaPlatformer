@@ -5,15 +5,25 @@ using UnityEngine;
 public class KLD_FlipCigaretteEnd : MonoBehaviour
 {
     PlayerController2D controller;
-
+    Transform fireEmitter;
+    ParticleSystem fireEmitterParticleSystem;
+    LineRenderer smokeLine;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
+        fireEmitter = GameObject.Find("Cigarette_Fire").transform ;
+        fireEmitterParticleSystem = fireEmitter.GetComponent<ParticleSystem>();
+        smokeLine = GameObject.Find("CigaretteSmoke").GetComponent<LineRenderer>();
     }
 
-    // Update is called once per frame
+    private void Update()
+    {
+        linkFireToCigarette();
+        changeParticle();
+    }
+
     void LateUpdate()
     {
         checkFlip();
@@ -32,4 +42,28 @@ public class KLD_FlipCigaretteEnd : MonoBehaviour
         }
         transform.localPosition = new Vector3(direction * Mathf.Abs(transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
     }
+
+    void linkFireToCigarette ()
+    {
+        fireEmitter.position = transform.position;
+    }
+
+    void changeParticle ()
+    {
+        if (controller.getSprintState())
+        {
+            if (!fireEmitterParticleSystem.isPlaying)
+            {
+                fireEmitterParticleSystem.Play();
+            }
+            smokeLine.enabled = false;
+        }
+        else
+        {
+            smokeLine.enabled = true;
+            fireEmitterParticleSystem.Stop();
+        }
+    }
+
+
 }

@@ -198,4 +198,11 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0
     randomPitch: 0
+  - name: ClickUI
+    clip: {fileID: 8300000, guid: c4c1fb7616320ac42823d0a7e98b4c37, type: 3}
+    group: {fileID: 4312643147643485544, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
   soundsToPlayOnStart: []

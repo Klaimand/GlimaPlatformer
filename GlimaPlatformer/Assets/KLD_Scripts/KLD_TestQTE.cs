@@ -48,6 +48,8 @@ public class KLD_TestQTE : MonoBehaviour
         sr.color = basic;
         events = player.GetComponent<KLD_PlayerEvents>();
         parentTransform = transform.parent;
+
+        linkAnimToQteType();
     }
     
     void Update()
@@ -121,6 +123,7 @@ public class KLD_TestQTE : MonoBehaviour
         Destroy(transform.parent.gameObject);
     }
 
+    /*
     private void doGraphics ()
     {
         if (done)
@@ -128,10 +131,27 @@ public class KLD_TestQTE : MonoBehaviour
             sr.color = doneColor;
         }
         sr.size = new Vector2((currentPoints * 5f) / maxPoints, 0.5f);
+    }*/
+
+    private void doGraphics()
+    {
+        if (done)
+        {
+            //sr.color = doneColor;
+        }
+
+        sr.size = new Vector2((currentPoints * 7.4375f) / maxPoints, 3.125f);
     }
+
 
     void linkPosToPlayer ()
     {
         parentTransform.position = player.transform.position + (Vector3)playerOffset;
     }
+
+    void linkAnimToQteType ()
+    {
+        transform.parent.GetChild(1).GetComponent<Animator>().SetInteger("QteType", (int)qteMode);
+    }
+
 }
