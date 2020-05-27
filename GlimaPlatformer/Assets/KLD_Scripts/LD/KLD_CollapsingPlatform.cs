@@ -8,7 +8,7 @@ public class KLD_CollapsingPlatform : MonoBehaviour
     private bool isCollapsing;
 
     [SerializeField]
-    private float timeToCollapse;
+    private float timeToCollapse = 0f;
     private SpriteRenderer sr;
 
     private void Awake()

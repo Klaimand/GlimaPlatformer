@@ -1,5 +1,201 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &425902713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425902716}
+  - component: {fileID: 425902715}
+  - component: {fileID: 425902714}
+  m_Layer: 0
+  m_Name: CigaretteSmoke
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &425902716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425902713}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1113840994}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!120 &425902715
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425902713}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 38076fee68b0ea041a26aaaaad43ee73, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.022989273
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 0.5882353}
+      key1: {r: 1, g: 1, b: 1, a: 0}
+      key2: {r: 1, g: 1, b: 1, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 34695
+      ctime2: 65535
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 34695
+      atime2: 65535
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 3
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
+--- !u!114 &425902714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425902713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4fac70b7b30fa1498627821da9ca34c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  line: {fileID: 425902715}
+  numberOfPoints: 10
+  updateSpeed: 0.25
+  riseSpeed: 0.25
+  spread: 0.2
+  idleUpdateSpeed: 0.2
+  idleRiseSpeed: 0.75
+  idleSpread: 0.6
+  runUpdateSpeed: 0.05
+  runRiseSpeed: 0.8
+  runSpread: 0.2
+--- !u!1 &1113840993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1113840994}
+  - component: {fileID: 1113840995}
+  m_Layer: 0
+  m_Name: CigaretteEnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1113840994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113840993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.28, y: 1.654, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 425902716}
+  m_Father: {fileID: 1139996610849355495}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1113840995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113840993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53553b5c17d63841a276a27ef2d13f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1139996610431607811
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +273,12 @@ GameObject:
   - component: {fileID: 772187224456538735}
   - component: {fileID: 3521671514523263589}
   - component: {fileID: 1139996611729343310}
+  - component: {fileID: 1644083150}
+  - component: {fileID: 971501571}
+  - component: {fileID: 1816342173}
+  - component: {fileID: 1326616986}
+  - component: {fileID: 1139996611392143662}
+  - component: {fileID: 4740831783409130732}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -92,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139996610849355492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 179.35, y: -26.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1139996610712675596}
@@ -100,6 +302,8 @@ Transform:
   - {fileID: 1139996610431607836}
   - {fileID: 1139996612204838577}
   - {fileID: 3521671514229158902}
+  - {fileID: 1113840994}
+  - {fileID: 8500044833908586459}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -203,16 +407,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  sprintSpeed: 12
+  virtualXAxis: 0
+  xRawAxis: 0
+  virtualXRawAxis: 0
+  xAxisSensitivity: 0.2
   accelerationFrame: 6
   decelerationFrame: 8
   cantMove: 0
+  grabbed: 0
   jumpForce: {x: 3, y: 15}
   addAirSpeed: 32
   maxAirSpeed: 9
+  maxSprintAirSpeed: 13
   horizontalAirDrag: 0.04
   fallMultiplier: 2
   lowJumpMultiplier: 3
-  groundDetectionRadius: 0.1
+  groundDetectionRadius: 0.28
   wallSlideMultiplier: 0.1
   wallDetectionRadius: 0.1
   wallJumpForce: {x: 12, y: 15}
@@ -231,10 +442,10 @@ MonoBehaviour:
   slideStandingMaxSpeed: 4
   slopeJumpNoControlTimer: 0.3
   slopeCastDistance: 0.3
-  SlopeSlideJumpForce: {x: 8, y: 10}
+  SlopeSlideJumpForce: {x: 13, y: 10}
   slopeJumpDrag: 0.025
-  stairSpeed: 8
-  timeToReachFireRun: 0
+  stairSpeed: 7
+  crouchStairsSpeed: 2.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2304
@@ -246,6 +457,9 @@ MonoBehaviour:
     m_Bits: 1024
   playerState: 0
   moveStateThreshold: 0.1
+  rollLenght: 1
+  rollSpeed: 5
+  FlipXInst: 0
 --- !u!114 &772187222574316539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14ed209f7e60674ead8a18af1ea36f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDebugTp: 0
   unitsAddedPerDPadClick: 5
 --- !u!114 &772187224456538735
 MonoBehaviour:
@@ -272,9 +487,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   egoPointsPerBar: 4
-  curEgoPoints: 0
   egoPointsPerCan: 1
-  pointsAfter3BarsToFillSuperSayan: 2
+  curEgoPoints: 0
+  sprintSecondEnergyConsuption: 1
+  minimumEgoToSprint: 0
+  isSprinting: 0
   curEgoState: 0
 --- !u!114 &3521671514523263589
 MonoBehaviour:
@@ -288,10 +505,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8a7b22976b1d042a179188a73840ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QTEPrefab: {fileID: 2881500887123653549, guid: 96ab46087e8dc514a82f81de51568449,
+  QTEPrefab: {fileID: 4759268434577313724, guid: 2acc3bda7afaae949b69bf6af8c05ab6,
     type: 3}
   invulnerableTimeAfterDamageTaking: 1.5
   isInvulnerable: 0
+  isDamageInvulnerable: 0
 --- !u!95 &1139996611729343310
 Animator:
   serializedVersion: 3
@@ -311,6 +529,421 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1644083150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f239de5fdec74a343bfe15ff954487c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: JumpWoosh
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnWallJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addWallJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: WallJumpShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: WallJumpWoosh
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: CreateWallJumpDustParticles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSlopeJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addSlopeJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: SlopeJumpShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SlopeSlideJump
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnStandSlopeJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: StandSlopeJumpShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: StandSlideJump
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGroundRecovery:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GroundRecovery
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1139996611392143662}
+        m_MethodName: CreateFallParticle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFlatSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addFlatSlide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSlopeSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971501571}
+        m_MethodName: addSlopeSlide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDamageTaking:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: DamageTakingShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGroundHitdead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: GroundHitDeadShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDoorOpen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: DoorOpenShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DoorOpen
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnBouncyPlatformJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: BouncyPlatformShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BouncyJump
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnQTEPress:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1816342173}
+        m_MethodName: QTEPressShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlayQteInst
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: QteClick
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnQTEComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1326616986}
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: QteComplete
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &971501571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61c181cb5590224f87e2f1edc2fc66b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumps: 0
+  wallJumps: 0
+  slopeJumps: 0
+  flatSlides: 0
+  slopeSlides: 0
+--- !u!114 &1816342173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3edb3603904d3408f3c3fa37318ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCam: {fileID: 0}
+  WallJumpLenght: 0.06
+  WallJumpPower: 6
+  SlopeJumpLenght: 0.2
+  SlopeJumpPower: 18
+  StandSlopeJumpLenght: 0.2
+  StandSlopeJumpPower: 12
+  BouncyPlatformShakeLenght: 0.2
+  BouncyPlatformShakePower: 12
+  SlopeSlidePower: 0.8
+  FlatSlidePower: 1
+  SlopeStandPower: 0.4
+  DamageTakingLenght: 0.5
+  DamageTakingPower: 20
+  GroundHitDeadLenght: 0.3
+  GroundHitDeadPower: 12
+  DoorOpenLenght: 0.15
+  DoorOpenPower: 6
+  QTEPressLenght: 0.1
+  QTEPressPower: 4
+--- !u!114 &1326616986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e821a6ced992041b70afff9eac5954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1139996611392143662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec68c996049d5b64bb49423ceb7edf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WallJumpDustParticlesLeft: {fileID: 9189426295876359296, guid: a44a6a5f9231c2f4fb7c83da2e73fd28,
+    type: 3}
+  WallJumpDustParticlesRight: {fileID: 9189426295876359296, guid: ab94e6105954d1f44a9d7a2111f45257,
+    type: 3}
+  FallParticle: {fileID: 4977593573201393611, guid: 057c0b67d68e79c46884b1461eb63a86,
+    type: 3}
+--- !u!114 &4740831783409130732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139996610849355492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faed37a1c625512408507c01805a8801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segmentTimes: []
+  totalTime: 0
+  finalTotalTime: 0
+  minutes: 0
+  seconds: 0
+  milli: 
+  noUpdateTimeOnCheckpoint: 2
+  blinkTime: 0.05
+  blinkDuration: 0.5
 --- !u!1 &1139996611386880386
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,3 +1034,163 @@ Transform:
   m_Father: {fileID: 1139996610849355495}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1320550916354037234
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1139996610849355495}
+    m_Modifications:
+    - target: {fileID: 7468573134259747545, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344360, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344360, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.27999878
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6539993
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344362, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_Name
+      value: Cigarette_Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134436344362, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.a
+      value: 0.034325957
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime0
+      value: 8288
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime2
+      value: 21588
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 9059
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 23323
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime3
+      value: 47995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573134469135877, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573135272979400, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468573135952980937, guid: 15ef989b9b1e6ec42af916b5943f8604,
+        type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15ef989b9b1e6ec42af916b5943f8604, type: 3}
+--- !u!4 &8500044833908586459 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7468573134436344361, guid: 15ef989b9b1e6ec42af916b5943f8604,
+    type: 3}
+  m_PrefabInstance: {fileID: 1320550916354037234}
+  m_PrefabAsset: {fileID: 0}

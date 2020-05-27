@@ -5,7 +5,7 @@ using UnityEngine;
 public class KLD_TestQTE : MonoBehaviour
 {
     public float maxPoints;
-    private float currentPoints;
+    public float currentPoints;
     public float pointsPerInput;
     public float pointsLostPerSecond;
 
@@ -19,6 +19,10 @@ public class KLD_TestQTE : MonoBehaviour
     private SpriteRenderer sr;
     public Color basic, doneColor;
 
+    public Vector2 playerOffset;
+
+    KLD_PlayerEvents events;
+
     public enum QteMode
     {
         button,
@@ -29,6 +33,8 @@ public class KLD_TestQTE : MonoBehaviour
 
 
     private GameObject player;
+    private PlayerController2D controller;
+    private Transform parentTransform;
 
     void Awake()
     {
@@ -38,7 +44,12 @@ public class KLD_TestQTE : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
+        controller = player.GetComponent<PlayerController2D>();
         sr.color = basic;
+        events = player.GetComponent<KLD_PlayerEvents>();
+        parentTransform = transform.parent;
+
+        linkAnimToQteType();
     }
     
     void Update()
@@ -50,6 +61,7 @@ public class KLD_TestQTE : MonoBehaviour
             decreasePoints();
             checkEnd();
         }
+        linkPosToPlayer();
         doGraphics();
     }
 
@@ -72,6 +84,7 @@ public class KLD_TestQTE : MonoBehaviour
         {
             currentPoints += pointsPerInput;
             lastXAxisRawValue = 0f;
+            events.OnQTEPress.Invoke();
         }
         if (curXAxisRawValue != 0f)
         {
@@ -103,11 +116,14 @@ public class KLD_TestQTE : MonoBehaviour
 
     private void doEnd ()
     {
-        player.GetComponent<PlayerController2D>().cantMove = false;
+        controller.cantMove = false;
+        controller.grabbed = false;
         player.GetComponent<KLD_DamageTaker>().startInvulnerability();
+        events.InvokeQTEComplete();
         Destroy(transform.parent.gameObject);
     }
 
+    /*
     private void doGraphics ()
     {
         if (done)
@@ -115,5 +131,27 @@ public class KLD_TestQTE : MonoBehaviour
             sr.color = doneColor;
         }
         sr.size = new Vector2((currentPoints * 5f) / maxPoints, 0.5f);
+    }*/
+
+    private void doGraphics()
+    {
+        if (done)
+        {
+            //sr.color = doneColor;
+        }
+
+        sr.size = new Vector2((currentPoints * 7.4375f) / maxPoints, 3.125f);
     }
+
+
+    void linkPosToPlayer ()
+    {
+        parentTransform.position = player.transform.position + (Vector3)playerOffset;
+    }
+
+    void linkAnimToQteType ()
+    {
+        transform.parent.GetChild(1).GetComponent<Animator>().SetInteger("QteType", (int)qteMode);
+    }
+
 }

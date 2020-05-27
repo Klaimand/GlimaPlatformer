@@ -1,17 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KLD_LdHelper : MonoBehaviour
 {
     private Transform respawnPointsObject;
     private Rigidbody2D rb;
-    private Camera camera;
+    private new Camera camera;
+    private GameObject debugMenu;
+
+    public bool canDebugTp = true;
 
     private float lastDpadX;
     private float lastDpadY;
 
     public float unitsAddedPerDPadClick;
+
+    private string currentcode;
+
+    private bool debugOpen;
 
     private void Awake()
     {
@@ -23,14 +31,18 @@ public class KLD_LdHelper : MonoBehaviour
     {
         camera = Camera.main.GetComponent<Camera>();
         respawnPointsObject = GameObject.Find("RespawnPointsObject").transform;
+        debugMenu = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        teleportOnClickPosition();
-        teleportToRespawnPoint();
-        teleportOnControllerCrossDirection();
+        if (canDebugTp) {
+            teleportOnClickPosition();
+            teleportToRespawnPoint();
+            teleportOnControllerCrossDirection();
+        }
+        doCharacterReturn();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,7 +56,7 @@ public class KLD_LdHelper : MonoBehaviour
 
     void teleportOnClickPosition ()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !debugOpen)
         {
             transform.position = camera.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
@@ -133,5 +145,61 @@ public class KLD_LdHelper : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
+
+    void doCharacterReturn ()
+    {
+        foreach (char c in Input.inputString)
+        {
+            if (c == '\b')
+            {
+
+            }
+            else if ((c == '\n') || (c == '\r'))
+            {
+                checkCode();
+                currentcode = "";
+            }
+            else
+            {
+                currentcode += c;
+            }
+        }
+    }
+
+    void checkCode ()
+    {
+        if (currentcode == "debug")
+        {
+            debugOpen = true;
+            debugMenu.SetActive(true);
+        }
+    }
+
+    #region Debug Buttons Functions
+
+    public void resetScene ()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+
+    public void closeDebug ()
+    {
+        debugOpen = false;
+        debugMenu.SetActive(false);
+    }
+
+    public void disableDebugTp ()
+    {
+        canDebugTp = false;
+    }
+
+    public void enableDebugTp ()
+    {
+        canDebugTp = true;
+    }
+
+    #endregion
 
 }

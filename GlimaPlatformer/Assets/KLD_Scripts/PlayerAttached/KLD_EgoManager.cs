@@ -5,105 +5,171 @@ using UnityEngine.UI;
 
 public class KLD_EgoManager : MonoBehaviour
 {
-    [SerializeField, Range(1, 40)]
-    private int egoPointsPerBar;
-    
+    [SerializeField, Range(1, 20)]
+    private int egoPointsPerBar = 0, egoPointsPerCan = 0;
+
     [SerializeField]
-    private int curEgoPoints, egoPointsPerCan, pointsAfter3BarsToFillSuperSayan;
+    private float curEgoPoints;
+    [SerializeField, Tooltip("Cost of 1 second of sprinting")]
+    private float sprintSecondEnergyConsuption;
+    [SerializeField]
+    private float minimumEgoToSprint = 0f;
 
-    
-    private Image egoBarUI, egoBarAUI;
+    private Image egoBarUI, egoBarAUI, egoBarEclairs;
 
-    private float[] egoBarFillPoints = { 0f, 0.325f, 0.5935f, 0.8615f, 1f };
+    //private float[] egoBarFillPoints = { 0f, 0.325f, 0.5935f, 0.8615f};
+    private float[] egoBarFillPoints = { 0f, 0.272f, 0.543f, 0.815f };
+
+    [SerializeField]
+    private bool isSprinting;
+
+    PlayerController2D controller;
+    KLD_DamageTaker damageTaker;
+    KLD_AudioManager audioManager;
+
+    Animator egoEmptyAnimator;
 
     public enum EgoState
     {
         ZeroBarFilled,
         OneBarFilled,
         TwoBarsFilled,
-        ThreeBarsFilled,
-        FourBarsFilled
+        ThreeBarsFilled
     }
 
     public EgoState curEgoState;
+
+    public void Awake()
+    {
+        controller = GetComponent<PlayerController2D>();
+        damageTaker = GetComponent<KLD_DamageTaker>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         egoBarUI = GameObject.Find("EgoBar").GetComponent<Image>();
         egoBarAUI = GameObject.Find("EgoBarA").GetComponent<Image>();
+        egoBarEclairs = GameObject.Find("EgoBarEclairs").GetComponent<Image>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
+        egoEmptyAnimator = GameObject.Find("EgoBar_Ego").GetComponent<Animator>();
         checkEgoState();
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Space))
-       {
-            addEgo(egoPointsPerCan);
-       }
-       if (Input.GetKeyDown(KeyCode.A))
-       {
-            removeEgo();
-       }
+        doSprintInput();
+        checkEgoState();
+        updateEgoBarUI();
+        updateEclairsOnSprint();
+        updateEgoBarShake();
     }
 
     public void addEgo(int egoToAdd)
     {
-        curEgoPoints = Mathf.Min(curEgoPoints + egoToAdd, (egoPointsPerBar * 3) + pointsAfter3BarsToFillSuperSayan);
-        checkEgoState();
+        curEgoPoints = Mathf.Min(curEgoPoints + egoToAdd, (egoPointsPerBar * 3));
     }
 
     public void removeEgo ()
     {
         curEgoPoints = Mathf.Max(0, curEgoPoints - egoPointsPerBar);
-        checkEgoState();
     }
 
     void checkEgoState()
     {
-        if (curEgoPoints < egoPointsPerBar - 1)
+        if (curEgoPoints < egoPointsPerBar)
         {
             curEgoState = EgoState.ZeroBarFilled;
         }
-        else if (curEgoPoints >= egoPointsPerBar && curEgoPoints < (egoPointsPerBar * 2) - 1)
+        else if (curEgoPoints >= egoPointsPerBar && curEgoPoints < (egoPointsPerBar * 2))
         {
             curEgoState = EgoState.OneBarFilled;
         }
-        else if (curEgoPoints >= egoPointsPerBar * 2 && curEgoPoints < (egoPointsPerBar * 3) - 1)
+        else if (curEgoPoints >= egoPointsPerBar * 2 && curEgoPoints < (egoPointsPerBar * 3))
         {
             curEgoState = EgoState.TwoBarsFilled;
         }
-        else if (curEgoPoints >= egoPointsPerBar * 3 && curEgoPoints < (egoPointsPerBar * 3) + pointsAfter3BarsToFillSuperSayan)
+        else if (curEgoPoints >= egoPointsPerBar * 3)
         {
             curEgoState = EgoState.ThreeBarsFilled;
         }
-        else if (curEgoPoints == egoPointsPerBar * 3 + pointsAfter3BarsToFillSuperSayan)
-        {
-            curEgoState = EgoState.FourBarsFilled;
-        }
-        updateEgoBarUI();
     }
 
+    /*
     private void updateEgoBarUI()
     {
         egoBarUI.fillAmount = egoBarFillPoints[(int)curEgoState];
         
-        if ((int)curEgoState != 4)
+        if ((int)curEgoState != 3)
         {
-            float thisBarFillingRatio = (int)curEgoState == 3 ? (float)(curEgoPoints % pointsAfter3BarsToFillSuperSayan) / (float)pointsAfter3BarsToFillSuperSayan : (float)(curEgoPoints % egoPointsPerBar) / (float)egoPointsPerBar;
-            float fillingDifferenceBetweenActualBar = (int)curEgoState == 3 ? 1f - egoBarFillPoints[(int)curEgoState] : egoBarFillPoints[(int)curEgoState + 1] - egoBarFillPoints[(int)curEgoState];
+            float thisBarFillingRatio = (float)(curEgoPoints % egoPointsPerBar) / (float)egoPointsPerBar;
+            float fillingDifferenceBetweenActualBar = egoBarFillPoints[(int)curEgoState + 1] - egoBarFillPoints[(int)curEgoState];
             
             egoBarAUI.fillAmount = egoBarFillPoints[(int)curEgoState] + (fillingDifferenceBetweenActualBar * thisBarFillingRatio);
+        }
+    }*/
+
+    private void updateEgoBarUI ()
+    {
+        float filledAmount = ((float)curEgoPoints * egoBarFillPoints[3]) / ((float)egoPointsPerBar * 3f);
+        egoBarAUI.fillAmount = filledAmount;
+        egoBarUI.fillAmount = 1f - filledAmount;
+    }
+
+    private void updateEclairsOnSprint ()
+    {
+        if (isSprinting)
+        {
+            egoBarEclairs.color = Color.white;
+        }
+        else
+        {
+            egoBarEclairs.color = new Color(1f, 1f, 1f, 0f);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Can"))
+        if (collision.gameObject.CompareTag("Can") && curEgoPoints < egoPointsPerBar * 3)
         {
             addEgo(egoPointsPerCan);
+            audioManager.PlaySound("CanPickup");
             Destroy(collision.gameObject);
         }
+    }
+
+    void doSprintInput ()
+    {
+        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButton("Sprint"))
+        {
+            isSprinting = true;
+        }
+
+        else if (isSprinting && curEgoPoints <= 0f || isSprinting && !Input.GetButton("Sprint"))
+        {
+            isSprinting = false;
+        }
+
+        if (isSprinting)
+        {
+            curEgoPoints -= sprintSecondEnergyConsuption * Time.deltaTime;
+        }
+
+        controller.SetSprint(isSprinting);
+
+
+
+    }
+
+    public bool getSprintState()
+    {
+        return isSprinting;
+    }
+
+
+    void updateEgoBarShake ()
+    {
+        egoEmptyAnimator.SetBool("isShaking", isSprinting);
     }
 }

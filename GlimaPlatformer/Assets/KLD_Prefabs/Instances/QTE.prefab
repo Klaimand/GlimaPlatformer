@@ -100,6 +100,7 @@ MonoBehaviour:
   joystickLenghtToAdd: 0.5
   basic: {r: 0.9056604, g: 0.055535804, b: 0.40426472, a: 1}
   doneColor: {r: 0.17221431, g: 0.8490566, b: 0.2772604, a: 1}
+  playerOffset: {x: -3.7, y: 2.75}
   qteMode: 0
 --- !u!1 &2881500887123653549
 GameObject:
