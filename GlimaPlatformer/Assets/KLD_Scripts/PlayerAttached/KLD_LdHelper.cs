@@ -31,7 +31,7 @@ public class KLD_LdHelper : MonoBehaviour
     {
         camera = Camera.main.GetComponent<Camera>();
         respawnPointsObject = GameObject.Find("RespawnPointsObject").transform;
-        debugMenu = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+        debugMenu = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
