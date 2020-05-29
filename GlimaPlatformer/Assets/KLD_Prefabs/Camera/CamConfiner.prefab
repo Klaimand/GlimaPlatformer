@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 1531817651702055035}
   m_Layer: 2
   m_Name: CamConfiner
-  m_TagString: Untagged
+  m_TagString: CamConfiner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

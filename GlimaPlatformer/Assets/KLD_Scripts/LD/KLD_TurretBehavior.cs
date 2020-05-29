@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class KLD_TurretBehavior : MonoBehaviour
 {
@@ -22,11 +23,21 @@ public class KLD_TurretBehavior : MonoBehaviour
 
     public LayerMask tileMapLayer;
 
+
+    private Light2D turretLight;
+
+    [SerializeField]
+    float onDuration, offDuration;
+
+    bool isLighted;
+    float timeSinceLastBlink;
+
     private void Awake()
     {
         canShoot = true;
         target = turretIdletarget;
         lineRenderer = GetComponent<LineRenderer>();
+        turretLight = GetComponent<Light2D>();
     }
 
     void Start()
@@ -42,6 +53,7 @@ public class KLD_TurretBehavior : MonoBehaviour
         chooseTarget();
         aimTarget();
         checkIfTurretCanShoot();
+        doBlink();
         if (lineRenderer != null)
         {
             drawLaser();
@@ -135,6 +147,23 @@ public class KLD_TurretBehavior : MonoBehaviour
         RaycastHit2D hitt = Physics2D.Raycast((Vector2)transform.position, (Vector2)transform.up, Mathf.Infinity, tileMapLayer);
         lineRenderer.SetPosition(0, transform.position + transform.up * 0.625f);
         lineRenderer.SetPosition(1, hitt.point     );
+    }
+
+    private void doBlink()
+    {
+        if (!isLighted && timeSinceLastBlink >= offDuration)
+        {
+            turretLight.enabled = true;
+            timeSinceLastBlink = 0f;
+            isLighted = !isLighted;
+        }
+        else if (isLighted && timeSinceLastBlink >= onDuration)
+        {
+            turretLight.enabled = false;
+            timeSinceLastBlink = 0f;
+            isLighted = !isLighted;
+        }
+        timeSinceLastBlink += Time.deltaTime;
     }
 
 }

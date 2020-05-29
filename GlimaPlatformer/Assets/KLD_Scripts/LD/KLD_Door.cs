@@ -27,7 +27,7 @@ public class KLD_Door : MonoBehaviour
 
     void checkOpen ()
     {
-        if (!opened && Vector3.Distance(transform.position, player.position) < openDistance)
+        if (!opened && Vector3.Distance(transform.position + Vector3.up * 1.5f, player.position) < openDistance)
         {
             events.InvokeDoorOpening();
             opened = true;
