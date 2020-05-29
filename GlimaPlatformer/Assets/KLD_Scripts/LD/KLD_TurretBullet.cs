@@ -24,6 +24,8 @@ public class KLD_TurretBullet : MonoBehaviour
                 damagetaker.doDamageTaking(DamageType.Explosion, transform, 0f);
             }
         }
-        Destroy(gameObject);
+        if (!collisiongo.CompareTag("SegmentCheckpoint") && !collisiongo.CompareTag("CamConfiner")) {
+            Destroy(gameObject);
+        }
     }
 }

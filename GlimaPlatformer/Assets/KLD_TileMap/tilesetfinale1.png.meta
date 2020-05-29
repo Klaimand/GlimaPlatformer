@@ -41,6 +41,72 @@ TextureImporter:
   - first:
       213: -9009499048158482676
     second: tilesetfinale1_12
+  - first:
+      213: 8043166469237615788
+    second: tilesetfinale1_0
+  - first:
+      213: -5340001083759662366
+    second: tilesetfinale1_1
+  - first:
+      213: 8909672693820557739
+    second: tilesetfinale1_2
+  - first:
+      213: 3732975334220875239
+    second: tilesetfinale1_3
+  - first:
+      213: -3190995770135904141
+    second: tilesetfinale1_4
+  - first:
+      213: -5753134393453138949
+    second: tilesetfinale1_5
+  - first:
+      213: 7209801831515772785
+    second: tilesetfinale1_6
+  - first:
+      213: 3794679756269283043
+    second: tilesetfinale1_7
+  - first:
+      213: 2481546947253981703
+    second: tilesetfinale1_8
+  - first:
+      213: 7090422637619235436
+    second: tilesetfinale1_9
+  - first:
+      213: -5429958260142650650
+    second: tilesetfinale1_10
+  - first:
+      213: -584361569966981002
+    second: tilesetfinale1_11
+  - first:
+      213: -661556777400343501
+    second: tilesetfinale1_12
+  - first:
+      213: 890733554265855819
+    second: tilesetfinale1_13
+  - first:
+      213: -9062091485989328489
+    second: tilesetfinale1_14
+  - first:
+      213: 4587992589833986177
+    second: tilesetfinale1_15
+  - first:
+      213: -7725902832519741847
+    second: tilesetfinale1_16
+  - first:
+      213: 3390108299478583042
+    second: tilesetfinale1_17
+  - first:
+      213: 9082101524843186866
+    second: tilesetfinale1_18
+  - first:
+      213: -3557219706671031025
+    second: tilesetfinale1_19
+  - first:
+      213: -7916689113258444747
+    second: tilesetfinale1_20
+  - first:
+      213: 5286826663248469302
+    second: tilesetfinale1_21
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -128,8 +194,8 @@ TextureImporter:
       name: tilesetfinale1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 24
+        x: 1
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -139,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9558e2bd23545a80800000000000000
-      internalID: -8479060742691596897
+      spriteID: cacad3c0a411f9f60800000000000000
+      internalID: 8043166469237615788
       vertices: []
       indices: 
       edges: []
@@ -149,8 +215,8 @@ TextureImporter:
       name: tilesetfinale1_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 24
+        x: 11
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -160,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f75dc5893f8667e80800000000000000
-      internalID: -8181236277629364865
+      spriteID: 2eaed4e8e4184e5b0800000000000000
+      internalID: -5340001083759662366
       vertices: []
       indices: 
       edges: []
@@ -170,8 +236,8 @@ TextureImporter:
       name: tilesetfinale1_2
       rect:
         serializedVersion: 2
-        x: 24
-        y: 24
+        x: 31
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -181,8 +247,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2d5025c0b3059940800000000000000
-      internalID: 5302148194054987055
+      spriteID: ba90c2c0c1485ab70800000000000000
+      internalID: 8909672693820557739
       vertices: []
       indices: 
       edges: []
@@ -191,8 +257,8 @@ TextureImporter:
       name: tilesetfinale1_3
       rect:
         serializedVersion: 2
-        x: 32
-        y: 24
+        x: 41
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -202,8 +268,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05f8559c3eb40fac0800000000000000
-      internalID: -3823472641930064048
+      spriteID: 7e5c78fc9413ec330800000000000000
+      internalID: 3732975334220875239
       vertices: []
       indices: 
       edges: []
@@ -212,8 +278,8 @@ TextureImporter:
       name: tilesetfinale1_4
       rect:
         serializedVersion: 2
-        x: 40
-        y: 24
+        x: 51
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -223,8 +289,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da6b57d6583d29ce0800000000000000
-      internalID: -1399823964138260819
+      spriteID: 3708641f04e47b3d0800000000000000
+      internalID: -3190995770135904141
       vertices: []
       indices: 
       edges: []
@@ -233,8 +299,8 @@ TextureImporter:
       name: tilesetfinale1_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 8
+        x: 1
+        y: 11
         width: 8
         height: 8
       alignment: 0
@@ -244,8 +310,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c8a8dc14239c1060800000000000000
-      internalID: 6925572110301046977
+      spriteID: bfba42520c2c820b0800000000000000
+      internalID: -5753134393453138949
       vertices: []
       indices: 
       edges: []
@@ -254,8 +320,8 @@ TextureImporter:
       name: tilesetfinale1_6
       rect:
         serializedVersion: 2
-        x: 8
-        y: 8
+        x: 11
+        y: 11
         width: 8
         height: 8
       alignment: 0
@@ -265,8 +331,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1868c7989076b3260800000000000000
-      internalID: 7078364530001872513
+      spriteID: 177557c019c5e0460800000000000000
+      internalID: 7209801831515772785
       vertices: []
       indices: 
       edges: []
@@ -275,8 +341,8 @@ TextureImporter:
       name: tilesetfinale1_7
       rect:
         serializedVersion: 2
-        x: 40
-        y: 8
+        x: 51
+        y: 11
         width: 8
         height: 8
       alignment: 0
@@ -286,8 +352,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15963dea1babc17a0800000000000000
-      internalID: -6405039297722619567
+      spriteID: 3e6ebcc122969a430800000000000000
+      internalID: 3794679756269283043
       vertices: []
       indices: 
       edges: []
@@ -296,8 +362,8 @@ TextureImporter:
       name: tilesetfinale1_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 1
+        y: 1
         width: 8
         height: 8
       alignment: 0
@@ -307,8 +373,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b05e463a0298a9720800000000000000
-      internalID: 2853744087165887755
+      spriteID: 702578cfcc9307220800000000000000
+      internalID: 2481546947253981703
       vertices: []
       indices: 
       edges: []
@@ -317,8 +383,8 @@ TextureImporter:
       name: tilesetfinale1_9
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
+        x: 11
+        y: 1
         width: 8
         height: 8
       alignment: 0
@@ -328,8 +394,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01e503defa4e57fb0800000000000000
-      internalID: -4650559595940389360
+      spriteID: c6aceae72dd366260800000000000000
+      internalID: 7090422637619235436
       vertices: []
       indices: 
       edges: []
@@ -338,8 +404,8 @@ TextureImporter:
       name: tilesetfinale1_10
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 21
+        y: 1
         width: 8
         height: 8
       alignment: 0
@@ -349,8 +415,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbda45e80b2840a90800000000000000
-      internalID: -7348604997148037701
+      spriteID: 6eacff64bb9e4a4b0800000000000000
+      internalID: -5429958260142650650
       vertices: []
       indices: 
       edges: []
@@ -359,8 +425,8 @@ TextureImporter:
       name: tilesetfinale1_11
       rect:
         serializedVersion: 2
-        x: 24
-        y: 0
+        x: 31
+        y: 1
         width: 8
         height: 8
       alignment: 0
@@ -370,8 +436,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3efef363f0117c30800000000000000
-      internalID: 4355280952184733247
+      spriteID: 6708ab98f3ee3e7f0800000000000000
+      internalID: -584361569966981002
       vertices: []
       indices: 
       edges: []
@@ -380,8 +446,8 @@ TextureImporter:
       name: tilesetfinale1_12
       rect:
         serializedVersion: 2
-        x: 40
-        y: 0
+        x: 51
+        y: 1
         width: 8
         height: 8
       alignment: 0
@@ -391,8 +457,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0f2b4e9954d7f280800000000000000
-      internalID: -9009499048158482676
+      spriteID: 334ec44bd9da1d6f0800000000000000
+      internalID: -661556777400343501
       vertices: []
       indices: 
       edges: []

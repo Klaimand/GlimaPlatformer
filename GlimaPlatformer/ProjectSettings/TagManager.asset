@@ -11,6 +11,7 @@ TagManager:
   - StairsToTheRight
   - SegmentCheckpoint
   - FinalCheckpoint
+  - CamConfiner
   layers:
   - Default
   - TransparentFX
