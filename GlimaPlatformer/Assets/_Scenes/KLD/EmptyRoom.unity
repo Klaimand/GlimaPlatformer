@@ -54562,11 +54562,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 604825893500009565, guid: ddfb7c37ff12aa74c8431125afa0a391,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddfb7c37ff12aa74c8431125afa0a391, type: 3}
 --- !u!1001 &1576255258279658692
@@ -55845,11 +55840,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8253953085192454224, guid: 6e8da8d853018de44b6e96effa27577f,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8253953085192454225, guid: 6e8da8d853018de44b6e96effa27577f,
         type: 3}
       propertyPath: m_LocalPosition.x
