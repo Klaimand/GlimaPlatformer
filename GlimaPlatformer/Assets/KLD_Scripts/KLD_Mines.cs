@@ -15,15 +15,24 @@ public class KLD_Mines : MonoBehaviour
     private KLD_DamageTaker damageTaker;
     private KLD_AudioManager audioManager;
 
+    private GameObject mineLight;
+
     [SerializeField]
     private float timeBeforeExplosion = 0f, explosionRadius = 0f, explosionForce = 0f;
-    
+
+    [SerializeField]
+    float onDuration, offDuration;
+
+    bool isLighted;
+    float timeSinceLastBlink;
+
     // Start is called before the first frame update
     void Start()
     {
         damageTaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
         audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
         thisSr = GetComponent<SpriteRenderer>();
+        mineLight = transform.GetChild(0).gameObject;
         //buttonSr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         //buttonSr.color = buttonOff;
     }
@@ -31,7 +40,7 @@ public class KLD_Mines : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        doBlink();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,5 +74,22 @@ public class KLD_Mines : MonoBehaviour
             }
         }
         audioManager.PlaySound("MineExplosion");
+    }
+
+    private void doBlink ()
+    {
+        if (!isLighted && timeSinceLastBlink >= offDuration)
+        {
+            mineLight.SetActive(true);
+            timeSinceLastBlink = 0f;
+            isLighted = !isLighted;
+        }
+        else if (isLighted && timeSinceLastBlink >= onDuration)
+        {
+            mineLight.SetActive(false);
+            timeSinceLastBlink = 0f;
+            isLighted = !isLighted;
+        }
+        timeSinceLastBlink += Time.deltaTime;
     }
 }
