@@ -25,6 +25,7 @@ public class PlayerController2D : MonoBehaviour
     public int accelerationFrame;
     public int decelerationFrame;
     public bool cantMove;
+    public bool grabbed;
     private bool isSprinting;
 
     private bool cantMoveTrigger;
@@ -109,10 +110,12 @@ public class PlayerController2D : MonoBehaviour
     private bool isOnStairs;
     private bool stairsToTheLeft;
     private bool jumpTrigger;
-    
+
     [Header("Getters and Setters")]
+    private bool isPaused;
     private bool canTriggerJumpGetter;
     
+
     [Space(10)]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
@@ -133,7 +136,9 @@ public class PlayerController2D : MonoBehaviour
         CrouchAir, //11
         BlowedAscending, //12
         BlowedFalling, //13
-        Downed //14
+        Downed, //14
+        Grabbed, //15
+        Sprinting //16
     };
 
     [Header("Animations Handling")]
@@ -143,6 +148,7 @@ public class PlayerController2D : MonoBehaviour
     public float rollLenght;
     public float rollSpeed;
     private bool doneRoll;
+    public bool FlipXInst;
 
     #endregion
 
@@ -162,14 +168,13 @@ public class PlayerController2D : MonoBehaviour
     void Update()
     {
         checkGround();
-        if (!cantMove)
+        if (!cantMove && !isPaused)
         {
             doJump();
             doWallJump();
             doCrouch();
             doFlatSliding();
             doSlopedSlideJump();
-            //doSprintInputDebug();
         }
         getPlayerState2();
         doFlipX();
@@ -192,6 +197,8 @@ public class PlayerController2D : MonoBehaviour
         doOnStairsGravityDisable();
         //doSlopeSlideDetection();
         doHorizontalMove();
+        checkIfSprintingInAir();
+        checkGroundRecovery();
         checkLastGroundState();
         checkLastWallState();
     }
@@ -364,19 +371,7 @@ public class PlayerController2D : MonoBehaviour
             rb.velocity = new Vector2(1f, stairsDirection).normalized * speed * virtualXAxis;
         }
     }
-
-    void doSprintInputDebug ()
-    {
-        if (Input.GetKey(KeyCode.N))
-        {
-            isSprinting = true;
-        }
-        else
-        {
-            isSprinting = false;
-        }
-    }
-
+    
     #endregion
 
     #region Jumps
@@ -627,6 +622,23 @@ public class PlayerController2D : MonoBehaviour
         cantMoveTrigger = false;
     }
 
+    private void checkGroundRecovery ()
+    {
+        if (!lastFrameGrounded && isGrounded && !cantMove
+            && !isFlatSliding)
+        {
+            events.InvokeGroundRecovery();
+        }
+    }
+
+    private void checkIfSprintingInAir ()
+    {
+        if (lastJumpIsSprintJump && !isSprinting)
+        {
+            lastJumpIsSprintJump = false;
+        }
+    }
+
     #endregion
 
     #region Crouching and Sliding
@@ -774,6 +786,23 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public bool getWallSlideStatus()
+    {
+        if (playerState == PlayerState.WallSliding)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool getIsWallSlidingLeft ()
+    {
+        return isAgainstLeftWall;
+    }
+
     public bool getSlopeSlideStatus ()
     {
         if (playerState == PlayerState.SlopeSliding)
@@ -815,6 +844,11 @@ public class PlayerController2D : MonoBehaviour
         return 1 - (flatSlidingMinSpeed / Mathf.Abs(rb.velocity.x));
     }
 
+    public bool getSprintState ()
+    {
+        return isSprinting;
+    }
+
     public void SetLastJumpIsBounce (bool value)
     {
         lastJumpIsBounce = value;
@@ -854,6 +888,11 @@ public class PlayerController2D : MonoBehaviour
         isSprinting = state;
     }
 
+    public void SetPause (bool state)
+    {
+        isPaused = state;
+    }
+
     #endregion
 
     #region Animations Handling
@@ -868,7 +907,16 @@ public class PlayerController2D : MonoBehaviour
                 {
                     if (isGrounded)
                     {
-                        playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.Running : PlayerState.Idle;
+                        //playerState = Mathf.Abs(rb.velocity.x) > moveStateThreshold ? PlayerState.Running : PlayerState.Idle;
+                        if (Mathf.Abs(rb.velocity.x) > moveStateThreshold)
+                        {
+                            playerState = isSprinting ? PlayerState.Sprinting : PlayerState.Running;
+                        }
+                        else
+                        {
+                            playerState = PlayerState.Idle;
+                        }
+
                         if ((Mathf.Sign(rb.velocity.x) != Input.GetAxisRaw("Horizontal")) && Input.GetAxisRaw("Horizontal") != 0f)
                         {
                             //Retournement trigger
@@ -924,20 +972,27 @@ public class PlayerController2D : MonoBehaviour
         }
         else if (cantMove)
         {
-            if (isGrounded)
+            if (!grabbed)
             {
-                playerState = PlayerState.Downed;
+                if (isGrounded)
+                {
+                    playerState = PlayerState.Downed;
+                }
+                else if (!isGrounded)
+                {
+                    if (rb.velocity.y > 0f)
+                    {
+                        playerState = PlayerState.BlowedAscending;
+                    }
+                    else if (rb.velocity.y < 0f)
+                    {
+                        playerState = PlayerState.BlowedFalling;
+                    }
+                }
             }
-            else if (!isGrounded)
+            else if (grabbed)
             {
-                if (rb.velocity.y > 0f)
-                {
-                    playerState = PlayerState.BlowedAscending;
-                }
-                else if (rb.velocity.y < 0f)
-                {
-                    playerState = PlayerState.BlowedFalling;
-                }
+                playerState = PlayerState.Grabbed;
             }
         }
 
@@ -946,7 +1001,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void doFlipX ()
     {
-        if (playerState == PlayerState.Running || playerState == PlayerState.Jumping || playerState == PlayerState.Falling ||
+        if (playerState == PlayerState.Running || playerState == PlayerState.Sprinting || playerState == PlayerState.Jumping || playerState == PlayerState.Falling ||
             playerState == PlayerState.CrouchWalk || playerState == PlayerState.CrouchAir)
         {
             if (Mathf.Abs(virtualXAxis) > moveStateThreshold && !cantControlHorizontal) {
@@ -965,13 +1020,16 @@ public class PlayerController2D : MonoBehaviour
         {
             flip = isSlidingToTheLeft;
         }
+
+        FlipXInst = flip;
+
         spriterenderer.flipX = flip;
     }
 
 
     private void checkBlowedGround ()
     {
-        if (cantMove && isGrounded && !doneRoll)
+        if (cantMove && isGrounded && !doneRoll && !grabbed)
         {
             doneRoll = true;
             StartCoroutine(startRolling());

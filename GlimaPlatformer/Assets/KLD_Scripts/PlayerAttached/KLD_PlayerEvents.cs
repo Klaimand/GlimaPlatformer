@@ -10,6 +10,7 @@ public class KLD_PlayerEvents : MonoBehaviour
     public UnityEvent OnWallJump;
     public UnityEvent OnSlopeJump;
     public UnityEvent OnStandSlopeJump;
+    public UnityEvent OnGroundRecovery;
     public UnityEvent OnFlatSlide;
     public UnityEvent OnSlopeSlide;
     public UnityEvent OnDamageTaking;
@@ -17,6 +18,7 @@ public class KLD_PlayerEvents : MonoBehaviour
     public UnityEvent OnDoorOpen;
     public UnityEvent OnBouncyPlatformJump;
     public UnityEvent OnQTEPress;
+    public UnityEvent OnQTEComplete;
 
     public void InvokeJump ()
     {
@@ -36,6 +38,11 @@ public class KLD_PlayerEvents : MonoBehaviour
     public void InvokeStandSlopeJump ()
     {
         OnStandSlopeJump.Invoke();
+    }
+
+    public void InvokeGroundRecovery ()
+    {
+        OnGroundRecovery.Invoke();
     }
 
     public void InvokeFlatSlide()
@@ -71,6 +78,11 @@ public class KLD_PlayerEvents : MonoBehaviour
     public void InvokeQTEPress ()
     {
         OnQTEPress.Invoke();
+    }
+
+    public void InvokeQTEComplete()
+    {
+        OnQTEComplete.Invoke();
     }
 
 }
