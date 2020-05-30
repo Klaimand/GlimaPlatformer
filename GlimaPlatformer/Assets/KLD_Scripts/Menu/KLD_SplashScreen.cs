@@ -18,6 +18,7 @@ public class KLD_SplashScreen : MonoBehaviour
     Text AnyKeyText;
 
     public UnityEvent OnAnyKeyPress;
+    public UnityEvent OnFadeFinish;
 
     // Start is called before the first frame update
     void Awake()
@@ -44,6 +45,7 @@ public class KLD_SplashScreen : MonoBehaviour
             StartCoroutine(startBlackFade());
             AnyKeyTextAnimator.SetBool("KeyPressed", true);
             StartCoroutine(blink());
+            OnAnyKeyPress.Invoke();
         }
     }
 
@@ -80,6 +82,6 @@ public class KLD_SplashScreen : MonoBehaviour
     void callOnFadeFinish ()
     {
         //SceneManager.LoadScene("KLD_MenuPrincipal");
-        OnAnyKeyPress.Invoke();
+        OnFadeFinish.Invoke();
     }
 }
