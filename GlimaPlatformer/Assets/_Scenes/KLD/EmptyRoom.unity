@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7472,11 +7472,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1440845653339245470, guid: 8f01908ef42a9bd4d877b7b81eea61ba,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -12.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6955341376455950098, guid: 8f01908ef42a9bd4d877b7b81eea61ba,
         type: 3}
       propertyPath: m_Name
@@ -56396,16 +56391,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MenuFunctions
-      objectReference: {fileID: 0}
-    - target: {fileID: 9195346086060501422, guid: a2f9109c2b1f2d44a888586b745b56a4,
-        type: 3}
-      propertyPath: timeBetweenSegment
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9195346086060501422, guid: a2f9109c2b1f2d44a888586b745b56a4,
-        type: 3}
-      propertyPath: segmentRevealDuration
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9195346086060501423, guid: a2f9109c2b1f2d44a888586b745b56a4,
         type: 3}
