@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class KLD_SplashScreen : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class KLD_SplashScreen : MonoBehaviour
     Animator AnyKeyTextAnimator, BlackFadeAnimator;
     [SerializeField]
     Text AnyKeyText;
+
+    public UnityEvent OnAnyKeyPress;
 
     // Start is called before the first frame update
     void Awake()
@@ -76,6 +79,7 @@ public class KLD_SplashScreen : MonoBehaviour
 
     void callOnFadeFinish ()
     {
-        SceneManager.LoadScene("KLD_MenuPrincipal");
+        //SceneManager.LoadScene("KLD_MenuPrincipal");
+        OnAnyKeyPress.Invoke();
     }
 }

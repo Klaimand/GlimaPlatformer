@@ -9633,6 +9633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 837384223482682071}
+  - component: {fileID: 7988157441849766104}
   m_Layer: 0
   m_Name: WJ_Right_Particles_Parent
   m_TagString: Untagged
@@ -9656,3 +9657,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7988157441849766104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189426295876359296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fc559e2a7d5274ca0817c54b34839d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 2
