@@ -12,6 +12,9 @@ public class KLD_Grabber : MonoBehaviour
     PlayerController2D controller;
     Animator animator;
 
+    [SerializeField]
+    bool introBoris = false;
+    
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -37,6 +40,12 @@ public class KLD_Grabber : MonoBehaviour
             grabbing = true;
             inZone = true;
             damageTaker.doDamageTaking(DamageType.Grab, transform.GetChild(0), 0f);
+
+            if (introBoris)
+            {
+                Time.timeScale = 1;
+            }
+
         }
     }
 
