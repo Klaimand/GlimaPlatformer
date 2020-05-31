@@ -15,6 +15,9 @@ public class KLD_IntroSequence : MonoBehaviour
     [SerializeField]
     private GameObject camChangeWall;
 
+    [SerializeField]
+    private CanvasGroup borisCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,8 +85,9 @@ public class KLD_IntroSequence : MonoBehaviour
 
         GameObject.Find("CM vcam2").GetComponent<CinemachineVirtualCamera>().Priority = 9;
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
+        fadeInCanvasInst(borisCanvas);
         Destroy(camChangeWall);
     }
 
