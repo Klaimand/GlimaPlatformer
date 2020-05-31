@@ -12,6 +12,9 @@ public class KLD_IntroSequence : MonoBehaviour
     [SerializeField]
     private CanvasGroup[] canvasesToFadeInAfterCamChange;
 
+    [SerializeField]
+    private GameObject camChangeWall;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +81,10 @@ public class KLD_IntroSequence : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         GameObject.Find("CM vcam2").GetComponent<CinemachineVirtualCamera>().Priority = 9;
+
+        yield return new WaitForSeconds(1);
+
+        Destroy(camChangeWall);
     }
 
 }
