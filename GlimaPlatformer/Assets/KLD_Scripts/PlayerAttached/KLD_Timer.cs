@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class KLD_Timer : MonoBehaviour
 {
+
+    public bool started = false;
+
     public List<float> segmentTimes = new List<float>();
     public float totalTime = 0f;
 
@@ -14,7 +17,7 @@ public class KLD_Timer : MonoBehaviour
     public int minutes, seconds;
     public string milli;
 
-    private bool updateUI = true;
+    public bool updateUI = true;
     public float noUpdateTimeOnCheckpoint = 2f;
 
     
@@ -41,12 +44,13 @@ public class KLD_Timer : MonoBehaviour
         milliText = GameObject.Find("MilliTimer").GetComponent<Text>();
 
         timerCanvasGroup = GameObject.Find("TimeCanvas").GetComponent<CanvasGroup>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!finished) {
+        if (!finished && started) {
             addFrameTime();
             updateMinsAndSecs();
         }
@@ -54,11 +58,6 @@ public class KLD_Timer : MonoBehaviour
         {
             updateTimerText();
         }
-        /*
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            print(GetTimeString(GetSegmentTime(0)));
-        }*/
     }
 
     void addFrameTime ()
@@ -137,6 +136,7 @@ public class KLD_Timer : MonoBehaviour
         seconds = Mathf.FloorToInt(totalTime) % 60;
         milli = totalTime.ToString("F3");
         milli = milli.Substring(milli.Length - 3);
+        print(milli);
     }
 
     void updateTimerText ()

@@ -131,22 +131,29 @@ public class KLD_EgoManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Can") && curEgoPoints < egoPointsPerBar * 3)
+        if (collision.gameObject.CompareTag("Can"))
         {
-            addEgo(egoPointsPerCan);
-            audioManager.PlaySound("CanPickup");
+            if (curEgoPoints < egoPointsPerBar * 3) {
+                addEgo(egoPointsPerCan);
+                audioManager.PlaySound("CanPickup");
+            }
+            else if (curEgoPoints == egoPointsPerBar * 3)
+            {
+                egoEmptyAnimator.SetTrigger("Pop");
+                audioManager.PlaySound("CanFull");
+            }
             Destroy(collision.gameObject);
         }
     }
 
     void doSprintInput ()
     {
-        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButton("Sprint"))
+        if (!isSprinting && curEgoPoints >= minimumEgoToSprint && Input.GetButton("Sprint") && !controller.getSlopeSlideStatus() && !controller.getSlopeStandStatus())
         {
             isSprinting = true;
         }
 
-        else if (isSprinting && curEgoPoints <= 0f || isSprinting && !Input.GetButton("Sprint"))
+        else if (isSprinting && curEgoPoints <= 0f || isSprinting && !Input.GetButton("Sprint") || controller.getSlopeSlideStatus() || controller.getSlopeStandStatus())
         {
             isSprinting = false;
         }

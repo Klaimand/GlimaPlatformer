@@ -47,6 +47,9 @@ public class Sound
 public class KLD_AudioManager : MonoBehaviour
 {
     [SerializeField]
+    bool mainMenu = false;
+
+    [SerializeField]
     Sound[] sounds;
 
     PlayerController2D controller;
@@ -56,8 +59,7 @@ public class KLD_AudioManager : MonoBehaviour
 
     private void Start()
     {
-        controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
-
+        
         for (int i = 0; i < sounds.Length; i++)
         {
             GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
@@ -70,6 +72,15 @@ public class KLD_AudioManager : MonoBehaviour
             PlaySound(sound);
         }
 
+        if (!mainMenu)
+        {
+            controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
+            GetSound("DefenseMatrixIntro").GetSource().loop = true;
+        }
+        else if (mainMenu)
+        {
+            GetSound("RingsOfJupiter").GetSource().loop = true;
+        }
     }
 
     public void PlaySound (string _name)
@@ -88,7 +99,7 @@ public class KLD_AudioManager : MonoBehaviour
         Debug.LogWarning("No found sound '" + _name + "'");
     }
 
-    Sound GetSound (string _name)
+    public Sound GetSound (string _name)
     {
         foreach (Sound sound in sounds)
         {
@@ -115,13 +126,15 @@ public class KLD_AudioManager : MonoBehaviour
 
     private void Update()
     {
-        doWallSlideSound();
-        doFlatSlideSound();
-        doSlopeSlideSound();
-        doStandSlideSound();
+        if (!mainMenu) {
+            doWallSlideSound();
+            doFlatSlideSound();
+            doSlopeSlideSound();
+            doStandSlideSound();
+        }
     }
 
-    void FadeOutInst (AudioSource _source, float time)
+    public void FadeOutInst (AudioSource _source, float time)
     {
         StartCoroutine(FadeOut(_source, time));
     }

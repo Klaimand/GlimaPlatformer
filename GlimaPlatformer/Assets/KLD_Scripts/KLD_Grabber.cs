@@ -11,7 +11,11 @@ public class KLD_Grabber : MonoBehaviour
     KLD_DamageTaker damageTaker;
     PlayerController2D controller;
     Animator animator;
+    KLD_AudioManager audioManager;
 
+    [SerializeField]
+    bool introBoris = false;
+    
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -22,6 +26,7 @@ public class KLD_Grabber : MonoBehaviour
     {
         damageTaker = GameObject.Find("Player").GetComponent<KLD_DamageTaker>();
         controller = damageTaker.transform.GetComponent<PlayerController2D>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
     }
 
     private void Update()
@@ -37,6 +42,13 @@ public class KLD_Grabber : MonoBehaviour
             grabbing = true;
             inZone = true;
             damageTaker.doDamageTaking(DamageType.Grab, transform.GetChild(0), 0f);
+            audioManager.PlaySound("Grab");
+
+            if (introBoris)
+            {
+                Time.timeScale = 1;
+            }
+
         }
     }
 

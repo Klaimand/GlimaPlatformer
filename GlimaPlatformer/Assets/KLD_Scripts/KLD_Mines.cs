@@ -26,6 +26,9 @@ public class KLD_Mines : MonoBehaviour
     bool isLighted;
     float timeSinceLastBlink;
 
+    [SerializeField]
+    private GameObject explosionFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +76,9 @@ public class KLD_Mines : MonoBehaviour
                 damageTaker.doDamageTaking(DamageType.Explosion, transform, explosionForce);
             }
         }
+        Instantiate(explosionFX, transform.position, Quaternion.identity);
         audioManager.PlaySound("MineExplosion");
+        Destroy(gameObject);
     }
 
     private void doBlink ()

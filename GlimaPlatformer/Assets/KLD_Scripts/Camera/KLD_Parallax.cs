@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class KLD_Parallax : MonoBehaviour
 {
+
+    [SerializeField]
+    bool alwaysParallax = false;
+
     Transform player;
 
     [SerializeField]
@@ -27,7 +31,8 @@ public class KLD_Parallax : MonoBehaviour
     void Start()
     {
         getRenderers();
-        player = GameObject.Find("Player").transform;
+        //player = GameObject.Find("Player").transform;
+        player = Camera.main.gameObject.transform;
         //endPosition = player.position.x;
         endPosition = player.position;
     }
@@ -79,7 +84,7 @@ public class KLD_Parallax : MonoBehaviour
         endPosition = player.position;
         deltaPosition = endPosition - startPosition;
 
-        if (isVisiblee)
+        if (isVisiblee || alwaysParallax)
         {
             if (!doVerticalParallax)
             {

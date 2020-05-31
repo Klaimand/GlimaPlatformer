@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3420fe785d6d6f44a2fe70e924ac272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: 1
   sounds:
   - name: Step00
     clip: {fileID: 8300000, guid: 1badc28e511514a448f6f0de57d33e1c, type: 3}
@@ -205,4 +206,33 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.1
-  soundsToPlayOnStart: []
+  - name: EnterUI
+    clip: {fileID: 8300000, guid: 6d7c07fb89c41fc42b17f6f9bcd584e2, type: 3}
+    group: {fileID: 4312643147643485544, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: EscapeUI
+    clip: {fileID: 8300000, guid: c1b8706f125ebcf4c9bb018a0636c502, type: 3}
+    group: {fileID: 4312643147643485544, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Avengers
+    clip: {fileID: 8300000, guid: 7acb0c91603f0cd4dacb07d957df1d63, type: 3}
+    group: {fileID: 7379434044419954658, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: RingsOfJupiter
+    clip: {fileID: 8300000, guid: 9a68e38364d883a46a709baacfece10b, type: 3}
+    group: {fileID: 7379434044419954658, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  soundsToPlayOnStart:
+  - RingsOfJupiter

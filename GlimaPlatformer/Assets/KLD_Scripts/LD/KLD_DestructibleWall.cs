@@ -26,7 +26,7 @@ public class KLD_DestructibleWall : MonoBehaviour
     {
         if (!destroyed && collision.gameObject.CompareTag("Player"))
         {
-            if (controller.getGroundStatus() && controller.getVirtualXAxis() > 0.99f)
+            if (controller.transform.position.x < transform.position.x)
             {
                 Destroy(gameObject);
             }

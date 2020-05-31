@@ -16,8 +16,11 @@ public class KLD_MainMenu : MonoBehaviour
     [SerializeField]
     private Button buttonToSelect;
 
+    KLD_AudioManager audioManager;
+
     private void Start()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
         buttonToSelect.Select();
     }
 
@@ -97,6 +100,8 @@ public class KLD_MainMenu : MonoBehaviour
         else if (randomNumber == 50)
         {
             print("SHITTY NAMES TIME");
+            audioManager.PlaySound("Avengers");
+            audioManager.GetSound("RingsOfJupiter").GetSource().volume = 0.1f;
             for (int i = 0; i < 2; i++)
             {
 
@@ -127,8 +132,21 @@ public class KLD_MainMenu : MonoBehaviour
         }
     }
 
+    public void putMusicSoundBack ()
+    {
+        audioManager.GetSound("RingsOfJupiter").GetSource().volume = 0.7f;
+    }
+
     public void launchScene2705 ()
     {
+        GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(true);
+        StartCoroutine(waitOneSecThenLoadScene());
+        audioManager.FadeOutInst(audioManager.GetSound("RingsOfJupiter").GetSource(), 1.5f);
+    }
+
+    IEnumerator waitOneSecThenLoadScene ()
+    {
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("KLD_2705_LD");
     }
 

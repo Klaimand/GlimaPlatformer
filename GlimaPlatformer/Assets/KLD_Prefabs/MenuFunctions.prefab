@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d964e6cbe88f649bb453201908a3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentRevealDuration: 2
-  timeBetweenSegment: 1
+  segmentRevealDuration: 1
+  timeBetweenSegment: 0.2
