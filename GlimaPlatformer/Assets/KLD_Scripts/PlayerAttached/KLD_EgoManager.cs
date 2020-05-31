@@ -140,6 +140,7 @@ public class KLD_EgoManager : MonoBehaviour
             else if (curEgoPoints == egoPointsPerBar * 3)
             {
                 egoEmptyAnimator.SetTrigger("Pop");
+                audioManager.PlaySound("CanFull");
             }
             Destroy(collision.gameObject);
         }
