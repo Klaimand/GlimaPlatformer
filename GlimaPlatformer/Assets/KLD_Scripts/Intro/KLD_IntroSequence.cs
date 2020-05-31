@@ -19,6 +19,7 @@ public class KLD_IntroSequence : MonoBehaviour
     private CanvasGroup borisCanvas;
 
     KLD_AudioManager audioManager;
+    KLD_Timer timer;
 
     bool isStoppedOnRamp = false;
 
@@ -27,6 +28,7 @@ public class KLD_IntroSequence : MonoBehaviour
     {
         StartCoroutine(waitAndfadeIn());
         audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
+        timer = GameObject.Find("Player").GetComponent<KLD_Timer>();
     }
 
     // Update is called once per frame
@@ -41,7 +43,16 @@ public class KLD_IntroSequence : MonoBehaviour
         fadeInCanvasInst(fadeInOnStart);
     }
 
+
+
+
+    /*
     public void startRampSlowMo ()
+    {
+        startSlowMo(0.4f, 2f);
+    }
+
+    public void startRampCompleteSlowMo()
     {
         startSlowMo(0f, 0.5f);
     }
@@ -68,7 +79,7 @@ public class KLD_IntroSequence : MonoBehaviour
     public void stopSlowMo ()
     {
         Time.timeScale = 1f;
-    }
+    }*/
 
     private float canvasFadeTime = 0.5f;
 
@@ -120,9 +131,21 @@ public class KLD_IntroSequence : MonoBehaviour
         if (isStoppedOnRamp && Input.GetButton("Fire1"))
         {
             isStoppedOnRamp = false;
-            stopSlowMo();
+            //stopSlowMo();
+            audioManager.GetSound("DefenseMatrixIntro").GetSource().Stop();
             audioManager.PlaySound("DefenseMatrix");
         }
+    }
+
+    public void startGame ()
+    {
+        timer.started = true; //starttimer
+        timer.updateUI = true;
+        //explodecar
+        //carsoundeffect
+        //changecarsprite
+        audioManager.GetSound("DefenseMatrixIntro").GetSource().Stop();
+        audioManager.PlaySound("DefenseMatrix");
     }
 
 }
