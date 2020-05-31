@@ -18,16 +18,21 @@ public class KLD_IntroSequence : MonoBehaviour
     [SerializeField]
     private CanvasGroup borisCanvas;
 
+    KLD_AudioManager audioManager;
+
+    bool isStoppedOnRamp = false;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(waitAndfadeIn());
+        audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        checkIfStoppedOnRamp();
     }
 
     private IEnumerator waitAndfadeIn ()
@@ -36,9 +41,28 @@ public class KLD_IntroSequence : MonoBehaviour
         fadeInCanvasInst(fadeInOnStart);
     }
 
-    public void startSlowMo(float speed)
+    public void startRampSlowMo ()
     {
-        Time.timeScale = speed;
+        startSlowMo(0f, 0.5f);
+    }
+
+    private void startSlowMo(float _speed, float _time)
+    {
+        StartCoroutine(startSlowMoFade(_speed, _time));
+    }
+
+    IEnumerator startSlowMoFade (float _speed, float _time)
+    {
+        float curTime = _time;
+        while (curTime > 0)
+        {
+            Time.timeScale = curTime / _time;
+            curTime -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        Time.timeScale = _speed;
+        isStoppedOnRamp = true;
     }
 
     public void stopSlowMo ()
@@ -89,6 +113,16 @@ public class KLD_IntroSequence : MonoBehaviour
 
         fadeInCanvasInst(borisCanvas);
         Destroy(camChangeWall);
+    }
+
+    void checkIfStoppedOnRamp ()
+    {
+        if (isStoppedOnRamp && Input.GetButton("Fire1"))
+        {
+            isStoppedOnRamp = false;
+            stopSlowMo();
+            audioManager.PlaySound("DefenseMatrix");
+        }
     }
 
 }
