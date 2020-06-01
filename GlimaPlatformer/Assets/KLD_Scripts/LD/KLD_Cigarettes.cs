@@ -4,22 +4,11 @@ using UnityEngine;
 
 public class KLD_Cigarettes : MonoBehaviour
 {
-
-    SpriteRenderer sr;
-
-    [SerializeField]
-    Sprite cigarettes, fantomcigarettes;
-
-    [SerializeField]
-    bool fantom = false;
-
-    [SerializeField]
-    int fantomAlpha = 100;
-
+    public int cigarettesIndex = 0;
 
     private void Awake()
     {
-        sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
     }
 
     // Start is called before the first frame update
@@ -28,24 +17,9 @@ public class KLD_Cigarettes : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void triggerFindAnim ()
     {
-        checkFantom();
-    }
-
-    void checkFantom ()
-    {
-        if  (fantom)
-        {
-            sr.sprite = fantomcigarettes;
-            sr.color = new Color(1, 1, 1, (float)fantomAlpha/255f);
-        }
-        else
-        {
-            sr.sprite = cigarettes;
-            sr.color = new Color(1, 1, 1, 1);
-        }
+        Destroy(gameObject);
     }
 
 }

@@ -17,10 +17,16 @@ public class KLD_MenuFonctions : MonoBehaviour
     GameObject timeTextObject;
     GameObject timeNameObject;
 
+    GameObject cigsObject;
+
     KLD_Timer timerComponent;
+    KLD_CigarettesAttached cigarettesAttached;
 
     [SerializeField]
     float segmentRevealDuration, timeBetweenSegment;
+
+    [SerializeField]
+    float timePerSig, timeAfterCig, timeAfterCigFound;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +37,17 @@ public class KLD_MenuFonctions : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
         resumeScreenCanvas.SetActive(false);
         endGameCanvas = GameObject.Find("EndGameCanvas");
+
+        cigsObject = GameObject.Find("Cigs");
+        
         endGameCanvas.SetActive(false);
         timeTextObject = endGameCanvas.transform.GetChild(3).gameObject;
         timeNameObject = endGameCanvas.transform.GetChild(2).gameObject;
         timerComponent = GameObject.Find("Player").GetComponent<KLD_Timer>();
+
+        cigarettesAttached = GameObject.Find("Player").GetComponent<KLD_CigarettesAttached>();
+
+
     }
 
     // Update is called once per frame
@@ -44,7 +57,9 @@ public class KLD_MenuFonctions : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            doTimeRevealInst();
+            openEndGameScreen();
+            //doTimeRevealInst();
+            StartCoroutine(doCigsReveal());
         }
     }
 
@@ -127,6 +142,36 @@ public class KLD_MenuFonctions : MonoBehaviour
 
             yield return new WaitForSeconds(timeBetweenSegment);
         }
+
+        StartCoroutine(doCigsReveal());
+    }
+
+    IEnumerator doCigsReveal ()
+    {
+        for (int i = 0; i < cigsObject.transform.childCount; i++)
+        {
+            GameObject curCig = cigsObject.transform.GetChild(i).gameObject;
+
+            curCig.SetActive(true);
+
+            int curCigState = (int)cigarettesAttached.cigarettes[i].cigaretteState;
+
+            curCig.GetComponent<Animator>().SetInteger("State", curCigState);
+
+            if (curCigState == 2)
+            {
+                audioManager.PlaySound("CigarettePopNew");
+                cigarettesAttached.cigarettes[i].cigaretteState = Cigarette.CigaretteState.fantom;
+                cigarettesAttached.doSaveCigHasBeenFound(i); //save
+                yield return new WaitForSeconds(timeAfterCigFound);
+            }
+            else
+            {
+                audioManager.PlaySound("CigarettePopOld");
+                yield return new WaitForSeconds(timeAfterCig);
+            }
+        }
+        //do cig state save
     }
 
 }
