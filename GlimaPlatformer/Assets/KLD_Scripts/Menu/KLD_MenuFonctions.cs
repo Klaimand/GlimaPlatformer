@@ -112,6 +112,8 @@ public class KLD_MenuFonctions : MonoBehaviour
             float startTime = i == 0 ? 0f : timerComponent.segmentTimes[i - 1];
             float endTime = timerComponent.segmentTimes[i];
 
+            audioManager.PlaySound("TimeCount");
+
             while (curDuration < segmentRevealDuration)
             {
                 _textToModif.text = timerComponent.GetTimeString(Mathf.Lerp(startTime, endTime, curDuration/segmentRevealDuration));
@@ -120,6 +122,9 @@ public class KLD_MenuFonctions : MonoBehaviour
                 yield return null;
             }
             _textToModif.text = timerComponent.GetTimeString(timerComponent.segmentTimes[i]);
+
+            audioManager.PlaySound("TimeBing");
+
             yield return new WaitForSeconds(timeBetweenSegment);
         }
     }

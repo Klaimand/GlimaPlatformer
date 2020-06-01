@@ -13,7 +13,7 @@ public class KLD_IntroSequence : MonoBehaviour
     private CanvasGroup[] canvasesToFadeInAfterCamChange;
 
     [SerializeField]
-    private GameObject camChangeWall;
+    private GameObject camChangeWall, limousine;
 
     [SerializeField]
     private CanvasGroup borisCanvas;
@@ -99,6 +99,23 @@ public class KLD_IntroSequence : MonoBehaviour
         }
     }
 
+    public void fadeOutCanvasInst(CanvasGroup canvas)
+    {
+        StartCoroutine(fadeOutCanvas(canvas));
+    }
+
+    private IEnumerator fadeOutCanvas(CanvasGroup canvas)
+    {
+        float curTime = 0f;
+        while (curTime < canvasFadeTime)
+        {
+            canvas.alpha = 1 - (curTime / canvasFadeTime);
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+        canvas.alpha = 0f;
+    }
+
     public void changeCameraInst ()
     {
         StartCoroutine(changeCamera());
@@ -146,6 +163,11 @@ public class KLD_IntroSequence : MonoBehaviour
         //changecarsprite
         audioManager.GetSound("DefenseMatrixIntro").GetSource().Stop();
         audioManager.PlaySound("DefenseMatrix");
+    }
+
+    public void SetLimousinePetee ()
+    {
+        limousine.GetComponent<Animator>().SetBool("exploded", true);
     }
 
 }

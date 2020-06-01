@@ -136,7 +136,7 @@ public class KLD_Timer : MonoBehaviour
         seconds = Mathf.FloorToInt(totalTime) % 60;
         milli = totalTime.ToString("F3");
         milli = milli.Substring(milli.Length - 3);
-        print(milli);
+        //print(milli);
     }
 
     void updateTimerText ()
