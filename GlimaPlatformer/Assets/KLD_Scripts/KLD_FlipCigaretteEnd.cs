@@ -7,7 +7,11 @@ public class KLD_FlipCigaretteEnd : MonoBehaviour
     PlayerController2D controller;
     Transform fireEmitter;
     ParticleSystem fireEmitterParticleSystem;
+
     LineRenderer smokeLine;
+
+    //Transform newSmoke;
+    //ParticleSystem newSmokeParticleSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +19,11 @@ public class KLD_FlipCigaretteEnd : MonoBehaviour
         controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
         fireEmitter = GameObject.Find("Cigarette_Fire").transform ;
         fireEmitterParticleSystem = fireEmitter.GetComponent<ParticleSystem>();
+
         smokeLine = GameObject.Find("CigaretteSmoke").GetComponent<LineRenderer>();
+
+        //newSmoke = GameObject.Find("Smoke_Cigsv2").transform;
+        //newSmokeParticleSystem = newSmoke.GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -46,6 +54,7 @@ public class KLD_FlipCigaretteEnd : MonoBehaviour
     void linkFireToCigarette ()
     {
         fireEmitter.position = transform.position;
+        //newSmoke.position = transform.position;
     }
 
     void changeParticle ()
@@ -57,9 +66,17 @@ public class KLD_FlipCigaretteEnd : MonoBehaviour
                 fireEmitterParticleSystem.Play();
             }
             smokeLine.enabled = false;
+            //newSmokeParticleSystem.Stop();
+            //newSmokeParticleSystem.gameObject.SetActive(false);
         }
         else
         {
+            //newSmokeParticleSystem.gameObject.SetActive(true);
+            /*
+            if (!newSmokeParticleSystem.isPlaying)
+            {
+                newSmokeParticleSystem.Play();
+            }*/
             smokeLine.enabled = true;
             fireEmitterParticleSystem.Stop();
         }

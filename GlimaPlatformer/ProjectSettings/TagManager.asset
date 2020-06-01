@@ -12,6 +12,7 @@ TagManager:
   - SegmentCheckpoint
   - FinalCheckpoint
   - CamConfiner
+  - Cigarette
   layers:
   - Default
   - TransparentFX
