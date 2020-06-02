@@ -55,12 +55,13 @@ public class KLD_MenuFonctions : MonoBehaviour
     {
         checkResumeScreen();
 
+        /*
         if (Input.GetKeyDown(KeyCode.G))
         {
             openEndGameScreen();
             //doTimeRevealInst();
             StartCoroutine(doCigsReveal());
-        }
+        }*/
     }
 
     private void OnApplicationFocus(bool focus)
