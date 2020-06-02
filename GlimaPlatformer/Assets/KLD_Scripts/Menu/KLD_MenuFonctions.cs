@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class KLD_MenuFonctions : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class KLD_MenuFonctions : MonoBehaviour
     GameObject timeNameObject;
 
     GameObject cigsObject;
+    public GameObject endGameReturn;
 
     KLD_Timer timerComponent;
     KLD_CigarettesAttached cigarettesAttached;
@@ -40,6 +42,7 @@ public class KLD_MenuFonctions : MonoBehaviour
 
         cigsObject = GameObject.Find("Cigs");
         
+
         endGameCanvas.SetActive(false);
         timeTextObject = endGameCanvas.transform.GetChild(3).gameObject;
         timeNameObject = endGameCanvas.transform.GetChild(2).gameObject;
@@ -102,6 +105,8 @@ public class KLD_MenuFonctions : MonoBehaviour
         resumeScreenOpened = false;
         controller.SetPause(false);
         Time.timeScale = 1;
+        resumeScreenCanvas.transform.GetChild(2).gameObject.SetActive(true);
+        resumeScreenCanvas.transform.GetChild(3).gameObject.SetActive(false);
         resumeScreenCanvas.SetActive(false);
         audioManager.PlaySound("ClickUI");
     }
@@ -172,7 +177,16 @@ public class KLD_MenuFonctions : MonoBehaviour
                 yield return new WaitForSeconds(timeAfterCig);
             }
         }
-        //do cig state save
+        endGameReturn.SetActive(true);
+        endGameReturn.GetComponent<Button>().Select();
+    }
+
+
+    public void loadMainmenu ()
+    {
+        SceneManager.LoadScene("KLD_MenuPrincipal");
+        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        //SceneManager.LoadScene(0);
     }
 
 }

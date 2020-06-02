@@ -247,6 +247,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1806163111}
+        m_MethodName: loadSlidersUIOnPrefs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &59447214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +557,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1806163111}
+        m_MethodName: changeMainVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &126650704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1729,7 +1751,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1806163111}
+        m_MethodName: changeSfxVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &545523641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,7 +2947,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1806163111}
+        m_MethodName: changeMusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1245158661
 GameObject:
   m_ObjectHideFlags: 0
@@ -3982,6 +4026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1806163110}
   - component: {fileID: 1806163109}
+  - component: {fileID: 1806163111}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -4059,6 +4104,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1806163111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806163108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad534ecbf17dba4884de03b270a96dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: cce3b7c1aabb08a4f9bc3f137a97160f, type: 2}
+  mainVolumeSlider: {fileID: 119327505}
+  musicVolumeSlider: {fileID: 1242692557}
+  sfxVolumeSlider: {fileID: 484689183}
 --- !u!1 &1933318383
 GameObject:
   m_ObjectHideFlags: 0
@@ -4357,7 +4418,7 @@ RectTransform:
   m_LocalScale: {x: 1.0000172, y: 1.0000172, z: 1.0000172}
   m_Children: []
   m_Father: {fileID: 8228868460664115621}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5164,8 +5225,8 @@ RectTransform:
   - {fileID: 378626928}
   - {fileID: 1296129788}
   - {fileID: 2071963391}
-  - {fileID: 403752551}
   - {fileID: 1989618876}
+  - {fileID: 403752551}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

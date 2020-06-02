@@ -93,9 +93,13 @@ public class KLD_CigarettesAttached : MonoBehaviour
             if (cigarettes[cigaretteIndex].cigaretteState == Cigarette.CigaretteState.red)
             {
                 cigarettes[cigaretteIndex].cigaretteState = Cigarette.CigaretteState.found;
+                audioManager.PlaySound("CigarettePick");
+            }
+            else
+            {
+                audioManager.PlaySound("CigarettePickFantom");
             }
 
-            audioManager.PlaySound("CigarettePick");
             cigarettes[cigaretteIndex].cigaretteObj.GetComponent<KLD_Cigarettes>().triggerFindAnim();
 
         }

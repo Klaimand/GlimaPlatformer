@@ -39,7 +39,7 @@ public class KLD_IntroSequence : MonoBehaviour
 
     private IEnumerator waitAndfadeIn ()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(6);
         fadeInCanvasInst(fadeInOnStart);
     }
 
