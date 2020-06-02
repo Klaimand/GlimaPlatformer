@@ -12,9 +12,9 @@ public class KLD_MainMenu : MonoBehaviour
     public string[] gaNames;
 
     public GameObject namesEmpty;
-    
+
     [SerializeField]
-    private Button buttonToSelect;
+    private Button buttonToSelect, secretButton;
 
     KLD_AudioManager audioManager;
 
@@ -22,6 +22,7 @@ public class KLD_MainMenu : MonoBehaviour
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<KLD_AudioManager>();
         buttonToSelect.Select();
+        checkIfWeSpawnSecretButton();
     }
 
     public void randomizeNames ()
@@ -139,7 +140,7 @@ public class KLD_MainMenu : MonoBehaviour
 
     public void launchScene2705 ()
     {
-        GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.GetChild(9).gameObject.SetActive(true);
         StartCoroutine(waitOneSecThenLoadScene());
         audioManager.FadeOutInst(audioManager.GetSound("RingsOfJupiter").GetSource(), 1.5f);
     }
@@ -153,6 +154,22 @@ public class KLD_MainMenu : MonoBehaviour
     public void quitApplication ()
     {
         Application.Quit();
+    }
+
+    void checkIfWeSpawnSecretButton ()
+    {
+        int numberOfCans = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (PlayerPrefs.GetInt("Cigarette" + i) == 1)
+            {
+                numberOfCans++;
+            }
+        }
+        if (numberOfCans == 6)
+        {
+            secretButton.gameObject.SetActive(true);
+        }
     }
 
 }

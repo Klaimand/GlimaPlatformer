@@ -14,6 +14,7 @@ public class KLD_Volumes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        checkIfThisIsFirstLaunch();
         loadVolumePrefs();
     }
 
@@ -21,6 +22,20 @@ public class KLD_Volumes : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void checkIfThisIsFirstLaunch ()
+    {
+        if (PlayerPrefs.GetInt("FirstLaunch") == 0)
+        {
+            //this is first launch
+            PlayerPrefs.SetInt("FirstLaunch", 1);
+
+            PlayerPrefs.SetFloat("MasterVolume", 0f);
+            PlayerPrefs.SetFloat("MusicVolume", -20f);
+            PlayerPrefs.SetFloat("SfxVolume", 0f);
+
+        }
     }
 
     public void changeMainVolume ()
