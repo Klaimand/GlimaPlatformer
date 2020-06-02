@@ -19,7 +19,7 @@ public class KLD_Yacht : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        yachtSprites.position = new Vector3(yachtTransform.position.x, floatyYacht.position.y, 0f);
+        yachtSprites.position = new Vector3(yachtTransform.position.x, floatyYacht.localPosition.y, 0f);
     }
 
 

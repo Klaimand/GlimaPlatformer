@@ -24,11 +24,22 @@ public class KLD_MenuFonctions : MonoBehaviour
     KLD_Timer timerComponent;
     KLD_CigarettesAttached cigarettesAttached;
 
+
+    KLD_IntroSequence introSequence;
+
+    public GameObject dialogCanvas;
+    CanvasGroup dialogCanvasGroup;
+    bool dialogClosed = false;
+
     [SerializeField]
     float segmentRevealDuration, timeBetweenSegment;
 
     [SerializeField]
     float timePerSig, timeAfterCig, timeAfterCigFound;
+
+    public Transform helicoImmeublesSpawn;
+    public GameObject helicoImmeublesPrefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +61,9 @@ public class KLD_MenuFonctions : MonoBehaviour
 
         cigarettesAttached = GameObject.Find("Player").GetComponent<KLD_CigarettesAttached>();
 
+        introSequence = GameObject.Find("IntroObj").GetComponent<KLD_IntroSequence>();
 
+        dialogCanvasGroup = dialogCanvas.GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
@@ -187,6 +200,69 @@ public class KLD_MenuFonctions : MonoBehaviour
         SceneManager.LoadScene("KLD_MenuPrincipal");
         //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         //SceneManager.LoadScene(0);
+    }
+
+    public void spawnFirstDialog ()
+    {
+        spawnTextInst(false, 7f, 0);
+    }
+
+    public void openDialog1 ()
+    {
+        spawnTextInst(true, 4f, 1);
+    }
+
+    void spawnTextInst (bool up, float duration, int textIndex)
+    {
+        StartCoroutine(spawnText(up, duration, textIndex));
+    }
+
+    IEnumerator spawnText (bool up, float duration, int textIndex)
+    {
+        if (!up)
+        {
+            dialogCanvas.transform.GetChild(0).gameObject.SetActive(true);
+            dialogCanvas.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        else if (up)
+        {
+            dialogCanvas.transform.GetChild(0).gameObject.SetActive(false);
+            dialogCanvas.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < dialogCanvas.transform.childCount - 1; i++)
+        {
+            if (i == textIndex)
+            {
+                dialogCanvas.transform.GetChild(2).GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                dialogCanvas.transform.GetChild(2).GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        introSequence.fadeInCanvasInst(dialogCanvasGroup);
+
+        yield return new WaitForSeconds(duration);
+
+        closeDialog(textIndex);
+    }
+
+    private List<int> closedDialogIndexes = new List<int>();
+
+    public void closeDialog (int dialogIndex)
+    {
+        if (!closedDialogIndexes.Contains(dialogIndex))
+        {
+            closedDialogIndexes.Add(dialogIndex);
+            introSequence.fadeOutCanvasInst(dialogCanvasGroup);
+        }
+    }
+
+    public void spawnHelicoImmeubles ()
+    {
+        Instantiate(helicoImmeublesPrefab, helicoImmeublesSpawn.position, Quaternion.identity);
     }
 
 }

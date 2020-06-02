@@ -5,7 +5,7 @@ using UnityEngine;
 public class KLD_HelicoIntro : MonoBehaviour
 {
     KLD_IntroSequence introFonc;
-
+    KLD_MenuFonctions menuFonctions;
 
     public Transform helicoTransform;
 
@@ -20,10 +20,11 @@ public class KLD_HelicoIntro : MonoBehaviour
     void Start()
     {
         introFonc = GameObject.Find("IntroObj").GetComponent<KLD_IntroSequence>();
+        menuFonctions = GameObject.Find("MenuFunctions").GetComponent<KLD_MenuFonctions>();
 
         dialogCanvasGroup = dialogCanvas.GetComponent<CanvasGroup>();
         dialogCanvasGroup.alpha = 0f;
-        dialogCanvas.SetActive(false);
+        //dialogCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,7 +46,13 @@ public class KLD_HelicoIntro : MonoBehaviour
 
     public void spawnDialogInst ()
     {
-        StartCoroutine(spawnDialog());
+        //StartCoroutine(spawnDialog());
+        spawnDialogNewWay();
+    }
+
+    void spawnDialogNewWay ()
+    {
+        menuFonctions.spawnFirstDialog();
     }
 
     IEnumerator spawnDialog ()

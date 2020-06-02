@@ -18,6 +18,9 @@ public class KLD_IntroSequence : MonoBehaviour
     [SerializeField]
     private CanvasGroup borisCanvas;
 
+    public Animator Monika;
+    public Animator helicoTransformAnimator;
+
     KLD_AudioManager audioManager;
     KLD_Timer timer;
 
@@ -39,8 +42,12 @@ public class KLD_IntroSequence : MonoBehaviour
 
     private IEnumerator waitAndfadeIn ()
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(7.5f);
+        Monika.SetTrigger("StopKiss");
         fadeInCanvasInst(fadeInOnStart);
+
+        yield return new WaitForSeconds(2f);
+        helicoTransformAnimator.SetTrigger("GoUp");
     }
 
 
