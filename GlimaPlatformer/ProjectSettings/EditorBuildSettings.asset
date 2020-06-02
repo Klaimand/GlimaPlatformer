@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/_Scenes/KLD/KLD_MenuPrincipal.unity
     guid: 2866d649bc0c3804989206f3a9862db7
   - enabled: 1
-    path: Assets/_Scenes/KLD/KLD_2705_LD.unity
-    guid: 239d84b3ab0955248b2c920fea703ba3
+    path: Assets/_Scenes/KLD/KLD_LD_FINAL.unity
+    guid: f098e4103aead2a42a8566acbfea2d79
   m_configObjects: {}

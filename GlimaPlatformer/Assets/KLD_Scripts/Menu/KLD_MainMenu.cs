@@ -139,7 +139,7 @@ public class KLD_MainMenu : MonoBehaviour
 
     public void launchScene2705 ()
     {
-        GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(true);
         StartCoroutine(waitOneSecThenLoadScene());
         audioManager.FadeOutInst(audioManager.GetSound("RingsOfJupiter").GetSource(), 1.5f);
     }
@@ -147,7 +147,7 @@ public class KLD_MainMenu : MonoBehaviour
     IEnumerator waitOneSecThenLoadScene ()
     {
         yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("KLD_2705_LD");
+        SceneManager.LoadScene("KLD_LD_FINAL");
     }
 
     public void quitApplication ()

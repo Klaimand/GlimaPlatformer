@@ -76,6 +76,7 @@ public class KLD_AudioManager : MonoBehaviour
         {
             controller = GameObject.Find("Player").GetComponent<PlayerController2D>();
             GetSound("DefenseMatrixIntro").GetSource().loop = true;
+            GetSound("DefenseMatrix").GetSource().loop = true;
         }
         else if (mainMenu)
         {

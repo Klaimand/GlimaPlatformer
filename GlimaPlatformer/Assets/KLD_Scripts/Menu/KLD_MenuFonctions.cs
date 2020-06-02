@@ -197,6 +197,7 @@ public class KLD_MenuFonctions : MonoBehaviour
 
     public void loadMainmenu ()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("KLD_MenuPrincipal");
         //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         //SceneManager.LoadScene(0);
