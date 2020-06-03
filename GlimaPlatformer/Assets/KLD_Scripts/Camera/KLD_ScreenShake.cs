@@ -88,11 +88,12 @@ public class KLD_ScreenShake : MonoBehaviour
 
     private void StartShake(float lenght, float power)
     {
-        //print("launched shake lenght : " + lenght + " Power : " + power);
-        shakeTimeRemaining = lenght;
-        shakePower = power;
+        //print("launched shake lenght : " + lenght + " Power : " + power + " At time : " + Time.time);
+        
+            shakeTimeRemaining = lenght;
+            shakePower = power;
 
-        shakeFadeTime = power / lenght;
+            shakeFadeTime = power / lenght;
     }
 
     void checkSlide()
@@ -101,7 +102,10 @@ public class KLD_ScreenShake : MonoBehaviour
         {
             //print(controller.getFlatSlideSpeedPercentage());
             //StartShake(Time.deltaTime, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
-            StartShake(0.1f, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
+            if (FlatSlidePower * controller.getFlatSlideSpeedPercentage() > 0.1f)
+            {
+                StartShake(0.1f, Mathf.Abs(FlatSlidePower * controller.getFlatSlideSpeedPercentage()));
+            }
 
         }
         else if (controller.getSlopeSlideStatus() && shakePower < SlopeSlidePower)
