@@ -20,7 +20,7 @@ public class KLD_Timer : MonoBehaviour
     public bool updateUI = true;
     public float noUpdateTimeOnCheckpoint = 2f;
 
-    
+
     [SerializeField]
     float blinkTime, blinkDuration;
     CanvasGroup timerCanvasGroup;
@@ -34,7 +34,6 @@ public class KLD_Timer : MonoBehaviour
 
     KLD_MenuFonctions menuFonctions;
 
-    // Start is called before the first frame update
     void Start()
     {
         menuFonctions = GameObject.Find("MenuFunctions").GetComponent<KLD_MenuFonctions>();
@@ -45,12 +44,15 @@ public class KLD_Timer : MonoBehaviour
 
         timerCanvasGroup = GameObject.Find("TimeCanvas").GetComponent<CanvasGroup>();
 
+        highsScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
 
-    // Update is called once per frame
+
+
     void Update()
     {
-        if (!finished && started) {
+        if (!finished && started)
+        {
             addFrameTime();
             updateMinsAndSecs();
         }
@@ -60,7 +62,7 @@ public class KLD_Timer : MonoBehaviour
         }
     }
 
-    void addFrameTime ()
+    void addFrameTime()
     {
         totalTime += Time.deltaTime;
     }
@@ -84,14 +86,14 @@ public class KLD_Timer : MonoBehaviour
         }
     }
 
-    void changeSegment ()
+    void changeSegment()
     {
         segmentTimes.Add(totalTime);
         StartCoroutine(lockUI(noUpdateTimeOnCheckpoint));
         StartCoroutine(blink());
     }
 
-    IEnumerator lockUI (float time)
+    IEnumerator lockUI(float time)
     {
         updateUI = false;
         yield return new WaitForSeconds(time);
@@ -123,32 +125,31 @@ public class KLD_Timer : MonoBehaviour
         timerCanvasGroup.alpha = 1f;
     }
 
-    void endTimer ()
+    void endTimer()
     {
         finished = true;
         segmentTimes.Add(totalTime);
         finalTotalTime = totalTime;
     }
 
-    void updateMinsAndSecs ()
+    void updateMinsAndSecs()
     {
         minutes = Mathf.FloorToInt(totalTime) / 60;
         seconds = Mathf.FloorToInt(totalTime) % 60;
         milli = totalTime.ToString("F3");
         milli = milli.Substring(milli.Length - 3);
-        //print(milli);
     }
 
-    void updateTimerText ()
+    void updateTimerText()
     {
         minutesText.text = minutes.ToString() + "'";
         secondsText.text = seconds.ToString("00") + "\"";
         milliText.text = milli;
     }
 
-    public float GetSegmentTime (int segmentIndex)
+    public float GetSegmentTime(int segmentIndex)
     {
-        float segmentTime = 0f; 
+        float segmentTime = 0f;
 
         if (segmentIndex == 0)
         {
@@ -161,7 +162,7 @@ public class KLD_Timer : MonoBehaviour
         return segmentTime;
     }
 
-    public string GetTimeString (float _segmentTime)
+    public string GetTimeString(float _segmentTime)
     {
         int _segmentMinutes = Mathf.FloorToInt(_segmentTime) / 60;
         int _segmentSeconds = Mathf.FloorToInt(_segmentTime) % 60;
@@ -174,5 +175,40 @@ public class KLD_Timer : MonoBehaviour
             (_segmentMilli);
     }
 
+     public void totalTime()
+    {
+        if ("totalTime" > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", totalTime);
+            highScore.text = totalTime;
+        }
+    }
+
+    [System.Serializable]
+    public struct TimerRating
+    {
+        public float minTime, maxTime;
+        public string ratingName;
+    }
+
+
+    public class RatingSystem : MonoBehaviour
+    {
+        public TimerRating[] ratings;
+        public string defaultRating;
+
+        public string ReturnRatingFromPerformance(float finalTime)
+        {
+            foreach (var rating in ratings)
+            {
+                if (finalTime > rating.minTime && finalTime < rating.maxTime)
+                {
+                    return rating.ratingName;
+                }
+            }
+
+            return defaultRating;
+        }
+    }
 
 }
