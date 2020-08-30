@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +19,7 @@ public class KLD_Timer : MonoBehaviour
 
     public bool updateUI = true;
     public float noUpdateTimeOnCheckpoint = 2f;
-
+    
 
     [SerializeField]
     float blinkTime, blinkDuration;
@@ -44,12 +44,12 @@ public class KLD_Timer : MonoBehaviour
 
         timerCanvasGroup = GameObject.Find("TimeCanvas").GetComponent<CanvasGroup>();
 
-        highsScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+
     }
 
 
 
-    void Update()
+    void Update() 
     {
         if (!finished && started)
         {
@@ -175,11 +175,14 @@ public class KLD_Timer : MonoBehaviour
             (_segmentMilli);
     }
 
-     public void totalTime()
+ 
+
+    private void TotalTime()
     {
-        if ("totalTime" > PlayerPrefs.GetInt("HighScore", 0))
+        if (totalTime > PlayerPrefs.GetInt("HighScore", 0))
         {
-            PlayerPrefs.SetInt("HighScore", totalTime);
+            int bullshitvar = Mathf.RoundToInt(totalTime);
+            PlayerPrefs.SetInt("HighScore", bullshitvar);
             highScore.text = totalTime;
         }
     }
